@@ -60,123 +60,95 @@ const action = (
 
 export default {
   columns: [
-    { name: "project", align: "left" },
-    { name: "budget", align: "left" },
-    { name: "status", align: "left" },
-    { name: "completion", align: "center" },
-    { name: "action", align: "center" },
+    { name: "data", align: "left" },
+    { name: "value", align: "left" },
   ],
 
   rows: [
     {
-      project: (
+      data: (
         <VuiBox display="flex" alignItems="center">
-          <AdobeXD size="20px" />
           <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-            Chakra Vision UI Version
+            1.
+          </VuiTypography>{" "}
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            Referrer
           </VuiTypography>
         </VuiBox>
       ),
-      budget: (
+      value: (
         <VuiTypography variant="button" color="white" fontWeight="medium">
           $14,000
         </VuiTypography>
       ),
-      status: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          Working
-        </VuiTypography>
-      ),
-      completion: <Completion value={60} color="info" />,
-      action,
     },
     {
-      project: (
+      data: (
         <VuiBox display="flex" alignItems="center">
-          <Atlassian size="20px" />
           <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-            Add Progress Track
+            2.
+          </VuiTypography>{" "}
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            Underlines{" "}
           </VuiTypography>
         </VuiBox>
       ),
-      budget: (
+      value: (
         <VuiTypography variant="button" color="white" fontWeight="medium">
           $3,000
         </VuiTypography>
       ),
-      status: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          Done
-        </VuiTypography>
-      ),
-      completion: <Completion value={100} color="info" />,
-      action,
     },
     {
-      project: (
+      data: (
         <VuiBox display="flex" alignItems="center">
-          <Slack size="20px" />
           <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-            Fix Platform Errors
+            3.
+          </VuiTypography>{" "}
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            Unlocked Levels
           </VuiTypography>
         </VuiBox>
       ),
-      budget: (
+      value: (
         <VuiTypography variant="button" color="white" fontWeight="medium">
           Not set
         </VuiTypography>
       ),
-      status: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          Canceled
-        </VuiTypography>
-      ),
-      completion: <Completion value={30} color="info" />,
-      action,
     },
     {
-      project: (
+      data: (
         <VuiBox display="flex" alignItems="center">
-          <Spotify size="20px" />
           <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-            Launch our Mobile App
+            5.
+          </VuiTypography>{" "}
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            First Direct Lock{" "}
           </VuiTypography>
         </VuiBox>
       ),
-      budget: (
+      value: (
         <VuiTypography variant="button" color="white" fontWeight="medium">
           $32,000
         </VuiTypography>
       ),
-      status: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          Canceled
-        </VuiTypography>
-      ),
-      completion: <Completion value={0} color="info" />,
-      action,
     },
     {
-      project: (
+      data: (
         <VuiBox display="flex" alignItems="center">
-          <Jira size="20px" />
           <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-            Add the New Pricing Page
+            6.
+          </VuiTypography>{" "}
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            Register Time{" "}
           </VuiTypography>
         </VuiBox>
       ),
-      budget: (
+      value: (
         <VuiTypography variant="button" color="white" fontWeight="medium">
           $2,300
         </VuiTypography>
       ),
-      status: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          Done
-        </VuiTypography>
-      ),
-      completion: <Completion value={100} color="info" />,
-      action,
     },
   ],
 };

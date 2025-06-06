@@ -30,14 +30,15 @@ import palette from "assets/theme/base/colors";
 // Vision UI Dashboard components
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
+import VuiButton from "components/VuiButton";
 
 // React icons
 import { FaEllipsisH } from "react-icons/fa";
 import { MdOutlineDomain } from "react-icons/md";
 
-const CreditBalance = () => {
+const CreditBalance = ({ width, title, buttonTitle }) => {
   return (
-    <Card sx={{ padding: "30px" }}>
+    <Card sx={{ width: width }}>
       <VuiBox display="flex" flexDirection="column">
         <VuiBox
           mb="32px"
@@ -48,7 +49,7 @@ const CreditBalance = () => {
         >
           <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
             <VuiTypography variant="caption" color="white" fontWeight="medium" mr="auto">
-              Credit Balance
+              {title}
             </VuiTypography>
             <FaEllipsisH color="white" size="18px" sx={{ cursor: "pointer" }} />
           </VuiBox>
@@ -59,37 +60,15 @@ const CreditBalance = () => {
             <VuiBox component="img" src={Graph} sx={{ width: "58px", height: "20px" }} />
           </VuiBox>
         </VuiBox>
-        <VuiTypography color="text" variant="xxs" fontWeight="medium" mb="8px">
-          NEWEST
-        </VuiTypography>
+
         <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
           <Stack direction="row" spacing="10px" mr="auto">
-            <VuiBox
-              display="flex"
-              mr="10px"
-              justifyContent="center"
-              alignItems="center"
-              sx={{
-                background: "rgba(34, 41, 78, 0.7)",
-                borderRadius: "50%",
-                width: "42px",
-                height: "42px",
-              }}
-            >
-              <MdOutlineDomain color={palette.success.main} size="20px" />
-            </VuiBox>
-            <VuiBox display="flex" flexDirection="column">
-              <VuiTypography color="white" variant="button" fontWeight="medium">
-                Bill & Taxes
-              </VuiTypography>
-              <VuiTypography color="text" variant="button" fontWeight="medium">
-                Today, 16:36
-              </VuiTypography>
+            <VuiBox>
+              <VuiButton variant="contained" color="info">
+                {buttonTitle}
+              </VuiButton>
             </VuiBox>
           </Stack>
-          <VuiTypography variant="button" color="white" fontWeight="bold">
-            -$154.50
-          </VuiTypography>
         </VuiBox>
       </VuiBox>
     </Card>

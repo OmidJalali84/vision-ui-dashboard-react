@@ -17,7 +17,7 @@
 */
 
 // @mui material components
-import Grid from "@mui/material/Grid";
+import { Card, Stack, Grid } from "@mui/material";
 
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
@@ -28,53 +28,146 @@ import MasterCard from "examples/Cards/MasterCard";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
+import colors from "assets/theme/base/colors";
 
 // Billing page components
-import PaymentMethod from "layouts/billing/components/PaymentMethod";
-import Invoices from "layouts/billing/components/Invoices";
-import BillingInformation from "layouts/billing/components/BillingInformation";
-import Transactions from "layouts/billing/components/Transactions";
 import CreditBalance from "./components/CreditBalance";
+import GreenLightning from "assets/images/shapes/green-lightning.svg";
+import CircularProgress from "@mui/material/CircularProgress";
+import VuiTypography from "components/VuiTypography";
+import SatisfactionRate from "layouts/dashboard/components/SatisfactionRate";
 
-function Billing() {
+import WhiteLightning from "assets/images/shapes/white-lightning.svg";
+import linearGradient from "assets/theme/functions/linearGradient";
+import carProfile from "assets/images/shapes/car-profile.svg";
+
+function StackDashboard() {
+  const { gradients, info } = colors;
+
+  const { cardContent } = gradients;
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <VuiBox mt={4}>
-        <VuiBox mb={1.5}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} lg={7} xl={8}>
-              <Grid container spacing={3}>
-                <Grid item xs={12} xl={6}>
-                  <MasterCard number={7812213908237916} valid="05/24" cvv="09X" />
-                </Grid>
-                <Grid item xs={12} md={12} xl={6}>
-                  <CreditBalance />
-                </Grid>
-                <Grid item xs={12}>
-                  <PaymentMethod />
-                </Grid>
-              </Grid>
-            </Grid>
-            <Grid item xs={12} lg={5} xl={4}>
-              <Invoices />
-            </Grid>
-          </Grid>
-        </VuiBox>
-        <VuiBox my={3}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={7}>
-              <BillingInformation />
-            </Grid>
-            <Grid item xs={12} md={5}>
-              <Transactions />
-            </Grid>
-          </Grid>
-        </VuiBox>
+
+      <Stack
+        spacing="24px"
+        background="#fff"
+        justifyContent={"space-between"}
+        sx={({ breakpoints }) => ({
+          [breakpoints.up("sm")]: {
+            flexDirection: "row",
+            gap: "24px",
+          },
+          [breakpoints.up("md")]: {
+            flexDirection: "culomn",
+            gap: "24px",
+          },
+          [breakpoints.only("xl")]: {
+            flexDirection: "culomn",
+            gap: "24px",
+          },
+        })}
+      >
+        {/* <Grid width={"50%"}> */}
+        <CreditBalance width={"50%"} title={"Staked Amount"} buttonTitle="Stake More" />
+        {/* </Grid> */}
+        <Grid sx={{ display: "flex", justifyContent: "center", width: "50%" }}>
+          <VuiBox
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            sx={({ breakpoints }) => ({
+              [breakpoints.only("sm")]: {
+                alignItems: "center",
+              },
+            })}
+            alignItems="center"
+          >
+            <VuiBox sx={{ position: "relative", display: "inline-flex" }}>
+              <CircularProgress variant="determinate" value={60} size={170} color="info" />
+              <VuiBox
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <VuiTypography color="white" variant="h2" mt="6px" fontWeight="bold" mb="4px">
+                  68%
+                </VuiTypography>
+                <VuiTypography color="text" variant="caption">
+                  Current Load
+                </VuiTypography>
+              </VuiBox>
+            </VuiBox>
+            <VuiBox
+              display="flex"
+              justifyContent="center"
+              flexDirection="column"
+              sx={{ textAlign: "center" }}
+            >
+              <VuiTypography color="white" variant="lg" fontWeight="bold" mb="2px" mt="18px">
+                0h 58 min
+              </VuiTypography>
+              <VuiTypography color="text" variant="button" fontWeight="regular">
+                Time to wihdraw
+              </VuiTypography>
+            </VuiBox>
+          </VuiBox>
+        </Grid>
+      </Stack>
+
+      <VuiBox py={3}>
+        <Card>
+          <VuiBox display="flex" justifyContent="space-between" alignItems="center">
+            <VuiTypography variant="lg" color="white" mb="20px">
+              Positions
+            </VuiTypography>
+          </VuiBox>
+          <VuiBox
+            sx={{
+              "& th": {
+                borderBottom: ({ borders: { borderWidth }, palette: { grey } }) =>
+                  `${borderWidth[1]} solid ${grey[700]}`,
+              },
+              "& .MuiTableRow-root:not(:last-child)": {
+                "& td": {
+                  borderBottom: ({ borders: { borderWidth }, palette: { grey } }) =>
+                    `${borderWidth[1]} solid ${grey[700]}`,
+                },
+              },
+            }}
+          >
+            <Grid
+              container
+              sx={({ breakpoints }) => ({
+                spacing: "24px",
+                display: "flex",
+                justifyContent: "space-between",
+                [breakpoints.only("sm")]: {
+                  gap: "0px",
+                  rowGap: "24px",
+                },
+                [breakpoints.up("md")]: {
+                  gap: "24px",
+                  ml: "50px !important",
+                },
+                [breakpoints.only("xl")]: {
+                  gap: "12px",
+                  mx: "auto !important",
+                },
+              })}
+            >
+              <SatisfactionRate amount={100} percentage={20} />
+              <SatisfactionRate amount={50} percentage={80} />
+              <SatisfactionRate amount={1000} percentage={10} />
+            </Grid>{" "}
+          </VuiBox>
+        </Card>
       </VuiBox>
       <Footer />
     </DashboardLayout>
   );
 }
 
-export default Billing;
+export default StackDashboard;

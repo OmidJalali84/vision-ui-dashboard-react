@@ -17,7 +17,7 @@
 */
 
 // @mui material components
-import Card from "@mui/material/Card";
+import { Card, Stack, Grid } from "@mui/material";
 
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
@@ -33,39 +33,242 @@ import Table from "examples/Tables/Table";
 import authorsTableData from "layouts/tables/data/authorsTableData";
 import projectsTableData from "layouts/tables/data/projectsTableData";
 
-function Tables() {
-  const { columns, rows } = authorsTableData;
+import colors from "assets/theme/base/colors";
+
+import CreditBalance from "layouts/billing/components/CreditBalance";
+
+import WhiteLightning from "assets/images/shapes/white-lightning.svg";
+import linearGradient from "assets/theme/functions/linearGradient";
+import carProfile from "assets/images/shapes/car-profile.svg";
+import { IoCash, IoDocumentText } from "react-icons/io5";
+import { IoWallet } from "react-icons/io5";
+import { IoLogoBitcoin } from "react-icons/io5";
+
+import LineChart from "examples/Charts/LineCharts/LineChart";
+import { lineChartDataProfile1, lineChartDataProfile2 } from "variables/charts";
+import { lineChartOptionsProfile2, lineChartOptionsProfile1 } from "variables/charts";
+
+function PlanDashboard() {
   const { columns: prCols, rows: prRows } = projectsTableData;
+  const { gradients, info } = colors;
+  const { cardContent } = gradients;
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <VuiBox py={3}>
-        <VuiBox mb={3}>
-          <Card>
-            <VuiBox display="flex" justifyContent="space-between" alignItems="center" mb="22px">
-              <VuiTypography variant="lg" color="white">
-                Authors table
-              </VuiTypography>
-            </VuiBox>
+      <Stack
+        spacing="24px"
+        background="#fff"
+        sx={({ breakpoints }) => ({
+          [breakpoints.up("sm")]: {
+            flexDirection: "row",
+            gap: "24px",
+          },
+          [breakpoints.up("md")]: {
+            flexDirection: "row",
+            gap: "24px",
+          },
+          [breakpoints.only("xl")]: {
+            flexDirection: "row",
+            gap: "24px",
+          },
+        })}
+      >
+        <CreditBalance width={"50%"} title={"Entry Amount"} buttonTitle="Upgrade Plan" />
+        <Grid
+          container
+          sx={({ breakpoints }) => ({
+            spacing: "24px",
+            [breakpoints.only("sm")]: {
+              columnGap: "0px",
+              rowGap: "24px",
+            },
+            [breakpoints.up("md")]: {
+              gap: "24px",
+              ml: "50px !important",
+            },
+            [breakpoints.only("xl")]: {
+              gap: "12px",
+              mx: "auto !important",
+            },
+          })}
+        >
+          <Grid item xs={12} md={5.5} xl={5.8} xxl={5.5}>
             <VuiBox
+              display="flex"
+              p="18px"
+              alignItems="center"
               sx={{
-                "& th": {
-                  borderBottom: ({ borders: { borderWidth }, palette: { grey } }) =>
-                    `${borderWidth[1]} solid ${grey[700]}`,
-                },
-                "& .MuiTableRow-root:not(:last-child)": {
-                  "& td": {
-                    borderBottom: ({ borders: { borderWidth }, palette: { grey } }) =>
-                      `${borderWidth[1]} solid ${grey[700]}`,
-                  },
-                },
+                background: linearGradient(cardContent.main, cardContent.state, cardContent.deg),
+                borderRadius: "20px",
+                minHeight: "110px",
               }}
             >
-              <Table columns={columns} rows={rows} />
+              <VuiBox display="flex" flexDirection="column" mr="auto">
+                <VuiTypography color="text" variant="caption" fontWeight="medium" mb="2px">
+                  Username
+                </VuiTypography>
+                <VuiTypography
+                  color="white"
+                  variant="h4"
+                  fontWeight="bold"
+                  sx={({ breakpoints }) => ({
+                    [breakpoints.only("xl")]: {
+                      fontSize: "20px",
+                    },
+                  })}
+                >
+                  163W/km
+                </VuiTypography>
+              </VuiBox>
+              <VuiBox
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                sx={{
+                  background: info.main,
+                  borderRadius: "12px",
+                  width: "56px",
+                  height: "56px",
+                }}
+              >
+                <IoDocumentText color="white" />
+              </VuiBox>
             </VuiBox>
-          </Card>
-        </VuiBox>
+          </Grid>
+          <Grid item xs={12} md={5.5} xl={5.8} xxl={5.5}>
+            <VuiBox
+              display="flex"
+              p="18px"
+              alignItems="center"
+              sx={{
+                background: linearGradient(cardContent.main, cardContent.state, cardContent.deg),
+                borderRadius: "20px",
+                minHeight: "110px",
+              }}
+            >
+              <VuiBox display="flex" flexDirection="column" mr="auto">
+                <VuiTypography color="text" variant="caption" fontWeight="medium" mb="2px">
+                  Total Reward
+                </VuiTypography>
+                <VuiTypography
+                  color="white"
+                  variant="h4"
+                  fontWeight="bold"
+                  sx={({ breakpoints }) => ({
+                    [breakpoints.only("xl")]: {
+                      fontSize: "20px",
+                    },
+                  })}
+                >
+                  163W/km
+                </VuiTypography>
+              </VuiBox>
+              <VuiBox
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                sx={{
+                  background: info.main,
+                  borderRadius: "12px",
+                  width: "56px",
+                  height: "56px",
+                }}
+              >
+                <IoCash color="white" />
+              </VuiBox>
+            </VuiBox>
+          </Grid>
+          <Grid item xs={12} md={5.5} xl={5.8} xxl={5.5}>
+            <VuiBox
+              display="flex"
+              p="18px"
+              alignItems="center"
+              sx={{
+                background: linearGradient(cardContent.main, cardContent.state, cardContent.deg),
+                minHeight: "110px",
+                borderRadius: "20px",
+              }}
+            >
+              <VuiBox display="flex" flexDirection="column" mr="auto">
+                <VuiTypography color="text" variant="caption" fontWeight="medium" mb="2px">
+                  Token Balance
+                </VuiTypography>
+                <VuiTypography
+                  color="white"
+                  variant="h4"
+                  fontWeight="bold"
+                  sx={({ breakpoints }) => ({
+                    [breakpoints.only("xl")]: {
+                      fontSize: "20px",
+                    },
+                  })}
+                >
+                  76%
+                </VuiTypography>
+              </VuiBox>
+              <VuiBox
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                sx={{
+                  background: info.main,
+                  borderRadius: "12px",
+                  width: "56px",
+                  height: "56px",
+                }}
+              >
+                <IoWallet color="white" />
+              </VuiBox>
+            </VuiBox>
+          </Grid>
+          <Grid item xs={12} md={5.5} xl={5.8} xxl={5.5}>
+            <VuiBox
+              display="flex"
+              p="18px"
+              alignItems="center"
+              sx={{
+                background: linearGradient(cardContent.main, cardContent.state, cardContent.deg),
+                minHeight: "110px",
+                borderRadius: "20px",
+              }}
+            >
+              <VuiBox display="flex" flexDirection="column" mr="auto">
+                <VuiTypography color="text" variant="caption" fontWeight="medium" mb="2px">
+                  Points
+                </VuiTypography>
+                <VuiTypography
+                  color="white"
+                  variant="h4"
+                  fontWeight="bold"
+                  sx={({ breakpoints }) => ({
+                    [breakpoints.only("xl")]: {
+                      fontSize: "20px",
+                    },
+                  })}
+                >
+                  76%
+                </VuiTypography>
+              </VuiBox>
+              <VuiBox
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                sx={{
+                  background: info.main,
+                  borderRadius: "12px",
+                  width: "56px",
+                  height: "56px",
+                }}
+              >
+                <IoWallet color="white" />
+              </VuiBox>
+            </VuiBox>
+          </Grid>
+        </Grid>
+      </Stack>
+
+      <VuiBox py={3}>
         <Card>
           <VuiBox display="flex" justifyContent="space-between" alignItems="center">
             <VuiTypography variant="lg" color="white">
@@ -95,4 +298,4 @@ function Tables() {
   );
 }
 
-export default Tables;
+export default PlanDashboard;
