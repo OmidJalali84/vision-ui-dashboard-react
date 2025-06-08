@@ -6,7 +6,7 @@ import VuiTypography from "../../../../components/VuiTypography";
 
 import gif from "../../../../assets/images/cardimgfree.png";
 
-const WelcomeMark = () => {
+const WelcomeMark = ({ name }) => {
   return (
     <Card
       sx={() => ({
@@ -17,30 +17,15 @@ const WelcomeMark = () => {
         backgroundPosition: "50%",
       })}
     >
-      <VuiBox
-        height="100%"
-        display="flex"
-        flexDirection="column"
-        justifyContent="space-between"
-      >
+      <VuiBox height="100%" display="flex" flexDirection="column" justifyContent="space-between">
         <VuiBox>
-          <VuiTypography
-            color="text"
-            variant="button"
-            fontWeight="regular"
-            mb="12px"
-          >
+          <VuiTypography color="text" variant="button" fontWeight="regular" mb="12px">
             Welcome back,
           </VuiTypography>
           <VuiTypography color="white" variant="h3" fontWeight="bold" mb="18px">
-            Mark Johnson
+            {name}
           </VuiTypography>
-          <VuiTypography
-            color="text"
-            variant="h6"
-            fontWeight="regular"
-            mb="auto"
-          >
+          <VuiTypography color="text" variant="h6" fontWeight="regular" mb="auto">
             Glad to see you again!
           </VuiTypography>
         </VuiBox>

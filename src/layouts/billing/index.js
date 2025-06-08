@@ -17,10 +17,11 @@
 */
 
 // @mui material components
-import { Card, Stack, Grid } from "@mui/material";
+import { Card, Stack, Grid, Modal, Box } from "@mui/material";
 
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
+import VuiButton from "components/VuiButton";
 
 // Vision UI Dashboard React components
 import MasterCard from "examples/Cards/MasterCard";
@@ -36,83 +37,327 @@ import GreenLightning from "assets/images/shapes/green-lightning.svg";
 import CircularProgress from "@mui/material/CircularProgress";
 import VuiTypography from "components/VuiTypography";
 import SatisfactionRate from "layouts/dashboard/components/SatisfactionRate";
-
-import WhiteLightning from "assets/images/shapes/white-lightning.svg";
-import linearGradient from "assets/theme/functions/linearGradient";
-import carProfile from "assets/images/shapes/car-profile.svg";
+import { useAccount } from "wagmi";
+import { ConnectKitButton } from "connectkit";
+import { getStaker, getStakes } from "web3/actions";
+import { useState, useEffect } from "react";
+import { Button } from "@mui/material";
+import balance from "assets/images/billing-background-balance.png";
+import Graph from "assets/images/shapes/graph-billing.svg";
+import { FaEllipsisH } from "react-icons/fa";
+import StakeMore from "./components/StakeMore";
+import projectsTableData from "layouts/tables/data/projectsTableData";
+import Table from "examples/Tables/Table";
 
 function StackDashboard() {
-  const { gradients, info } = colors;
+  const { columns: prCols } = projectsTableData;
 
-  const { cardContent } = gradients;
+  const { isConnected, address } = useAccount();
+  const staker = getStaker(address);
+  const stakes = getStakes(address);
+  // console.log(staker?.data);
+  console.log(stakes);
 
+  const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 });
+  const [percentDone, setPercentDone] = useState(0);
+  const [isFirstDay, setIsFirstDay] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "black",
+    boxShadow: 24,
+    borderRadius: "8px",
+  };
+
+  const prRows = [
+    {
+      data: (
+        <VuiBox display="flex" alignItems="center">
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            1.
+          </VuiTypography>
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            Referrer
+          </VuiTypography>
+        </VuiBox>
+      ),
+      value: (
+        <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
+          {staker?.data?.[0]}
+        </VuiTypography>
+      ),
+    },
+    {
+      data: (
+        <VuiBox display="flex" alignItems="center">
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            2.
+          </VuiTypography>
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            Underlines
+          </VuiTypography>
+        </VuiBox>
+      ),
+      value: (
+        <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
+          {Number(staker?.data?.[4] ?? 0).toLocaleString()}
+        </VuiTypography>
+      ),
+    },
+    {
+      data: (
+        <VuiBox display="flex" alignItems="center">
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            3.
+          </VuiTypography>
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            Unlocked Levels
+          </VuiTypography>
+        </VuiBox>
+      ),
+      value: (
+        <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
+          {Number(staker?.data?.[2] ?? 0).toLocaleString()}
+        </VuiTypography>
+      ),
+    },
+    {
+      data: (
+        <VuiBox display="flex" alignItems="center">
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            4.
+          </VuiTypography>
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            Total Reward
+          </VuiTypography>
+        </VuiBox>
+      ),
+      value: (
+        <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
+          {staker?.data?.[5]
+            ? (Number(userInfo.data[5]) / 1e18).toLocaleString(undefined, {
+                style: "currency",
+                currency: "USD",
+              })
+            : "$ 0"}
+        </VuiTypography>
+      ),
+    },
+  ];
+
+  useEffect(() => {
+    const tick = () => {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = now.getMonth();
+      const nextFirst = new Date(year, month + 1, 1, 0, 0, 0);
+      const diffSec = Math.floor((nextFirst - now) / 1000);
+
+      const d = Math.floor(diffSec / 86400);
+      const h = Math.floor((diffSec % 86400) / 3600);
+      const m = Math.floor((diffSec % 3600) / 60);
+      const s = diffSec % 60;
+
+      setTimeLeft({ d, h, m, s });
+      setIsFirstDay(now.getDate() === 1);
+
+      const startThisMonth = new Date(year, month, 1);
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const elapsedDays = now.getDate() - 1 + now.getHours() / 24;
+      setPercentDone((elapsedDays / daysInMonth) * 100);
+    };
+
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const handleModalClick = () => {
+    setModalOpen(true);
+  };
+  if (!isConnected) {
+    return (
+      <DashboardLayout>
+        <DashboardNavbar />
+        <VuiBox
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          minHeight="60vh"
+          textAlign="center"
+          py={6}
+        >
+          <VuiBox mb={2} fontSize="lg" fontWeight="medium">
+            Please first connect wallet
+          </VuiBox>
+          <ConnectKitButton />
+        </VuiBox>
+        <Footer />
+      </DashboardLayout>
+    );
+  }
   return (
     <DashboardLayout>
       <DashboardNavbar />
-
       <Stack
         spacing="24px"
         background="#fff"
-        justifyContent={"space-between"}
+        justifyContent={{ xs: "center", sm: "space-between" }}
         sx={({ breakpoints }) => ({
+          // Mobile first: columns
+          flexDirection: "column",
+          gap: "24px",
+          alignItems: { xs: "center", sm: "stretch" },
+
+          // From sm up: two columns
           [breakpoints.up("sm")]: {
             flexDirection: "row",
-            gap: "24px",
           },
-          [breakpoints.up("md")]: {
-            flexDirection: "culomn",
-            gap: "24px",
-          },
-          [breakpoints.only("xl")]: {
-            flexDirection: "culomn",
-            gap: "24px",
-          },
+
+          // (you can add further tweaks at md, lg if you like)
         })}
       >
-        {/* <Grid width={"50%"}> */}
-        <CreditBalance width={"50%"} title={"Staked Amount"} buttonTitle="Stake More" />
-        {/* </Grid> */}
-        <Grid sx={{ display: "flex", justifyContent: "center", width: "50%" }}>
-          <VuiBox
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            sx={({ breakpoints }) => ({
-              [breakpoints.only("sm")]: {
-                alignItems: "center",
-              },
-            })}
-            alignItems="center"
-          >
-            <VuiBox sx={{ position: "relative", display: "inline-flex" }}>
-              <CircularProgress variant="determinate" value={60} size={170} color="info" />
-              <VuiBox
-                display="flex"
-                flexDirection="column"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <VuiTypography color="white" variant="h2" mt="6px" fontWeight="bold" mb="4px">
-                  68%
+        <Card
+          sx={{
+            // MOBILE: make it 90% wide and center it
+            width: { xs: "90%", sm: "50%" },
+            mx: { xs: "auto", sm: 0 },
+          }}
+        >
+          <VuiBox display="flex" flexDirection="column">
+            <VuiBox
+              mb="32px"
+              p="20px"
+              display="flex"
+              flexDirection="column"
+              sx={{
+                backgroundImage: `url(${balance})`,
+                backgroundSize: "cover",
+                borderRadius: "18px",
+              }}
+            >
+              <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
+                <VuiTypography variant="caption" color="white" fontWeight="medium" mr="auto">
+                  Total Staked
                 </VuiTypography>
-                <VuiTypography color="text" variant="caption">
-                  Current Load
+                <FaEllipsisH color="white" size="18px" sx={{ cursor: "pointer" }} />
+              </VuiBox>
+              <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
+                <VuiTypography variant="h2" color="white" fontWeight="bold" mr="auto">
+                  ${Number(staker?.data?.[3]) / 1e18}
                 </VuiTypography>
+                <VuiBox component="img" src={Graph} sx={{ width: "58px", height: "20px" }} />
               </VuiBox>
             </VuiBox>
-            <VuiBox
-              display="flex"
-              justifyContent="center"
-              flexDirection="column"
-              sx={{ textAlign: "center" }}
-            >
-              <VuiTypography color="white" variant="lg" fontWeight="bold" mb="2px" mt="18px">
-                0h 58 min
-              </VuiTypography>
-              <VuiTypography color="text" variant="button" fontWeight="regular">
-                Time to wihdraw
-              </VuiTypography>
+
+            <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
+              <Stack direction="row" spacing="10px" mr="auto">
+                <VuiBox>
+                  <VuiButton variant="contained" color="info" onClick={handleModalClick}>
+                    Stake More
+                  </VuiButton>
+                </VuiBox>
+              </Stack>
             </VuiBox>
+          </VuiBox>
+        </Card>
+        {/* </Grid> */}
+        <Grid
+          sx={{
+            // MOBILE: also give it a little breathing room if needed
+            width: { xs: "90%", sm: "50%" },
+            mx: { xs: "auto", sm: 0 },
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <VuiBox display="flex" justifyContent="center" mt={6}>
+            {isFirstDay ? (
+              <VuiBox
+                mt={4}
+                p="24px"
+                sx={{
+                  background: "rgba(255,255,255,0.05)",
+                  borderRadius: "16px",
+                  width: "280px",
+                  textAlign: "center",
+                  boxShadow: "0 8px 16px rgba(0,0,0,0.25)",
+                }}
+              >
+                <VuiTypography variant="h6" color="white" fontWeight="bold" mb="12px">
+                  Withdraw Available
+                </VuiTypography>
+
+                <VuiTypography variant="h3" color="white" fontWeight="bold" mb="16px">
+                  123.45 DAI
+                </VuiTypography>
+
+                <VuiBox>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    fullWidth
+                    onClick={() => {
+                      /* TODO: wire up your withdraw action */
+                    }}
+                  >
+                    Withdraw Now
+                  </Button>
+                </VuiBox>
+              </VuiBox>
+            ) : (
+              <VuiBox display="flex" flexDirection="column" alignItems="center">
+                <VuiBox sx={{ position: "relative", display: "inline-flex" }}>
+                  <CircularProgress
+                    variant="determinate"
+                    value={percentDone}
+                    size={170}
+                    color="info"
+                  />
+                  <VuiBox
+                    position="absolute"
+                    top={0}
+                    left={0}
+                    right={0}
+                    bottom={0}
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <VuiTypography color="white" variant="h2" fontWeight="bold">
+                      {Math.round(percentDone)}%
+                    </VuiTypography>
+                    <VuiTypography color="text" variant="caption">
+                      Month Progress
+                    </VuiTypography>
+                  </VuiBox>
+                </VuiBox>
+
+                <VuiBox display="flex" alignItems="center" mt={3} sx={{ gap: "12px" }}>
+                  <>
+                    <VuiTypography color="white" variant="h5" fontWeight="bold">
+                      {timeLeft.d}d
+                    </VuiTypography>
+                    <VuiTypography color="white" variant="h5" fontWeight="bold">
+                      {timeLeft.h}h
+                    </VuiTypography>
+                    <VuiTypography color="white" variant="h5" fontWeight="bold">
+                      {timeLeft.m}m
+                    </VuiTypography>
+                    <VuiTypography color="white" variant="h5" fontWeight="bold">
+                      {timeLeft.s}s
+                    </VuiTypography>
+                  </>
+                </VuiBox>
+              </VuiBox>
+            )}
           </VuiBox>
         </Grid>
       </Stack>
@@ -120,8 +365,8 @@ function StackDashboard() {
       <VuiBox py={3}>
         <Card>
           <VuiBox display="flex" justifyContent="space-between" alignItems="center">
-            <VuiTypography variant="lg" color="white" mb="20px">
-              Positions
+            <VuiTypography variant="lg" color="white">
+              Data Table
             </VuiTypography>
           </VuiBox>
           <VuiBox
@@ -138,33 +383,91 @@ function StackDashboard() {
               },
             }}
           >
-            <Grid
-              container
-              sx={({ breakpoints }) => ({
-                spacing: "24px",
-                display: "flex",
-                justifyContent: "space-between",
-                [breakpoints.only("sm")]: {
-                  gap: "0px",
-                  rowGap: "24px",
-                },
-                [breakpoints.up("md")]: {
-                  gap: "24px",
-                  ml: "50px !important",
-                },
-                [breakpoints.only("xl")]: {
-                  gap: "12px",
-                  mx: "auto !important",
-                },
-              })}
-            >
-              <SatisfactionRate amount={100} percentage={20} />
-              <SatisfactionRate amount={50} percentage={80} />
-              <SatisfactionRate amount={1000} percentage={10} />
-            </Grid>{" "}
+            <Table columns={prCols} rows={prRows} />
           </VuiBox>
         </Card>
       </VuiBox>
+
+      <VuiBox
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          flexGrow: 1,
+          justifyContent: stakes.length > 0 ? "flex-start" : "center",
+          py: 3,
+          minHeight: stakes.length > 0 ? "auto" : "400px", // adjust as needed
+        }}
+      >
+        {stakes?.data?.length > 0 ? (
+          <VuiBox py={3}>
+            <Card>
+              <VuiBox display="flex" justifyContent="space-between" alignItems="center">
+                <VuiTypography variant="lg" color="white" mb="20px">
+                  Positions
+                </VuiTypography>
+              </VuiBox>
+              <VuiBox
+                sx={{
+                  "& th": {
+                    borderBottom: ({ borders: { borderWidth }, palette: { grey } }) =>
+                      `${borderWidth[1]} solid ${grey[700]}`,
+                  },
+                  "& .MuiTableRow-root:not(:last-child)": {
+                    "& td": {
+                      borderBottom: ({ borders: { borderWidth }, palette: { grey } }) =>
+                        `${borderWidth[1]} solid ${grey[700]}`,
+                    },
+                  },
+                }}
+              >
+                <Grid
+                  container
+                  sx={({ breakpoints }) => ({
+                    spacing: "24px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    [breakpoints.only("sm")]: {
+                      gap: "0px",
+                      rowGap: "24px",
+                    },
+                    [breakpoints.up("md")]: {
+                      gap: "24px",
+                      ml: "50px !important",
+                    },
+                    [breakpoints.only("xl")]: {
+                      gap: "12px",
+                      mx: "auto !important",
+                    },
+                  })}
+                >
+                  {stakes?.data?.map((stake) => (
+                    <SatisfactionRate
+                      amount={Number(stake.amount) / 1e18}
+                      percentage={Number(stake.rewardClaimed) / Number(stake.amount) / 2}
+                    />
+                  ))}
+                </Grid>{" "}
+              </VuiBox>
+            </Card>
+          </VuiBox>
+        ) : (
+          <VuiTypography variant="button" color="text" textAlign="center">
+            You have no active positions yet.
+          </VuiTypography>
+        )}
+      </VuiBox>
+      <Modal
+        open={modalOpen}
+        onClose={() => {
+          setModalOpen(false);
+        }}
+        hideBackdrop={false}
+        disableEscapeKeyDown={true}
+      >
+        <Box sx={style}>
+          <StakeMore staker={staker} />
+        </Box>
+      </Modal>
       <Footer />
     </DashboardLayout>
   );

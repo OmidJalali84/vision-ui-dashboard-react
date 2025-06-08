@@ -6,7 +6,7 @@ import colors from "../../../../assets/theme/base/colors";
 import linearGradient from "../../../../assets/theme/functions/linearGradient";
 import CircularProgress from "@mui/material/CircularProgress";
 
-function ReferralTracking() {
+function ReferralTracking({ levels, totalReward, directs, title }) {
   const { info, gradients } = colors;
   const { cardContent } = gradients;
 
@@ -30,7 +30,7 @@ function ReferralTracking() {
           mb="40px"
         >
           <VuiTypography variant="lg" color="white" mr="auto" fontWeight="bold">
-            Referral Tracking
+            {title}
           </VuiTypography>
         </VuiBox>
         <VuiBox
@@ -71,11 +71,7 @@ function ReferralTracking() {
               p="20px 22px"
               flexDirection="column"
               sx={({ breakpoints }) => ({
-                background: linearGradient(
-                  cardContent.main,
-                  cardContent.state,
-                  cardContent.deg
-                ),
+                background: linearGradient(cardContent.main, cardContent.state, cardContent.deg),
                 borderRadius: "20px",
                 [breakpoints.up("xl")]: {
                   maxWidth: "110px !important",
@@ -86,16 +82,11 @@ function ReferralTracking() {
                 },
               })}
             >
-              <VuiTypography
-                color="text"
-                variant="button"
-                fontWeight="regular"
-                mb="5px"
-              >
+              <VuiTypography color="text" variant="button" fontWeight="regular" mb="5px">
                 Invited
               </VuiTypography>
               <VuiTypography color="white" variant="lg" fontWeight="bold">
-                145 people
+                {Number(directs)} people
               </VuiTypography>
             </VuiBox>
             <VuiBox
@@ -104,11 +95,7 @@ function ReferralTracking() {
               p="20px 22px"
               flexDirection="column"
               sx={({ breakpoints }) => ({
-                background: linearGradient(
-                  cardContent.main,
-                  cardContent.state,
-                  cardContent.deg
-                ),
+                background: linearGradient(cardContent.main, cardContent.state, cardContent.deg),
                 borderRadius: "20px",
                 [breakpoints.up("xl")]: {
                   maxWidth: "110px !important",
@@ -119,30 +106,19 @@ function ReferralTracking() {
                 },
               })}
             >
-              <VuiTypography
-                color="text"
-                variant="button"
-                fontWeight="regular"
-                mb="5px"
-              >
-                Bonus
+              <VuiTypography color="text" variant="button" fontWeight="regular" mb="5px">
+                Reward
               </VuiTypography>
               <VuiTypography color="white" variant="lg" fontWeight="bold">
-                1,465
+                {Number(totalReward) / 1e18}
               </VuiTypography>
             </VuiBox>
           </Stack>
           <VuiBox sx={{ position: "relative", display: "inline-flex" }}>
             <CircularProgress
               variant="determinate"
-              value={33}
-              size={
-                window.innerWidth >= 1024
-                  ? 200
-                  : window.innerWidth >= 768
-                  ? 170
-                  : 200
-              }
+              value={Math.round((Number(levels) / 20) * 100)}
+              size={window.innerWidth >= 1024 ? 200 : window.innerWidth >= 768 ? 170 : 200}
               color="success"
             />
             <VuiBox
@@ -177,7 +153,7 @@ function ReferralTracking() {
                     },
                   })}
                 >
-                  5/20
+                  {Number(levels)}/20
                 </VuiTypography>
               </VuiBox>
             </VuiBox>

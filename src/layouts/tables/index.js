@@ -17,11 +17,12 @@
 */
 
 // @mui material components
-import { Card, Stack, Grid } from "@mui/material";
+import { Card, Stack, Grid, Modal, Box } from "@mui/material";
 
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
+import VuiButton from "components/VuiButton";
 
 // Vision UI Dashboard React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -30,51 +31,232 @@ import Footer from "examples/Footer";
 import Table from "examples/Tables/Table";
 
 // Data
-import authorsTableData from "layouts/tables/data/authorsTableData";
 import projectsTableData from "layouts/tables/data/projectsTableData";
 
 import colors from "assets/theme/base/colors";
 
-import CreditBalance from "layouts/billing/components/CreditBalance";
+import balance from "assets/images/billing-background-balance.png";
+import Graph from "assets/images/shapes/graph-billing.svg";
+import { FaEllipsisH } from "react-icons/fa";
 
-import WhiteLightning from "assets/images/shapes/white-lightning.svg";
 import linearGradient from "assets/theme/functions/linearGradient";
-import carProfile from "assets/images/shapes/car-profile.svg";
 import { IoCash, IoDocumentText } from "react-icons/io5";
 import { IoWallet } from "react-icons/io5";
-import { IoLogoBitcoin } from "react-icons/io5";
 
-import LineChart from "examples/Charts/LineCharts/LineChart";
-import { lineChartDataProfile1, lineChartDataProfile2 } from "variables/charts";
-import { lineChartOptionsProfile2, lineChartOptionsProfile1 } from "variables/charts";
+import { useAccount } from "wagmi";
+import { ConnectKitButton } from "connectkit";
+import { getUser, getTokenBalance, getPointBalance } from "web3/actions";
+import UpgradePlan from "./components/UpgradePlan";
+import { useState } from "react";
 
 function PlanDashboard() {
-  const { columns: prCols, rows: prRows } = projectsTableData;
+  const { columns: prCols } = projectsTableData;
   const { gradients, info } = colors;
   const { cardContent } = gradients;
+  const { isConnected, address } = useAccount();
+  const userInfo = getUser(address);
+  const tokenBalance = getTokenBalance(address);
+  const pointsBalance = getPointBalance(address);
 
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleModalClick = () => {
+    setModalOpen(true);
+  };
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "black",
+    boxShadow: 24,
+    borderRadius: "8px",
+  };
+
+  const prRows = [
+    {
+      data: (
+        <VuiBox display="flex" alignItems="center">
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            1.
+          </VuiTypography>
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            Referrer
+          </VuiTypography>
+        </VuiBox>
+      ),
+      value: (
+        <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
+          {userInfo?.data?.referrerUsername}
+        </VuiTypography>
+      ),
+    },
+    {
+      data: (
+        <VuiBox display="flex" alignItems="center">
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            2.
+          </VuiTypography>
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            Underlines
+          </VuiTypography>
+        </VuiBox>
+      ),
+      value: (
+        <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
+          {Number(userInfo?.data?.directs ?? 0).toLocaleString()}
+        </VuiTypography>
+      ),
+    },
+    {
+      data: (
+        <VuiBox display="flex" alignItems="center">
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            3.
+          </VuiTypography>
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            Unlocked Levels
+          </VuiTypography>
+        </VuiBox>
+      ),
+      value: (
+        <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
+          {Number(userInfo?.data?.unlockedLevels ?? 0).toLocaleString()}
+        </VuiTypography>
+      ),
+    },
+    {
+      data: (
+        <VuiBox display="flex" alignItems="center">
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            4.
+          </VuiTypography>
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            First Direct Lock
+          </VuiTypography>
+        </VuiBox>
+      ),
+      value: (
+        <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
+          {userInfo?.data?.firstDirectLockAmount
+            ? (Number(userInfo.data.firstDirectLockAmount) / 1e18).toLocaleString(undefined, {
+                style: "currency",
+                currency: "USD",
+              })
+            : "$ 0"}
+        </VuiTypography>
+      ),
+    },
+    {
+      data: (
+        <VuiBox display="flex" alignItems="center">
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            5.
+          </VuiTypography>
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            Register Time
+          </VuiTypography>
+        </VuiBox>
+      ),
+      value: (
+        <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
+          {userInfo?.data?.registrationTime
+            ? new Date(Number(userInfo.data.registrationTime) * 1000).toLocaleString()
+            : "—"}
+        </VuiTypography>
+      ),
+    },
+  ];
+
+  if (!isConnected) {
+    return (
+      <DashboardLayout>
+        <DashboardNavbar />
+        <VuiBox
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          minHeight="60vh"
+          textAlign="center"
+          py={6}
+        >
+          <VuiBox mb={2} fontSize="lg" fontWeight="medium">
+            Please first connect wallet
+          </VuiBox>
+          <ConnectKitButton />
+        </VuiBox>
+        <Footer />
+      </DashboardLayout>
+    );
+  }
   return (
     <DashboardLayout>
       <DashboardNavbar />
       <Stack
         spacing="24px"
         background="#fff"
+        justifyContent={{ xs: "center", sm: "space-between" }}
         sx={({ breakpoints }) => ({
+          // Mobile first: columns
+          flexDirection: "column",
+          gap: "24px",
+          alignItems: { xs: "center", sm: "stretch" },
+
+          // From sm up: two columns
           [breakpoints.up("sm")]: {
             flexDirection: "row",
-            gap: "24px",
           },
-          [breakpoints.up("md")]: {
-            flexDirection: "row",
-            gap: "24px",
-          },
-          [breakpoints.only("xl")]: {
-            flexDirection: "row",
-            gap: "24px",
-          },
+
+          // (you can add further tweaks at md, lg if you like)
         })}
       >
-        <CreditBalance width={"50%"} title={"Entry Amount"} buttonTitle="Upgrade Plan" />
+        <Card
+          sx={{
+            // MOBILE: make it 90% wide and center it
+            width: { xs: "90%", sm: "50%" },
+            mx: { xs: "auto", sm: 0 },
+          }}
+        >
+          <VuiBox display="flex" flexDirection="column">
+            <VuiBox
+              mb="32px"
+              p="20px"
+              display="flex"
+              flexDirection="column"
+              sx={{
+                backgroundImage: `url(${balance})`,
+                backgroundSize: "cover",
+                borderRadius: "18px",
+              }}
+            >
+              <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
+                <VuiTypography variant="caption" color="white" fontWeight="medium" mr="auto">
+                  Entry Amount
+                </VuiTypography>
+                <FaEllipsisH color="white" size="18px" sx={{ cursor: "pointer" }} />
+              </VuiBox>
+              <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
+                <VuiTypography variant="h2" color="white" fontWeight="bold" mr="auto">
+                  ${Number(userInfo?.data?.entryAmount) / 1e18}
+                </VuiTypography>
+                <VuiBox component="img" src={Graph} sx={{ width: "58px", height: "20px" }} />
+              </VuiBox>
+            </VuiBox>
+
+            <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
+              <Stack direction="row" spacing="10px" mr="auto">
+                <VuiBox>
+                  <VuiButton variant="contained" color="info" onClick={handleModalClick}>
+                    Upgrade Plan
+                  </VuiButton>
+                </VuiBox>
+              </Stack>
+            </VuiBox>
+          </VuiBox>
+        </Card>
         <Grid
           container
           sx={({ breakpoints }) => ({
@@ -118,7 +300,7 @@ function PlanDashboard() {
                     },
                   })}
                 >
-                  163W/km
+                  {userInfo?.data?.username}
                 </VuiTypography>
               </VuiBox>
               <VuiBox
@@ -161,7 +343,7 @@ function PlanDashboard() {
                     },
                   })}
                 >
-                  163W/km
+                  {Number(userInfo?.data?.totalReward) / 1e18}
                 </VuiTypography>
               </VuiBox>
               <VuiBox
@@ -204,7 +386,7 @@ function PlanDashboard() {
                     },
                   })}
                 >
-                  76%
+                  {Number(tokenBalance?.data) / 1e18}
                 </VuiTypography>
               </VuiBox>
               <VuiBox
@@ -247,7 +429,7 @@ function PlanDashboard() {
                     },
                   })}
                 >
-                  76%
+                  {Number(pointsBalance?.data) / 1e18}
                 </VuiTypography>
               </VuiBox>
               <VuiBox
@@ -272,7 +454,7 @@ function PlanDashboard() {
         <Card>
           <VuiBox display="flex" justifyContent="space-between" alignItems="center">
             <VuiTypography variant="lg" color="white">
-              Projects table
+              Data Table
             </VuiTypography>
           </VuiBox>
           <VuiBox
@@ -293,6 +475,18 @@ function PlanDashboard() {
           </VuiBox>
         </Card>
       </VuiBox>
+      <Modal
+        open={modalOpen}
+        onClose={() => {
+          setModalOpen(false);
+        }}
+        hideBackdrop={false}
+        disableEscapeKeyDown={true}
+      >
+        <Box sx={style}>
+          <UpgradePlan />
+        </Box>
+      </Modal>
       <Footer />
     </DashboardLayout>
   );

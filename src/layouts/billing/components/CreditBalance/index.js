@@ -25,8 +25,6 @@ import { Card, Stack } from "@mui/material";
 import balance from "assets/images/billing-background-balance.png";
 import Graph from "assets/images/shapes/graph-billing.svg";
 
-import palette from "assets/theme/base/colors";
-
 // Vision UI Dashboard components
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
@@ -34,9 +32,8 @@ import VuiButton from "components/VuiButton";
 
 // React icons
 import { FaEllipsisH } from "react-icons/fa";
-import { MdOutlineDomain } from "react-icons/md";
 
-const CreditBalance = ({ width, title, buttonTitle }) => {
+const CreditBalance = ({ width, title, buttonTitle, entryAmount }) => {
   return (
     <Card sx={{ width: width }}>
       <VuiBox display="flex" flexDirection="column">
@@ -55,7 +52,7 @@ const CreditBalance = ({ width, title, buttonTitle }) => {
           </VuiBox>
           <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
             <VuiTypography variant="h2" color="white" fontWeight="bold" mr="auto">
-              $25,215
+              ${Number(entryAmount) / 1e18}
             </VuiTypography>
             <VuiBox component="img" src={Graph} sx={{ width: "58px", height: "20px" }} />
           </VuiBox>

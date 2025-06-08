@@ -20,7 +20,7 @@ const SatisfactionRate = ({ amount, percentage }) => {
         </VuiTypography>
         <VuiBox sx={{ alignSelf: "center", justifySelf: "center", zIndex: "-1" }}>
           <VuiBox sx={{ position: "relative", display: "inline-flex" }}>
-            <CircularProgress variant="determinate" value={60} size={170} color="info" />
+            <CircularProgress variant="determinate" value={percentage} size={170} color="info" />
             <VuiBox
               sx={{
                 top: 0,
@@ -76,7 +76,7 @@ const SatisfactionRate = ({ amount, percentage }) => {
             sx={{ minWidth: "80px" }}
           >
             <VuiTypography color="white" variant="h3">
-              {percentage}%
+              {percentage * 2}%
             </VuiTypography>
             <VuiTypography color="text" variant="caption" fontWeight="regular">
               of stake earned
