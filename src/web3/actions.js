@@ -1,4 +1,4 @@
-import { formatEther, parseEther, encodePacked, keccak256, etherUnits } from "viem";
+import { formatEther, parseEther, encodePacked, keccak256, etherUnits, zeroAddress } from "viem";
 import { contractAddress, usdtAddress, contractABI, pointAddress } from "./helper";
 import { useReadContract } from "wagmi";
 import { readContract, writeContract } from "wagmi/actions";
@@ -21,16 +21,6 @@ export function getUserByUsername(username) {
     address: contractAddress,
     functionName: "getUserByUsername",
     args: [username],
-  });
-}
-
-export function registerUser(userAddress, referrer, amount, username, forToken) {
-  console.log(userAddress, referrer, amount, username, forToken);
-  return writeContract(config, {
-    abi: contractABI,
-    address: contractAddress,
-    functionName: "register",
-    args: [userAddress, referrer, ethers.utils.parseEther(amount.toString()), username, forToken],
   });
 }
 
@@ -114,12 +104,30 @@ export function stakeMore(amount) {
   });
 }
 
-export function upgrade(amount) {
+export function stake(userAddress, amount) {
+  return writeContract(config, {
+    abi: contractABI,
+    address: contractAddress,
+    functionName: "register",
+    args: [userAddress, zeroAddress, ethers.utils.parseEther(amount.toString()), "", 2],
+  });
+}
+
+export function register(userAddress, amount, plan) {
+  return writeContract(config, {
+    abi: contractABI,
+    address: contractAddress,
+    functionName: "register",
+    args: [userAddress, zeroAddress, ethers.utils.parseEther(amount.toString()), "", plan],
+  });
+}
+
+export function upgrade(amount, plan) {
   return writeContract(config, {
     abi: contractABI,
     address: contractAddress,
     functionName: "upgradePlan",
-    args: [ethers.utils.parseUnits(amount.toString(), 18), true],
+    args: [ethers.utils.parseUnits(amount.toString(), 18), plan],
   });
 }
 

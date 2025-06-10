@@ -8,13 +8,16 @@ import { Stepper, Step, StepLabel, Card } from "@mui/material";
 import { waitForTransactionReceipt } from "@wagmi/core";
 import { config } from "web3/Web3Provider";
 import { toast } from "react-toastify";
-import { approveUsdt, upgrade } from "web3/actions";
+import { approveUsdt, register } from "web3/actions";
+import { useAccount } from "wagmi";
 
-export default function UpgradePlan() {
+export default function Register({ plan }) {
   const amountRef = useRef();
   const [loading, setLoading] = useState(false);
   const [amount, setAmount] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
+
+  const { address } = useAccount();
 
   const handleApprove = async () => {
     setLoading(true);
@@ -36,9 +39,9 @@ export default function UpgradePlan() {
   const handleUpgrade = async () => {
     setLoading(true);
     try {
-      const tx = await upgrade(amount, 0);
+      const tx = await register(address, amount, plan);
       await waitForTransactionReceipt(config, { hash: tx });
-      toast.success("Upgrade request sent!");
+      toast.success("Regitser request sent!");
     } catch (e) {
       toast.error(e.message);
     } finally {
@@ -56,13 +59,13 @@ export default function UpgradePlan() {
       {/* Header */}
       <VuiBox display="flex" justifyContent="space-between" alignItems="center" mb={3}>
         <VuiTypography variant="h5" color="white" fontWeight="bold">
-          Upgrade
+          Register
         </VuiTypography>
       </VuiBox>
 
       {/* Stepper */}
       <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: 3 }}>
-        {["Approve", "Upgrade"].map((label) => (
+        {["Approve", "Register"].map((label) => (
           <Step key={label}>
             <StepLabel
               StepIconProps={{
@@ -140,7 +143,7 @@ export default function UpgradePlan() {
             onClick={handleUpgrade}
             fullWidth
           >
-            {loading ? "Upgrading..." : "Upgrade"}
+            {loading ? "Registering..." : "Register"}
           </VuiButton>
         )}
       </VuiBox>

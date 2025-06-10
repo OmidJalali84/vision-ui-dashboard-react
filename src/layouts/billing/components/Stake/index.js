@@ -5,21 +5,24 @@ import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 import VuiButton from "components/VuiButton";
 import { Stepper, Step, StepLabel, Card } from "@mui/material";
+import { approveUsdt, stake } from "web3/actions";
 import { waitForTransactionReceipt } from "@wagmi/core";
 import { config } from "web3/Web3Provider";
 import { toast } from "react-toastify";
-import { approveUsdt, upgrade } from "web3/actions";
+import { useAccount } from "wagmi";
 
-export default function UpgradePlan() {
+export default function Stake() {
   const amountRef = useRef();
   const [loading, setLoading] = useState(false);
   const [amount, setAmount] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
 
+  const { address } = useAccount();
+
   const handleApprove = async () => {
     setLoading(true);
     try {
-      const amt = ((Number(amountRef.current.value) * 105) / 100).toString();
+      const amt = Number(amountRef.current.value).toString();
       console.log(amt);
       const tx = await approveUsdt(amt);
       await waitForTransactionReceipt(config, { hash: tx });
@@ -33,13 +36,14 @@ export default function UpgradePlan() {
     }
   };
 
-  const handleUpgrade = async () => {
+  const handleStake = async () => {
     setLoading(true);
     try {
-      const tx = await upgrade(amount, 0);
+      const tx = await stake(address, amount);
       await waitForTransactionReceipt(config, { hash: tx });
-      toast.success("Upgrade request sent!");
+      toast.success("Stake request sent!");
     } catch (e) {
+      console.error(e.message);
       toast.error(e.message);
     } finally {
       setLoading(false);
@@ -56,13 +60,13 @@ export default function UpgradePlan() {
       {/* Header */}
       <VuiBox display="flex" justifyContent="space-between" alignItems="center" mb={3}>
         <VuiTypography variant="h5" color="white" fontWeight="bold">
-          Upgrade
+          Stake
         </VuiTypography>
       </VuiBox>
 
       {/* Stepper */}
       <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: 3 }}>
-        {["Approve", "Upgrade"].map((label) => (
+        {["Approve", "Stake"].map((label) => (
           <Step key={label}>
             <StepLabel
               StepIconProps={{
@@ -137,10 +141,10 @@ export default function UpgradePlan() {
             variant="contained"
             color="success"
             disabled={loading}
-            onClick={handleUpgrade}
+            onClick={handleStake}
             fullWidth
           >
-            {loading ? "Upgrading..." : "Upgrade"}
+            {loading ? "Staking..." : "Stake"}
           </VuiButton>
         )}
       </VuiBox>

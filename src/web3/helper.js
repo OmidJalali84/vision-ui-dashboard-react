@@ -1,4 +1,4 @@
-export const contractAddress = "0x7624B39b2e17F84A7bbaB1BB74D1D402eEe43c00";
+export const contractAddress = "0x67caD56d286648BB3540B131989B7773cd448d3a";
 export const usdtAddress = "0x320f0Ed6Fc42b0857e2b598B5DA85103203cf5d3";
 export const pointAddress = "0x156C73C45AD51e492D50d6929f14A435F2C9eC00";
 
@@ -245,17 +245,17 @@ export const contractABI = [
             internalType: "uint256",
           },
           {
-            name: "unlockedLevels",
+            name: "unlockedLevelsToken",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "unlockedLevelsStake",
             type: "uint256",
             internalType: "uint256",
           },
           {
             name: "registerAmount",
-            type: "uint256",
-            internalType: "uint256",
-          },
-          {
-            name: "entryAmount",
             type: "uint256",
             internalType: "uint256",
           },
@@ -272,9 +272,43 @@ export const contractABI = [
           },
           { name: "credit", type: "uint256", internalType: "uint256" },
           {
-            name: "plan",
-            type: "uint8",
-            internalType: "enum Pyramid.Plan",
+            name: "tokenPlan",
+            type: "tuple",
+            internalType: "struct Pyramid.PlanInfo",
+            components: [
+              { name: "isActive", type: "bool", internalType: "bool" },
+              {
+                name: "entryAmount",
+                type: "uint256",
+                internalType: "uint256",
+              },
+            ],
+          },
+          {
+            name: "pointPlan",
+            type: "tuple",
+            internalType: "struct Pyramid.PlanInfo",
+            components: [
+              { name: "isActive", type: "bool", internalType: "bool" },
+              {
+                name: "entryAmount",
+                type: "uint256",
+                internalType: "uint256",
+              },
+            ],
+          },
+          {
+            name: "stakePlan",
+            type: "tuple",
+            internalType: "struct Pyramid.PlanInfo",
+            components: [
+              { name: "isActive", type: "bool", internalType: "bool" },
+              {
+                name: "entryAmount",
+                type: "uint256",
+                internalType: "uint256",
+              },
+            ],
           },
         ],
       },
@@ -318,17 +352,17 @@ export const contractABI = [
             internalType: "uint256",
           },
           {
-            name: "unlockedLevels",
+            name: "unlockedLevelsToken",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "unlockedLevelsStake",
             type: "uint256",
             internalType: "uint256",
           },
           {
             name: "registerAmount",
-            type: "uint256",
-            internalType: "uint256",
-          },
-          {
-            name: "entryAmount",
             type: "uint256",
             internalType: "uint256",
           },
@@ -345,9 +379,43 @@ export const contractABI = [
           },
           { name: "credit", type: "uint256", internalType: "uint256" },
           {
-            name: "plan",
-            type: "uint8",
-            internalType: "enum Pyramid.Plan",
+            name: "tokenPlan",
+            type: "tuple",
+            internalType: "struct Pyramid.PlanInfo",
+            components: [
+              { name: "isActive", type: "bool", internalType: "bool" },
+              {
+                name: "entryAmount",
+                type: "uint256",
+                internalType: "uint256",
+              },
+            ],
+          },
+          {
+            name: "pointPlan",
+            type: "tuple",
+            internalType: "struct Pyramid.PlanInfo",
+            components: [
+              { name: "isActive", type: "bool", internalType: "bool" },
+              {
+                name: "entryAmount",
+                type: "uint256",
+                internalType: "uint256",
+              },
+            ],
+          },
+          {
+            name: "stakePlan",
+            type: "tuple",
+            internalType: "struct Pyramid.PlanInfo",
+            components: [
+              { name: "isActive", type: "bool", internalType: "bool" },
+              {
+                name: "entryAmount",
+                type: "uint256",
+                internalType: "uint256",
+              },
+            ],
           },
         ],
       },
@@ -480,7 +548,11 @@ export const contractABI = [
         internalType: "uint256",
       },
       { name: "username", type: "string", internalType: "string" },
-      { name: "plan", type: "uint8", internalType: "enum Pyramid.Plan" },
+      {
+        name: "plan",
+        type: "uint8",
+        internalType: "enum Pyramid.PlanType",
+      },
     ],
     outputs: [],
     stateMutability: "nonpayable",
@@ -617,6 +689,11 @@ export const contractABI = [
         type: "uint256",
         internalType: "uint256",
       },
+      {
+        name: "planToUpgrade",
+        type: "uint8",
+        internalType: "enum Pyramid.PlanType",
+      },
     ],
     outputs: [],
     stateMutability: "nonpayable",
@@ -641,7 +718,12 @@ export const contractABI = [
         internalType: "uint256",
       },
       {
-        name: "unlockedLevels",
+        name: "unlockedLevelsToken",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      {
+        name: "unlockedLevelsStake",
         type: "uint256",
         internalType: "uint256",
       },
@@ -650,7 +732,6 @@ export const contractABI = [
         type: "uint256",
         internalType: "uint256",
       },
-      { name: "entryAmount", type: "uint256", internalType: "uint256" },
       {
         name: "firstDirectLockAmount",
         type: "uint256",
@@ -659,7 +740,45 @@ export const contractABI = [
       { name: "directs", type: "uint256", internalType: "uint256" },
       { name: "totalReward", type: "uint256", internalType: "uint256" },
       { name: "credit", type: "uint256", internalType: "uint256" },
-      { name: "plan", type: "uint8", internalType: "enum Pyramid.Plan" },
+      {
+        name: "tokenPlan",
+        type: "tuple",
+        internalType: "struct Pyramid.PlanInfo",
+        components: [
+          { name: "isActive", type: "bool", internalType: "bool" },
+          {
+            name: "entryAmount",
+            type: "uint256",
+            internalType: "uint256",
+          },
+        ],
+      },
+      {
+        name: "pointPlan",
+        type: "tuple",
+        internalType: "struct Pyramid.PlanInfo",
+        components: [
+          { name: "isActive", type: "bool", internalType: "bool" },
+          {
+            name: "entryAmount",
+            type: "uint256",
+            internalType: "uint256",
+          },
+        ],
+      },
+      {
+        name: "stakePlan",
+        type: "tuple",
+        internalType: "struct Pyramid.PlanInfo",
+        components: [
+          { name: "isActive", type: "bool", internalType: "bool" },
+          {
+            name: "entryAmount",
+            type: "uint256",
+            internalType: "uint256",
+          },
+        ],
+      },
     ],
     stateMutability: "view",
   },
@@ -780,6 +899,12 @@ export const contractABI = [
         type: "string",
         indexed: false,
         internalType: "string",
+      },
+      {
+        name: "plan",
+        type: "uint8",
+        indexed: false,
+        internalType: "enum Pyramid.PlanType",
       },
     ],
     anonymous: false,
@@ -906,6 +1031,12 @@ export const contractABI = [
         type: "uint256",
         indexed: false,
         internalType: "uint256",
+      },
+      {
+        name: "plan",
+        type: "uint8",
+        indexed: false,
+        internalType: "enum Pyramid.PlanType",
       },
     ],
     anonymous: false,

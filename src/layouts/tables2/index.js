@@ -46,8 +46,8 @@ import { IoWallet } from "react-icons/io5";
 import { useAccount } from "wagmi";
 import { ConnectKitButton } from "connectkit";
 import { getUser, getTokenBalance, getPointBalance, getLockedBalance } from "web3/actions";
+import Register from "./components/Register";
 import UpgradePlan from "./components/UpgradePlan";
-import Register from "layouts/tables2/components/Register";
 import { useState } from "react";
 
 function PlanDashboard() {
@@ -59,7 +59,6 @@ function PlanDashboard() {
   const tokenBalance = getTokenBalance(address);
   const lockedBalance = getLockedBalance(address);
   const pointsBalance = getPointBalance(address);
-  console.log(userInfo);
 
   const [modalOpenRegister, setModalOpenRegister] = useState(false);
   const [modalOpenUpgrade, setModalOpenUpgrade] = useState(false);
@@ -185,7 +184,7 @@ function PlanDashboard() {
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
-          minHeight="60vh"
+          minHeight="75vh"
           textAlign="center"
           py={6}
         >
@@ -197,44 +196,7 @@ function PlanDashboard() {
         <Footer />
       </DashboardLayout>
     );
-  }
-
-  if (!userInfo || !userInfo?.data?.tokenPlan?.isActive) {
-    return (
-      <DashboardLayout>
-        <DashboardNavbar />
-        <VuiBox
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          minHeight="75vh"
-          textAlign="center"
-          py={6}
-        >
-          <VuiBox mb={2} fontSize="lg" fontWeight="medium">
-            You're not active in this plan
-          </VuiBox>
-          <VuiButton variant="contained" color="info" onClick={handleModalClickRegister}>
-            Active
-          </VuiButton>
-          <Modal
-            open={modalOpenRegister}
-            onClose={() => {
-              setModalOpenRegister(false);
-            }}
-            hideBackdrop={false}
-            disableEscapeKeyDown={true}
-          >
-            <Box sx={style}>
-              <Register plan={0} />
-            </Box>
-          </Modal>
-        </VuiBox>
-        <Footer />
-      </DashboardLayout>
-    );
-  } else if (!userInfo || !userInfo?.data?.tokenPlan?.isActive) {
+  } else if (!userInfo || !userInfo?.data?.pointPlan?.isActive) {
     return (
       <DashboardLayout>
         <DashboardNavbar />
@@ -247,10 +209,25 @@ function PlanDashboard() {
           textAlign="center"
           py={6}
         >
-          <VuiBox mb={2} fontSize="lg" fontWeight="medium">
+          <VuiBox mb={2} fontSize="lg" fontWeight="medium" color>
             You're not active in this plan
           </VuiBox>
+          <VuiButton variant="contained" color="info" onClick={handleModalClickRegister}>
+            Active
+          </VuiButton>
         </VuiBox>
+        <Modal
+          open={modalOpenRegister}
+          onClose={() => {
+            setModalOpenRegister(false);
+          }}
+          hideBackdrop={false}
+          disableEscapeKeyDown={true}
+        >
+          <Box sx={style}>
+            <Register plan={1} />
+          </Box>
+        </Modal>
         <Footer />
       </DashboardLayout>
     );
@@ -305,7 +282,7 @@ function PlanDashboard() {
               </VuiBox>
               <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
                 <VuiTypography variant="h2" color="white" fontWeight="bold" mr="auto">
-                  ${Number(userInfo?.data?.tokenPlan?.entryAmount) / 1e18}
+                  ${Number(userInfo?.data?.pointPlan?.entryAmount) / 1e18}
                 </VuiTypography>
                 <VuiBox component="img" src={Graph} sx={{ width: "58px", height: "20px" }} />
               </VuiBox>
@@ -314,7 +291,7 @@ function PlanDashboard() {
             <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
               <Stack direction="row" spacing="10px" mr="auto">
                 <VuiBox>
-                  <VuiButton variant="contained" color="info" onClick={handleModalClick}>
+                  <VuiButton variant="contained" color="info" onClick={handleModalClickUpgrade}>
                     Upgrade Plan
                   </VuiButton>
                 </VuiBox>
@@ -483,7 +460,7 @@ function PlanDashboard() {
             >
               <VuiBox display="flex" flexDirection="column" mr="auto">
                 <VuiTypography color="text" variant="caption" fontWeight="medium" mb="2px">
-                  Locked Token
+                  Points
                 </VuiTypography>
                 <VuiTypography
                   color="white"
@@ -495,7 +472,7 @@ function PlanDashboard() {
                     },
                   })}
                 >
-                  {Number(lockedBalance?.data) / 1e18}
+                  {Number(pointsBalance?.data) / 1e18}
                 </VuiTypography>
               </VuiBox>
               <VuiBox
@@ -542,9 +519,9 @@ function PlanDashboard() {
         </Card>
       </VuiBox>
       <Modal
-        open={modalOpen}
+        open={modalOpenUpgrade}
         onClose={() => {
-          setModalOpen(false);
+          setModalOpenUpgrade(false);
         }}
         hideBackdrop={false}
         disableEscapeKeyDown={true}

@@ -41,6 +41,7 @@
 // Vision UI Dashboard React layouts
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
+import Tables2 from "layouts/tables2";
 import Billing from "layouts/billing";
 import { BsCreditCardFill } from "react-icons/bs";
 import { IoStatsChart } from "react-icons/io5";
@@ -58,11 +59,20 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Plan Dashboard",
-    key: "Plan Dashboard",
-    route: "/plan-dashboard",
+    name: "Token Dashboard",
+    key: "Token Dashboard",
+    route: "/token-dashboard",
     icon: <IoStatsChart size="15px" color="inherit" />,
     component: Tables,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Point Dashboard",
+    key: "Point Dashboard",
+    route: "/point-dashboard",
+    icon: <IoStatsChart size="15px" color="inherit" />,
+    component: Tables2,
     noCollapse: true,
   },
   {

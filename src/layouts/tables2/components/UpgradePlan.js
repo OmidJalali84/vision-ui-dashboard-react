@@ -36,7 +36,7 @@ export default function UpgradePlan() {
   const handleUpgrade = async () => {
     setLoading(true);
     try {
-      const tx = await upgrade(amount, 0);
+      const tx = await upgrade(amount, 1);
       await waitForTransactionReceipt(config, { hash: tx });
       toast.success("Upgrade request sent!");
     } catch (e) {
