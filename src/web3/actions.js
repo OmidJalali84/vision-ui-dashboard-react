@@ -60,21 +60,20 @@ export function getTokenBalance(address) {
     args: [address],
   });
 }
+export function getLockedBalance(address) {
+  return useReadContract({
+    abi: contractABI,
+    address: contractAddress,
+    functionName: "lockedAmount",
+    args: [address],
+  });
+}
 
 export function getPointBalance(address) {
   return useReadContract({
     abi: contractABI,
     address: pointAddress,
     functionName: "balanceOf",
-    args: [address],
-  });
-}
-
-export function getStaker(address) {
-  return useReadContract({
-    abi: contractABI,
-    address: contractAddress,
-    functionName: "stakerInfo",
     args: [address],
   });
 }
@@ -88,6 +87,15 @@ export function getStakes(address) {
   });
 }
 
+export function getAvailableRewards(address) {
+  return useReadContract({
+    abi: contractABI,
+    address: contractAddress,
+    functionName: "availableRewards",
+    args: [address],
+  });
+}
+
 export function approveUsdt(amount) {
   return writeContract(config, {
     abi: contractABI,
@@ -97,12 +105,12 @@ export function approveUsdt(amount) {
   });
 }
 
-export function stake(amount, referrer) {
+export function stakeMore(amount) {
   return writeContract(config, {
     abi: contractABI,
     address: contractAddress,
-    functionName: "stake",
-    args: [ethers.utils.parseUnits(amount.toString(), 18), referrer],
+    functionName: "stakeMore",
+    args: [ethers.utils.parseUnits(amount.toString(), 18)],
   });
 }
 
@@ -112,5 +120,14 @@ export function upgrade(amount) {
     address: contractAddress,
     functionName: "upgradePlan",
     args: [ethers.utils.parseUnits(amount.toString(), 18), true],
+  });
+}
+
+export function claimRewards() {
+  return writeContract(config, {
+    abi: contractABI,
+    address: contractAddress,
+    functionName: "claimRewards",
+    args: [],
   });
 }

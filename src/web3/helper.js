@@ -1,6 +1,6 @@
-export const contractAddress = "0xdD18775d65d80b83Ad60f4A9299A53685c55D2A9";
+export const contractAddress = "0x7624B39b2e17F84A7bbaB1BB74D1D402eEe43c00";
 export const usdtAddress = "0x320f0Ed6Fc42b0857e2b598B5DA85103203cf5d3";
-export const pointAddress = "0x457626bD49500CA2f765A60c1753B2A2a142090D";
+export const pointAddress = "0x156C73C45AD51e492D50d6929f14A435F2C9eC00";
 
 export const contractABI = [
   {
@@ -133,6 +133,13 @@ export const contractABI = [
   },
   {
     type: "function",
+    name: "changeLevel1EntranceStake",
+    inputs: [{ name: "newEntrance", type: "uint256", internalType: "uint256" }],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
     name: "claimOpen",
     inputs: [],
     outputs: [{ name: "", type: "bool", internalType: "bool" }],
@@ -171,32 +178,6 @@ export const contractABI = [
     name: "decimals",
     inputs: [],
     outputs: [{ name: "", type: "uint8", internalType: "uint8" }],
-    stateMutability: "view",
-  },
-  {
-    type: "function",
-    name: "earned",
-    inputs: [
-      {
-        name: "s",
-        type: "tuple",
-        internalType: "struct Pyramid.Stake",
-        components: [
-          { name: "amount", type: "uint256", internalType: "uint256" },
-          {
-            name: "startTimestamp",
-            type: "uint256",
-            internalType: "uint256",
-          },
-          {
-            name: "rewardClaimed",
-            type: "uint256",
-            internalType: "uint256",
-          },
-        ],
-      },
-    ],
-    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
   },
   {
@@ -289,6 +270,12 @@ export const contractABI = [
             type: "uint256",
             internalType: "uint256",
           },
+          { name: "credit", type: "uint256", internalType: "uint256" },
+          {
+            name: "plan",
+            type: "uint8",
+            internalType: "enum Pyramid.Plan",
+          },
         ],
       },
     ],
@@ -356,6 +343,12 @@ export const contractABI = [
             type: "uint256",
             internalType: "uint256",
           },
+          { name: "credit", type: "uint256", internalType: "uint256" },
+          {
+            name: "plan",
+            type: "uint8",
+            internalType: "enum Pyramid.Plan",
+          },
         ],
       },
     ],
@@ -374,6 +367,11 @@ export const contractABI = [
           { name: "amount", type: "uint256", internalType: "uint256" },
           {
             name: "startTimestamp",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "lastClaim",
             type: "uint256",
             internalType: "uint256",
           },
@@ -444,6 +442,20 @@ export const contractABI = [
   },
   {
     type: "function",
+    name: "pauseStake",
+    inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "paused",
+    inputs: [],
+    outputs: [{ name: "", type: "bool", internalType: "bool" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
     name: "pointToken",
     inputs: [],
     outputs: [{ name: "", type: "address", internalType: "contract PointToken" }],
@@ -468,7 +480,7 @@ export const contractABI = [
         internalType: "uint256",
       },
       { name: "username", type: "string", internalType: "string" },
-      { name: "forToken", type: "bool", internalType: "bool" },
+      { name: "plan", type: "uint8", internalType: "enum Pyramid.Plan" },
     ],
     outputs: [],
     stateMutability: "nonpayable",
@@ -489,34 +501,16 @@ export const contractABI = [
   },
   {
     type: "function",
-    name: "stake",
-    inputs: [
-      { name: "daiAmount", type: "uint256", internalType: "uint256" },
-      { name: "_referrer", type: "address", internalType: "address" },
-    ],
+    name: "stakeMore",
+    inputs: [{ name: "daiAmount", type: "uint256", internalType: "uint256" }],
     outputs: [],
     stateMutability: "nonpayable",
   },
   {
     type: "function",
-    name: "stakerInfo",
+    name: "stakerEarnings",
     inputs: [{ name: "", type: "address", internalType: "address" }],
-    outputs: [
-      {
-        name: "stakerAddress",
-        type: "address",
-        internalType: "address",
-      },
-      { name: "referrer", type: "address", internalType: "address" },
-      {
-        name: "unlockedLevels",
-        type: "uint256",
-        internalType: "uint256",
-      },
-      { name: "totalStaked", type: "uint256", internalType: "uint256" },
-      { name: "directs", type: "uint256", internalType: "uint256" },
-      { name: "totalReward", type: "uint256", internalType: "uint256" },
-    ],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
   },
   {
@@ -609,6 +603,13 @@ export const contractABI = [
   },
   {
     type: "function",
+    name: "unpauseStake",
+    inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
     name: "upgradePlan",
     inputs: [
       {
@@ -616,7 +617,6 @@ export const contractABI = [
         type: "uint256",
         internalType: "uint256",
       },
-      { name: "forToken", type: "bool", internalType: "bool" },
     ],
     outputs: [],
     stateMutability: "nonpayable",
@@ -658,6 +658,8 @@ export const contractABI = [
       },
       { name: "directs", type: "uint256", internalType: "uint256" },
       { name: "totalReward", type: "uint256", internalType: "uint256" },
+      { name: "credit", type: "uint256", internalType: "uint256" },
+      { name: "plan", type: "uint8", internalType: "enum Pyramid.Plan" },
     ],
     stateMutability: "view",
   },
@@ -733,6 +735,19 @@ export const contractABI = [
         name: "newOwner",
         type: "address",
         indexed: true,
+        internalType: "address",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "Paused",
+    inputs: [
+      {
+        name: "account",
+        type: "address",
+        indexed: false,
         internalType: "address",
       },
     ],
@@ -865,6 +880,19 @@ export const contractABI = [
   },
   {
     type: "event",
+    name: "Unpaused",
+    inputs: [
+      {
+        name: "account",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
     name: "UpgradePlan",
     inputs: [
       {
@@ -939,6 +967,8 @@ export const contractABI = [
     name: "ERC20InvalidSpender",
     inputs: [{ name: "spender", type: "address", internalType: "address" }],
   },
+  { type: "error", name: "EnforcedPause", inputs: [] },
+  { type: "error", name: "ExpectedPause", inputs: [] },
   {
     type: "error",
     name: "OwnableInvalidOwner",

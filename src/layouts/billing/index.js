@@ -39,7 +39,7 @@ import VuiTypography from "components/VuiTypography";
 import SatisfactionRate from "layouts/dashboard/components/SatisfactionRate";
 import { useAccount } from "wagmi";
 import { ConnectKitButton } from "connectkit";
-import { getStaker, getStakes } from "web3/actions";
+import { getUser, getStakes, getAvailableRewards } from "web3/actions";
 import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import balance from "assets/images/billing-background-balance.png";
@@ -48,20 +48,24 @@ import { FaEllipsisH } from "react-icons/fa";
 import StakeMore from "./components/StakeMore";
 import projectsTableData from "layouts/tables/data/projectsTableData";
 import Table from "examples/Tables/Table";
+import { claimRewards } from "web3/actions";
+import { toast } from "react-toastify";
+import { waitForTransactionReceipt } from "@wagmi/core";
+import { config } from "web3/Web3Provider";
 
 function StackDashboard() {
   const { columns: prCols } = projectsTableData;
 
   const { isConnected, address } = useAccount();
-  const staker = getStaker(address);
+  const staker = getUser(address);
   const stakes = getStakes(address);
-  // console.log(staker?.data);
-  console.log(stakes);
+  const availableRewards = getAvailableRewards(address);
 
   const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 });
   const [percentDone, setPercentDone] = useState(0);
   const [isFirstDay, setIsFirstDay] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const style = {
     position: "absolute",
@@ -88,7 +92,7 @@ function StackDashboard() {
       ),
       value: (
         <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
-          {staker?.data?.[0]}
+          {staker?.data?.referrerUsername}
         </VuiTypography>
       ),
     },
@@ -105,7 +109,7 @@ function StackDashboard() {
       ),
       value: (
         <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
-          {Number(staker?.data?.[4] ?? 0).toLocaleString()}
+          {Number(staker?.data?.directs ?? 0).toLocaleString()}
         </VuiTypography>
       ),
     },
@@ -122,7 +126,7 @@ function StackDashboard() {
       ),
       value: (
         <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
-          {Number(staker?.data?.[2] ?? 0).toLocaleString()}
+          {Number(staker?.data?.unlockedLevels ?? 0).toLocaleString()}
         </VuiTypography>
       ),
     },
@@ -139,8 +143,8 @@ function StackDashboard() {
       ),
       value: (
         <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
-          {staker?.data?.[5]
-            ? (Number(userInfo.data[5]) / 1e18).toLocaleString(undefined, {
+          {staker?.data?.totalreward
+            ? (Number(userInfo.totalreward) / 1e18).toLocaleString(undefined, {
                 style: "currency",
                 currency: "USD",
               })
@@ -180,6 +184,20 @@ function StackDashboard() {
   const handleModalClick = () => {
     setModalOpen(true);
   };
+
+  const handleClaimReward = async () => {
+    setLoading(true);
+    try {
+      const tx = await claimRewards();
+      await waitForTransactionReceipt(config, { hash: tx });
+      toast.success("Claim request sent!");
+    } catch (e) {
+      console.error(e.message);
+      toast.error(e.message);
+    } finally {
+      setLoading(false);
+    }
+  };
   if (!isConnected) {
     return (
       <DashboardLayout>
@@ -204,7 +222,6 @@ function StackDashboard() {
   }
   return (
     <DashboardLayout>
-      <DashboardNavbar />
       <Stack
         spacing="24px"
         background="#fff"
@@ -250,7 +267,7 @@ function StackDashboard() {
               </VuiBox>
               <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
                 <VuiTypography variant="h2" color="white" fontWeight="bold" mr="auto">
-                  ${Number(staker?.data?.[3]) / 1e18}
+                  ${Number(staker?.data?.entryAmount) / 1e18}
                 </VuiTypography>
                 <VuiBox component="img" src={Graph} sx={{ width: "58px", height: "20px" }} />
               </VuiBox>
@@ -277,10 +294,9 @@ function StackDashboard() {
             justifyContent: "center",
           }}
         >
-          <VuiBox display="flex" justifyContent="center" mt={6}>
-            {isFirstDay ? (
+          <VuiBox display="flex" justifyContent="center" mt={6} alignItems="center">
+            {true ? (
               <VuiBox
-                mt={4}
                 p="24px"
                 sx={{
                   background: "rgba(255,255,255,0.05)",
@@ -295,7 +311,7 @@ function StackDashboard() {
                 </VuiTypography>
 
                 <VuiTypography variant="h3" color="white" fontWeight="bold" mb="16px">
-                  123.45 DAI
+                  {Number(availableRewards?.data) / 1e18} DAI
                 </VuiTypography>
 
                 <VuiBox>
@@ -303,11 +319,10 @@ function StackDashboard() {
                     variant="contained"
                     color="secondary"
                     fullWidth
-                    onClick={() => {
-                      /* TODO: wire up your withdraw action */
-                    }}
+                    disabled={loading}
+                    onClick={handleClaimReward}
                   >
-                    Withdraw Now
+                    {loading ? "Claiming…" : "Claim"}
                   </Button>
                 </VuiBox>
               </VuiBox>
@@ -465,10 +480,9 @@ function StackDashboard() {
         disableEscapeKeyDown={true}
       >
         <Box sx={style}>
-          <StakeMore staker={staker} />
+          <StakeMore />
         </Box>
       </Modal>
-      <Footer />
     </DashboardLayout>
   );
 }

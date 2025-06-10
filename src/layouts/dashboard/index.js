@@ -40,14 +40,15 @@ import { FaMoneyCheck } from "react-icons/fa";
 // Wagmi & ConnectKit
 import { useAccount } from "wagmi";
 import { ConnectKitButton } from "connectkit";
-import { getContractStage, getUser, getStaker } from "web3/actions";
+import { getContractStage, getUser } from "web3/actions";
+import StackDashboard from "layouts/billing";
+import PlanDashboard from "layouts/tables";
 
 function Overview() {
   const { address, isConnected } = useAccount();
   const contractStage = getContractStage();
   const userInfo = getUser(address);
-  const staker = getStaker(address);
-  console.log(staker);
+  console.log(userInfo);
 
   // If not connected, show a prompt and the Connect button
   if (!isConnected) {
@@ -59,7 +60,7 @@ function Overview() {
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
-          minHeight="60vh"
+          minHeight="75vh"
           textAlign="center"
           py={6}
         >
@@ -71,84 +72,108 @@ function Overview() {
         <Footer />
       </DashboardLayout>
     );
-  }
-
-  // If connected, show the original dashboard content
-  return (
+  } else if (userInfo?.data?.plan === 0) {
     <DashboardLayout>
       <DashboardNavbar />
-      <VuiBox py={3}>
-        <VuiBox mb={3}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "total users" }}
-                count={contractStage?.data?.[0].toString()}
-                icon={{
-                  color: "info",
-                  component: <IoGlobe size="22px" color="white" />,
-                }}
-              />
-            </Grid>
-            <Grid item xs={12} md={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "Price", fontWeight: "regular" }}
-                count={"$" + (Number(contractStage?.data?.[3]) / 1e18).toString()}
-                icon={{
-                  color: "info",
-                  component: <IoPricetagOutline size="22px" color="white" />,
-                }}
-              />
-            </Grid>
-            <Grid item xs={12} md={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "usdt liquidity" }}
-                count={"$" + (Number(contractStage?.data?.[1]) / 1e18).toString()}
-                icon={{
-                  color: "info",
-                  component: <FaMoneyCheck size="22px" color="white" />,
-                }}
-              />
-            </Grid>
-            <Grid item xs={12} md={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "total supply" }}
-                count={(Number(contractStage?.data?.[2]) / 1e18).toString()}
-                icon={{
-                  color: "info",
-                  component: <FaMoneyCheck size="20px" color="white" />,
-                }}
-              />
-            </Grid>
-          </Grid>
-        </VuiBox>
-        <VuiBox mb={3}>
-          <Grid container spacing="10px" justifyContent="space-around">
-            <Grid item xs={12} lg={12} xl={4}>
-              <WelcomeMark name={userInfo?.data?.username} />
-            </Grid>
-            <Grid item xs={12} lg={6} xl={4}>
-              <ReferralTracking
-                title={"Plan Tracking"}
-                levels={userInfo?.data?.unlockedLevels}
-                totalReward={userInfo?.data?.totalReward}
-                directs={userInfo?.data?.directs}
-              />
-            </Grid>
-            <Grid item xs={12} lg={6} xl={4}>
-              <ReferralTracking
-                title={"Stake Tracking"}
-                levels={staker?.data?.[2]}
-                totalReward={staker?.data?.[5]}
-                directs={staker?.data?.[4]}
-              />
-            </Grid>
-          </Grid>
+      <VuiBox
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        minHeight="60vh"
+        textAlign="center"
+        py={6}
+      >
+        <VuiBox mb={2} fontSize="lg" fontWeight="medium">
+          You have no active plan
         </VuiBox>
       </VuiBox>
       <Footer />
-    </DashboardLayout>
-  );
+    </DashboardLayout>;
+  } else {
+    return (
+      <DashboardLayout>
+        <DashboardNavbar />
+        <VuiBox py={3}>
+          <VuiBox mb={3}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={6} xl={3}>
+                <MiniStatisticsCard
+                  title={{ text: "total users" }}
+                  count={contractStage?.data?.[0].toString()}
+                  icon={{
+                    color: "info",
+                    component: <IoGlobe size="22px" color="white" />,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} md={6} xl={3}>
+                <MiniStatisticsCard
+                  title={{ text: "Price", fontWeight: "regular" }}
+                  count={"$" + (Number(contractStage?.data?.[3]) / 1e18).toString()}
+                  icon={{
+                    color: "info",
+                    component: <IoPricetagOutline size="22px" color="white" />,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} md={6} xl={3}>
+                <MiniStatisticsCard
+                  title={{ text: "usdt liquidity" }}
+                  count={"$" + (Number(contractStage?.data?.[1]) / 1e18).toString()}
+                  icon={{
+                    color: "info",
+                    component: <FaMoneyCheck size="22px" color="white" />,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} md={6} xl={3}>
+                <MiniStatisticsCard
+                  title={{ text: "total supply" }}
+                  count={(Number(contractStage?.data?.[2]) / 1e18).toString()}
+                  icon={{
+                    color: "info",
+                    component: <FaMoneyCheck size="20px" color="white" />,
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </VuiBox>
+          <VuiBox mb={3}>
+            <Grid container spacing="10px" justifyContent="space-around">
+              <Grid item xs={12} lg={12} xl={4}>
+                <WelcomeMark name={userInfo?.data?.username} />
+              </Grid>
+              {userInfo?.data?.plan === 3 ? (
+                <Grid item xs={12} lg={6} xl={4}>
+                  <ReferralTracking
+                    title={"Stake Tracking"}
+                    levels={userInfo?.data?.unlockedLevels}
+                    totalReward={userInfo?.data?.totalReward}
+                    directs={userInfo?.data?.directs}
+                  />
+                </Grid>
+              ) : (
+                <Grid item xs={12} lg={6} xl={4}>
+                  <ReferralTracking
+                    title={"Plan Tracking"}
+                    levels={userInfo?.data?.unlockedLevels}
+                    totalReward={userInfo?.data?.totalReward}
+                    directs={userInfo?.data?.directs}
+                  />
+                </Grid>
+              )}
+            </Grid>
+          </VuiBox>
+        </VuiBox>
+
+        {userInfo?.data?.plan === 3 ? <StackDashboard /> : <PlanDashboard />}
+        <Footer />
+      </DashboardLayout>
+    );
+  }
+
+  // If connected, show the original dashboard content
 }
 
 export default Overview;

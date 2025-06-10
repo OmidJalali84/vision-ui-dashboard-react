@@ -45,7 +45,7 @@ import { IoWallet } from "react-icons/io5";
 
 import { useAccount } from "wagmi";
 import { ConnectKitButton } from "connectkit";
-import { getUser, getTokenBalance, getPointBalance } from "web3/actions";
+import { getUser, getTokenBalance, getPointBalance, getLockedBalance } from "web3/actions";
 import UpgradePlan from "./components/UpgradePlan";
 import { useState } from "react";
 
@@ -56,6 +56,7 @@ function PlanDashboard() {
   const { isConnected, address } = useAccount();
   const userInfo = getUser(address);
   const tokenBalance = getTokenBalance(address);
+  const lockedBalance = getLockedBalance(address);
   const pointsBalance = getPointBalance(address);
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -170,31 +171,8 @@ function PlanDashboard() {
     },
   ];
 
-  if (!isConnected) {
-    return (
-      <DashboardLayout>
-        <DashboardNavbar />
-        <VuiBox
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          minHeight="60vh"
-          textAlign="center"
-          py={6}
-        >
-          <VuiBox mb={2} fontSize="lg" fontWeight="medium">
-            Please first connect wallet
-          </VuiBox>
-          <ConnectKitButton />
-        </VuiBox>
-        <Footer />
-      </DashboardLayout>
-    );
-  }
   return (
-    <DashboardLayout>
-      <DashboardNavbar />
+    <Grid>
       <Stack
         spacing="24px"
         background="#fff"
@@ -404,49 +382,95 @@ function PlanDashboard() {
               </VuiBox>
             </VuiBox>
           </Grid>
-          <Grid item xs={12} md={5.5} xl={5.8} xxl={5.5}>
-            <VuiBox
-              display="flex"
-              p="18px"
-              alignItems="center"
-              sx={{
-                background: linearGradient(cardContent.main, cardContent.state, cardContent.deg),
-                minHeight: "110px",
-                borderRadius: "20px",
-              }}
-            >
-              <VuiBox display="flex" flexDirection="column" mr="auto">
-                <VuiTypography color="text" variant="caption" fontWeight="medium" mb="2px">
-                  Points
-                </VuiTypography>
-                <VuiTypography
-                  color="white"
-                  variant="h4"
-                  fontWeight="bold"
-                  sx={({ breakpoints }) => ({
-                    [breakpoints.only("xl")]: {
-                      fontSize: "20px",
-                    },
-                  })}
-                >
-                  {Number(pointsBalance?.data) / 1e18}
-                </VuiTypography>
-              </VuiBox>
+          {userInfo?.data?.plan === 2 ? (
+            <Grid item xs={12} md={5.5} xl={5.8} xxl={5.5}>
               <VuiBox
                 display="flex"
-                justifyContent="center"
+                p="18px"
                 alignItems="center"
                 sx={{
-                  background: info.main,
-                  borderRadius: "12px",
-                  width: "56px",
-                  height: "56px",
+                  background: linearGradient(cardContent.main, cardContent.state, cardContent.deg),
+                  minHeight: "110px",
+                  borderRadius: "20px",
                 }}
               >
-                <IoWallet color="white" />
+                <VuiBox display="flex" flexDirection="column" mr="auto">
+                  <VuiTypography color="text" variant="caption" fontWeight="medium" mb="2px">
+                    Points
+                  </VuiTypography>
+                  <VuiTypography
+                    color="white"
+                    variant="h4"
+                    fontWeight="bold"
+                    sx={({ breakpoints }) => ({
+                      [breakpoints.only("xl")]: {
+                        fontSize: "20px",
+                      },
+                    })}
+                  >
+                    {Number(pointsBalance?.data) / 1e18}
+                  </VuiTypography>
+                </VuiBox>
+                <VuiBox
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  sx={{
+                    background: info.main,
+                    borderRadius: "12px",
+                    width: "56px",
+                    height: "56px",
+                  }}
+                >
+                  <IoWallet color="white" />
+                </VuiBox>
               </VuiBox>
-            </VuiBox>
-          </Grid>
+            </Grid>
+          ) : (
+            <Grid item xs={12} md={5.5} xl={5.8} xxl={5.5}>
+              <VuiBox
+                display="flex"
+                p="18px"
+                alignItems="center"
+                sx={{
+                  background: linearGradient(cardContent.main, cardContent.state, cardContent.deg),
+                  minHeight: "110px",
+                  borderRadius: "20px",
+                }}
+              >
+                <VuiBox display="flex" flexDirection="column" mr="auto">
+                  <VuiTypography color="text" variant="caption" fontWeight="medium" mb="2px">
+                    Locked Token
+                  </VuiTypography>
+                  <VuiTypography
+                    color="white"
+                    variant="h4"
+                    fontWeight="bold"
+                    sx={({ breakpoints }) => ({
+                      [breakpoints.only("xl")]: {
+                        fontSize: "20px",
+                      },
+                    })}
+                  >
+                    {Number(lockedBalance?.data) / 1e18}
+                  </VuiTypography>
+                </VuiBox>
+                <VuiBox
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  sx={{
+                    background: info.main,
+                    borderRadius: "12px",
+                    width: "56px",
+                    height: "56px",
+                  }}
+                >
+                  <IoWallet color="white" />
+                </VuiBox>
+              </VuiBox>
+            </Grid>
+          )}
         </Grid>
       </Stack>
 
@@ -487,8 +511,7 @@ function PlanDashboard() {
           <UpgradePlan />
         </Box>
       </Modal>
-      <Footer />
-    </DashboardLayout>
+    </Grid>
   );
 }
 
