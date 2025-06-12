@@ -58,8 +58,6 @@ function PlanDashboard() {
   const userInfo = getUser(address);
   const tokenBalance = getTokenBalance(address);
   const lockedBalance = getLockedBalance(address);
-  const pointsBalance = getPointBalance(address);
-  console.log(userInfo);
 
   const [modalOpenRegister, setModalOpenRegister] = useState(false);
   const [modalOpenUpgrade, setModalOpenUpgrade] = useState(false);
@@ -243,7 +241,7 @@ function PlanDashboard() {
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
-          minHeight="60vh"
+          minHeight="75vh"
           textAlign="center"
           py={6}
         >
@@ -314,7 +312,7 @@ function PlanDashboard() {
             <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
               <Stack direction="row" spacing="10px" mr="auto">
                 <VuiBox>
-                  <VuiButton variant="contained" color="info" onClick={handleModalClick}>
+                  <VuiButton variant="contained" color="info" onClick={handleModalClickUpgrade}>
                     Upgrade Plan
                   </VuiButton>
                 </VuiBox>
@@ -408,7 +406,7 @@ function PlanDashboard() {
                     },
                   })}
                 >
-                  {Number(userInfo?.data?.totalReward) / 1e18}
+                  {Number(userInfo?.data?.totalRewardToken) / 1e18}
                 </VuiTypography>
               </VuiBox>
               <VuiBox
@@ -542,9 +540,9 @@ function PlanDashboard() {
         </Card>
       </VuiBox>
       <Modal
-        open={modalOpen}
+        open={modalOpenUpgrade}
         onClose={() => {
-          setModalOpen(false);
+          setModalOpenUpgrade(false);
         }}
         hideBackdrop={false}
         disableEscapeKeyDown={true}

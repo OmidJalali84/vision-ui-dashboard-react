@@ -6,7 +6,7 @@ import colors from "../../../../assets/theme/base/colors";
 import linearGradient from "../../../../assets/theme/functions/linearGradient";
 import CircularProgress from "@mui/material/CircularProgress";
 
-function ReferralTracking({ levels, title }) {
+function ReferralTracking({ levels, title, reward }) {
   const { info, gradients } = colors;
   const { cardContent } = gradients;
 
@@ -64,7 +64,32 @@ function ReferralTracking({ levels, title }) {
                 maxWidth: "40%",
               },
             })}
-          ></Stack>
+          >
+            <VuiBox
+              display="flex"
+              width="220px"
+              p="20px 22px"
+              flexDirection="column"
+              sx={({ breakpoints }) => ({
+                background: linearGradient(cardContent.main, cardContent.state, cardContent.deg),
+                borderRadius: "20px",
+                [breakpoints.up("xl")]: {
+                  maxWidth: "110px !important",
+                },
+                [breakpoints.up("xxl")]: {
+                  minWidth: "180px",
+                  maxWidth: "100% !important",
+                },
+              })}
+            >
+              <VuiTypography color="text" variant="button" fontWeight="regular" mb="5px">
+                Reward
+              </VuiTypography>
+              <VuiTypography color="white" variant="lg" fontWeight="bold">
+                {Number(reward) / 1e18}$
+              </VuiTypography>
+            </VuiBox>
+          </Stack>
           <VuiBox sx={{ position: "relative", display: "inline-flex" }}>
             <CircularProgress
               variant="determinate"

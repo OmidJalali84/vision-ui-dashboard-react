@@ -130,12 +130,14 @@ function Overview() {
               <ReferralTracking
                 title={"Plan Tracking"}
                 levels={userInfo?.data?.unlockedLevelsToken}
+                reward={userInfo?.data?.totalRewardToken}
               />
             </Grid>
             <Grid item xs={12} lg={6} xl={4}>
               <ReferralTracking
-                title={"Plan Tracking"}
+                title={"Stake Tracking"}
                 levels={userInfo?.data?.unlockedLevelsStake}
+                reward={userInfo?.data?.totalRewardStake}
               />
             </Grid>
           </Grid>

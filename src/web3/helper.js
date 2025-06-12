@@ -1,4 +1,4 @@
-export const contractAddress = "0x67caD56d286648BB3540B131989B7773cd448d3a";
+export const contractAddress = "0x6ED16eF38F82aeD74181Ed2D6CD3F85bF363a6f6";
 export const usdtAddress = "0x320f0Ed6Fc42b0857e2b598B5DA85103203cf5d3";
 export const pointAddress = "0x156C73C45AD51e492D50d6929f14A435F2C9eC00";
 
@@ -266,7 +266,12 @@ export const contractABI = [
           },
           { name: "directs", type: "uint256", internalType: "uint256" },
           {
-            name: "totalReward",
+            name: "totalRewardToken",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "totalRewardStake",
             type: "uint256",
             internalType: "uint256",
           },
@@ -373,7 +378,12 @@ export const contractABI = [
           },
           { name: "directs", type: "uint256", internalType: "uint256" },
           {
-            name: "totalReward",
+            name: "totalRewardToken",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "totalRewardStake",
             type: "uint256",
             internalType: "uint256",
           },
@@ -738,7 +748,16 @@ export const contractABI = [
         internalType: "uint256",
       },
       { name: "directs", type: "uint256", internalType: "uint256" },
-      { name: "totalReward", type: "uint256", internalType: "uint256" },
+      {
+        name: "totalRewardToken",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      {
+        name: "totalRewardStake",
+        type: "uint256",
+        internalType: "uint256",
+      },
       { name: "credit", type: "uint256", internalType: "uint256" },
       {
         name: "tokenPlan",

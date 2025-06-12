@@ -146,7 +146,7 @@ function StackDashboard() {
       value: (
         <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
           {userInfo?.data?.totalreward
-            ? (Number(userInfo.totalreward) / 1e18).toLocaleString(undefined, {
+            ? (Number(userInfo.totalrewardStake) / 1e18).toLocaleString(undefined, {
                 style: "currency",
                 currency: "USD",
               })
@@ -234,7 +234,7 @@ function StackDashboard() {
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
-          minHeight="60vh"
+          minHeight="75vh"
           textAlign="center"
           py={6}
         >

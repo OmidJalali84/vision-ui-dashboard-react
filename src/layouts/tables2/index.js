@@ -205,7 +205,7 @@ function PlanDashboard() {
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
-          minHeight="60vh"
+          minHeight="75vh"
           textAlign="center"
           py={6}
         >
@@ -385,7 +385,7 @@ function PlanDashboard() {
                     },
                   })}
                 >
-                  {Number(userInfo?.data?.totalReward) / 1e18}
+                  {Number(userInfo?.data?.totalRewardToken) / 1e18}
                 </VuiTypography>
               </VuiBox>
               <VuiBox
