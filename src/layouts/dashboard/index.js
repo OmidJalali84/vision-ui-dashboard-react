@@ -24,11 +24,7 @@ import VuiBox from "components/VuiBox";
 // Vision UI Dashboard React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
 import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
-
-// Vision UI Dashboard React base styles
-import colors from "assets/theme/base/colors";
 
 // Dashboard layout components
 import WelcomeMark from "layouts/dashboard/components/WelcomeMark";
@@ -48,8 +44,9 @@ function Overview() {
   const contractStage = getContractStage();
   const userInfo = getUser(address);
 
+  console.log(address);
   // If not connected, show a prompt and the Connect button
-  if (!isConnected) {
+  if (!isConnected && !address) {
     return (
       <DashboardLayout>
         <DashboardNavbar />
@@ -67,7 +64,6 @@ function Overview() {
           </VuiBox>
           <ConnectKitButton />
         </VuiBox>
-        <Footer />
       </DashboardLayout>
     );
   }
@@ -143,7 +139,6 @@ function Overview() {
           </Grid>
         </VuiBox>
       </VuiBox>
-      <Footer />
     </DashboardLayout>
   );
 }

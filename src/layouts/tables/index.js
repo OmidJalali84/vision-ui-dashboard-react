@@ -58,9 +58,9 @@ function PlanDashboard() {
   const userInfo = getUser(address);
   const tokenBalance = getTokenBalance(address);
   const lockedBalance = getLockedBalance(address);
-
   const [modalOpenRegister, setModalOpenRegister] = useState(false);
   const [modalOpenUpgrade, setModalOpenUpgrade] = useState(false);
+
   const handleModalClickRegister = () => {
     setModalOpenRegister(true);
   };
@@ -174,7 +174,7 @@ function PlanDashboard() {
     },
   ];
 
-  if (!isConnected) {
+  if (!isConnected && !address) {
     return (
       <DashboardLayout>
         <DashboardNavbar />
@@ -192,7 +192,6 @@ function PlanDashboard() {
           </VuiBox>
           <ConnectKitButton />
         </VuiBox>
-        <Footer />
       </DashboardLayout>
     );
   }
@@ -229,7 +228,6 @@ function PlanDashboard() {
             </Box>
           </Modal>
         </VuiBox>
-        <Footer />
       </DashboardLayout>
     );
   } else if (!userInfo || !userInfo?.data?.tokenPlan?.isActive) {
@@ -249,7 +247,6 @@ function PlanDashboard() {
             You're not active in this plan
           </VuiBox>
         </VuiBox>
-        <Footer />
       </DashboardLayout>
     );
   }
@@ -551,7 +548,6 @@ function PlanDashboard() {
           <UpgradePlan />
         </Box>
       </Modal>
-      <Footer />
     </DashboardLayout>
   );
 }

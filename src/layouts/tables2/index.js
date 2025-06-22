@@ -175,7 +175,7 @@ function PlanDashboard() {
     },
   ];
 
-  if (!isConnected) {
+  if (!isConnected && !address) {
     return (
       <DashboardLayout>
         <DashboardNavbar />
@@ -193,7 +193,6 @@ function PlanDashboard() {
           </VuiBox>
           <ConnectKitButton />
         </VuiBox>
-        <Footer />
       </DashboardLayout>
     );
   } else if (!userInfo || !userInfo?.data?.pointPlan?.isActive) {
@@ -228,7 +227,6 @@ function PlanDashboard() {
             <Register plan={1} />
           </Box>
         </Modal>
-        <Footer />
       </DashboardLayout>
     );
   }
@@ -530,7 +528,6 @@ function PlanDashboard() {
           <UpgradePlan />
         </Box>
       </Modal>
-      <Footer />
     </DashboardLayout>
   );
 }

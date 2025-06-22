@@ -204,7 +204,7 @@ function StackDashboard() {
       setLoading(false);
     }
   };
-  if (!isConnected) {
+  if (!isConnected && !address) {
     return (
       <DashboardLayout>
         <DashboardNavbar />
@@ -222,7 +222,6 @@ function StackDashboard() {
           </VuiBox>
           <ConnectKitButton />
         </VuiBox>
-        <Footer />
       </DashboardLayout>
     );
   } else if (!userInfo || !userInfo?.data?.stakePlan?.isActive) {
@@ -257,7 +256,6 @@ function StackDashboard() {
             <Stake />
           </Box>
         </Modal>
-        <Footer />
       </DashboardLayout>
     );
   }
@@ -525,7 +523,6 @@ function StackDashboard() {
           <StakeMore />
         </Box>
       </Modal>
-      <Footer />
     </DashboardLayout>
   );
 }
