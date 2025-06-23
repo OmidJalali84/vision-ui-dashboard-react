@@ -37,7 +37,9 @@ import { FaMoneyCheck } from "react-icons/fa";
 // Wagmi & ConnectKit
 import { useAccount } from "wagmi";
 import { ConnectKitButton } from "connectkit";
-import { getContractStage, getUser, getStaker } from "web3/actions";
+import { getContractStage, getUser } from "web3/actions";
+import Owner from "./components/Owner";
+import { contractOwner } from "web3/helper";
 
 function Overview() {
   const { address, isConnected } = useAccount();
@@ -138,6 +140,7 @@ function Overview() {
             </Grid>
           </Grid>
         </VuiBox>
+        {address === contractOwner ? <Owner /> : null}
       </VuiBox>
     </DashboardLayout>
   );

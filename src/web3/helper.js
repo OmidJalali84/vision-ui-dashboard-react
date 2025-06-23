@@ -1,6 +1,7 @@
 export const contractAddress = "0x6ED16eF38F82aeD74181Ed2D6CD3F85bF363a6f6";
 export const usdtAddress = "0x320f0Ed6Fc42b0857e2b598B5DA85103203cf5d3";
 export const pointAddress = "0x156C73C45AD51e492D50d6929f14A435F2C9eC00";
+export const contractOwner = "0x6Ac97c57138BD707680A10A798bAf24aCe62Ae9D";
 
 export const contractABI = [
   {

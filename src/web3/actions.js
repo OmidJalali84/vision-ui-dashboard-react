@@ -139,3 +139,75 @@ export function claimRewards() {
     args: [],
   });
 }
+
+export function claimIsOpen() {
+  return useReadContract({
+    abi: contractABI,
+    address: contractAddress,
+    functionName: "claimOpen",
+    args: [],
+  });
+}
+
+export function isPaused() {
+  return useReadContract({
+    abi: contractABI,
+    address: contractAddress,
+    functionName: "paused",
+    args: [],
+  });
+}
+
+export function swapIsOpen() {
+  return useReadContract({
+    abi: contractABI,
+    address: contractAddress,
+    functionName: "swapOpenForAll",
+    args: [],
+  });
+}
+
+export function openClaim() {
+  return writeContract(config, {
+    abi: contractABI,
+    address: contractAddress,
+    functionName: "openClaim",
+    args: [],
+  });
+}
+
+export function closeClaim() {
+  return writeContract(config, {
+    abi: contractABI,
+    address: contractAddress,
+    functionName: "closeClaim",
+    args: [],
+  });
+}
+
+export function pause() {
+  return writeContract(config, {
+    abi: contractABI,
+    address: contractAddress,
+    functionName: "pauseStake",
+    args: [],
+  });
+}
+
+export function unpause() {
+  return writeContract(config, {
+    abi: contractABI,
+    address: contractAddress,
+    functionName: "unpauseStake",
+    args: [],
+  });
+}
+
+export function openSwap() {
+  return writeContract(config, {
+    abi: contractABI,
+    address: contractAddress,
+    functionName: "openSwap",
+    args: [],
+  });
+}
