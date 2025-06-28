@@ -23,7 +23,6 @@ import { useState } from "react";
 import VuiBox from "components/VuiBox";
 
 import VuiTypography from "components/VuiTypography";
-import { Button } from "@mui/material";
 import {
   claimIsOpen,
   isPaused,
@@ -32,19 +31,25 @@ import {
   pause,
   unpause,
   openSwap,
+  totalAvailableRewards,
 } from "web3/actions";
 import { swapIsOpen } from "web3/actions";
 import { toast } from "react-toastify";
 import { waitForTransactionReceipt } from "@wagmi/core";
 import { config } from "web3/Web3Provider";
+import colors from "assets/theme/base/colors";
+import VuiButton from "components/VuiButton";
 
 function Owner() {
+  const { gradients, info } = colors;
+
   const [loadingClaim, setLoadingClaim] = useState(false);
   const [loadingPause, setLoadingPause] = useState(false);
   const [loadingSwap, setLoadingSwap] = useState(false);
 
   const claimIsOpenValue = claimIsOpen();
   const isPausedValue = isPaused();
+  const totalRewards = totalAvailableRewards();
 
   const handleOpenOrCloseClaim = async () => {
     setLoadingClaim(true);
@@ -106,10 +111,14 @@ function Owner() {
           {claimIsOpenValue?.data === true ? "Close Claim" : "Open Claim"}
         </VuiTypography>
 
+        <VuiTypography variant="h3" color="white" fontWeight="bold" mb="16px">
+          {Number(totalRewards?.data) / 1e18} DAI
+        </VuiTypography>
+
         <VuiBox>
-          <Button
+          <VuiButton
             variant="contained"
-            color="secondary"
+            color="info"
             fullWidth
             disabled={loadingClaim}
             onClick={handleOpenOrCloseClaim}
@@ -121,7 +130,7 @@ function Owner() {
               : claimIsOpenValue?.data === true
               ? "Close"
               : "Open"}
-          </Button>
+          </VuiButton>
         </VuiBox>
       </VuiBox>
 
@@ -140,9 +149,9 @@ function Owner() {
         </VuiTypography>
 
         <VuiBox>
-          <Button
+          <VuiButton
             variant="contained"
-            color="secondary"
+            color="info"
             fullWidth
             disabled={loadingPause}
             onClick={handlePauseOrUnpause}
@@ -154,7 +163,7 @@ function Owner() {
               : isPausedValue?.data === true
               ? "Unpause"
               : "Pause"}
-          </Button>
+          </VuiButton>
         </VuiBox>
       </VuiBox>
 
@@ -173,15 +182,15 @@ function Owner() {
         </VuiTypography>
 
         <VuiBox>
-          <Button
+          <VuiButton
             variant="contained"
-            color="secondary"
+            color="info"
             fullWidth
             disabled={loadingSwap}
             onClick={handleOpenSwap}
           >
             {loadingSwap ? "Openning..." : "Open"}
-          </Button>
+          </VuiButton>
         </VuiBox>
       </VuiBox>
     </Grid>

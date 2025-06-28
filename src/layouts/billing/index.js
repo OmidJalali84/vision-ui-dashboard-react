@@ -355,15 +355,15 @@ function StackDashboard() {
                 </VuiTypography>
 
                 <VuiBox>
-                  <Button
+                  <VuiButton
                     variant="contained"
-                    color="secondary"
+                    color="info"
                     fullWidth
                     disabled={loading}
                     onClick={handleClaimReward}
                   >
                     {loading ? "Claiming…" : "Claim"}
-                  </Button>
+                  </VuiButton>
                 </VuiBox>
               </VuiBox>
             ) : (

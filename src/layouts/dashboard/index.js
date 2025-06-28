@@ -79,8 +79,8 @@ function Overview() {
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
-                title={{ text: "total users" }}
-                count={contractStage?.data?.[0].toString()}
+                title={{ text: "total directs" }}
+                count={userInfo?.data?.directs.toString()}
                 icon={{
                   color: "info",
                   component: <IoGlobe size="22px" color="white" />,
@@ -90,7 +90,7 @@ function Overview() {
             <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
                 title={{ text: "Price", fontWeight: "regular" }}
-                count={"$" + (Number(contractStage?.data?.[3]) / 1e18).toString()}
+                count={"$" + (Number(contractStage?.data?.[3]) / 1e18).toFixed(8).toString()}
                 icon={{
                   color: "info",
                   component: <IoPricetagOutline size="22px" color="white" />,

@@ -43,6 +43,7 @@ import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
 import Tables2 from "layouts/tables2";
 import Billing from "layouts/billing";
+import Swap from "layouts/swap";
 import { BsCreditCardFill } from "react-icons/bs";
 import { IoStatsChart } from "react-icons/io5";
 import { IoHome } from "react-icons/io5";
@@ -82,6 +83,15 @@ const routes = [
     route: "/stake-dashboard",
     icon: <BsCreditCardFill size="15px" color="inherit" />,
     component: Billing,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Swap",
+    key: "Swap",
+    route: "/swap",
+    icon: <BsCreditCardFill size="15px" color="inherit" />,
+    component: Swap,
     noCollapse: true,
   },
 ];

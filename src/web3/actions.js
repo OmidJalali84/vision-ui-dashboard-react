@@ -50,6 +50,16 @@ export function getTokenBalance(address) {
     args: [address],
   });
 }
+
+export function getDaiBalance(address) {
+  return useReadContract({
+    abi: contractABI,
+    address: usdtAddress,
+    functionName: "balanceOf",
+    args: [address],
+  });
+}
+
 export function getLockedBalance(address) {
   return useReadContract({
     abi: contractABI,
@@ -90,6 +100,15 @@ export function approveUsdt(amount) {
   return writeContract(config, {
     abi: contractABI,
     address: usdtAddress,
+    functionName: "approve",
+    args: [contractAddress, ethers.utils.parseUnits(amount.toString(), 18)],
+  });
+}
+
+export function approveUnity(amount) {
+  return writeContract(config, {
+    abi: contractABI,
+    address: contractAddress,
     functionName: "approve",
     args: [contractAddress, ethers.utils.parseUnits(amount.toString(), 18)],
   });
@@ -209,5 +228,32 @@ export function openSwap() {
     address: contractAddress,
     functionName: "openSwap",
     args: [],
+  });
+}
+
+export function totalAvailableRewards() {
+  return useReadContract({
+    abi: contractABI,
+    address: contractAddress,
+    functionName: "totalAvailableRewards",
+    args: [],
+  });
+}
+
+export function getPrice() {
+  return useReadContract({
+    abi: contractABI,
+    address: contractAddress,
+    functionName: "price",
+    args: [],
+  });
+}
+
+export function swap(adress, unityToDai, amount) {
+  return writeContract(config, {
+    abi: contractABI,
+    address: contractAddress,
+    functionName: "swap",
+    args: [adress, unityToDai, ethers.utils.parseUnits(amount.toString(), 18)],
   });
 }
