@@ -64,6 +64,9 @@ function Swap() {
 
   useEffect(() => {
     const handleFetchBalances = () => {
+      if (!unityBalanceWithDecimals || !daiBalanceWithDecimals) {
+        return;
+      }
       setUnityBalance((Number(unityBalanceWithDecimals) / 1e18)?.toFixed(2));
       setDaiBalance((Number(daiBalanceWithDecimals) / 1e18)?.toFixed(2));
     };
@@ -204,7 +207,7 @@ function Swap() {
                   <span>Rate</span>
                   {/* TODO – web3: real rate */}
                   <span>
-                    {fromToken.symbol === "DAI"
+                    {rate ?? fromToken.symbol === "DAI"
                       ? `1 ${fromToken.symbol} ≈ ${rate?.toFixed(2).toString() + toToken.symbol}`
                       : `1 ${fromToken.symbol} ≈ ${
                           (1 / rate)?.toFixed(8).toString() + toToken.symbol
