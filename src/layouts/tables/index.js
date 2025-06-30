@@ -47,7 +47,7 @@ import { useAccount } from "wagmi";
 import { ConnectKitButton } from "connectkit";
 import { getUser, getTokenBalance, getPointBalance, getLockedBalance } from "web3/actions";
 import UpgradePlan from "./components/UpgradePlan";
-import Register from "layouts/tables2/components/Register";
+import Register from "./components/Register";
 import { useState } from "react";
 
 function PlanDashboard() {
