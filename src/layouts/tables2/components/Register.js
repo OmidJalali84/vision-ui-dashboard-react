@@ -22,7 +22,7 @@ export default function Register({ plan }) {
   const handleApprove = async () => {
     setLoading(true);
     try {
-      const amt = ((Number(amountRef.current.value) * 105) / 100).toString();
+      const amt = Number(amountRef.current.value).toString();
       console.log(amt);
       const tx = await approveUsdt(amt);
       await waitForTransactionReceipt(config, { hash: tx });

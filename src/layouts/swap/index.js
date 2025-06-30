@@ -64,8 +64,8 @@ function Swap() {
 
   useEffect(() => {
     const handleFetchBalances = () => {
-      setUnityBalance((Number(unityBalanceWithDecimals) / 1e18).toFixed(2));
-      setDaiBalance((Number(daiBalanceWithDecimals) / 1e18).toFixed(2));
+      setUnityBalance((Number(unityBalanceWithDecimals) / 1e18)?.toFixed(2));
+      setDaiBalance((Number(daiBalanceWithDecimals) / 1e18)?.toFixed(2));
     };
 
     handleFetchBalances();
@@ -205,9 +205,9 @@ function Swap() {
                   {/* TODO – web3: real rate */}
                   <span>
                     {fromToken.symbol === "DAI"
-                      ? `1 ${fromToken.symbol} ≈ ${rate.toFixed(2).toString() + toToken.symbol}`
+                      ? `1 ${fromToken.symbol} ≈ ${rate?.toFixed(2).toString() + toToken.symbol}`
                       : `1 ${fromToken.symbol} ≈ ${
-                          (1 / rate).toFixed(8).toString() + toToken.symbol
+                          (1 / rate)?.toFixed(8).toString() + toToken.symbol
                         }`}
                   </span>
                 </VuiTypography>

@@ -13,7 +13,7 @@ const SatisfactionRate = ({ amount, percentage }) => {
   const { cardContent } = gradients;
 
   return (
-    <Card sx={{ height: "340px", width: "48%" }}>
+    <Card sx={{ height: "340px", width: "100%" }}>
       <VuiBox display="flex" flexDirection="column">
         <VuiTypography variant="lg" color="white" fontWeight="bold" mb="4px">
           {amount}$

@@ -495,11 +495,22 @@ function StackDashboard() {
                     },
                   })}
                 >
-                  {stakes?.data?.map((stake) => (
-                    <SatisfactionRate
-                      amount={Number(stake.amount) / 1e18}
-                      percentage={Number(stake.rewardClaimed) / Number(stake.amount) / 2}
-                    />
+                  {stakes?.data?.map((stake, idx) => (
+                    <Grid
+                      item
+                      xs={12}
+                      sm={6}
+                      md={6}
+                      lg={6}
+                      key={idx}
+                      display={"flex"}
+                      justifyContent={"center"}
+                    >
+                      <SatisfactionRate
+                        amount={Number(stake.amount) / 1e18}
+                        percentage={Number(stake.rewardClaimed) / Number(stake.amount) / 2}
+                      />
+                    </Grid>
                   ))}
                 </Grid>{" "}
               </VuiBox>
