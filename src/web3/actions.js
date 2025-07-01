@@ -257,3 +257,21 @@ export function swap(adress, unityToDai, amount) {
     args: [adress, unityToDai, ethers.utils.parseUnits(amount.toString(), 18)],
   });
 }
+
+export function changeLevel1(amount) {
+  return writeContract(config, {
+    abi: contractABI,
+    address: contractAddress,
+    functionName: "changeLevel1Entrance",
+    args: [ethers.utils.parseUnits(amount.toString(), 18)],
+  });
+}
+
+export function changeLevel1Stake(amount) {
+  return writeContract(config, {
+    abi: contractABI,
+    address: contractAddress,
+    functionName: "changeLevel1EntranceStake",
+    args: [ethers.utils.parseUnits(amount.toString(), 18)],
+  });
+}

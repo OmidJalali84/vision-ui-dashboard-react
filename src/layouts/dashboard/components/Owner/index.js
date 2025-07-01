@@ -32,6 +32,8 @@ import {
   unpause,
   openSwap,
   totalAvailableRewards,
+  changeLevel1,
+  changeLevel1Stake,
 } from "web3/actions";
 import { swapIsOpen } from "web3/actions";
 import { toast } from "react-toastify";
@@ -39,6 +41,7 @@ import { waitForTransactionReceipt } from "@wagmi/core";
 import { config } from "web3/Web3Provider";
 import colors from "assets/theme/base/colors";
 import VuiButton from "components/VuiButton";
+import VuiInput from "components/VuiInput";
 
 function Owner() {
   const { gradients, info } = colors;
@@ -46,6 +49,10 @@ function Owner() {
   const [loadingClaim, setLoadingClaim] = useState(false);
   const [loadingPause, setLoadingPause] = useState(false);
   const [loadingSwap, setLoadingSwap] = useState(false);
+  const [loadinglevel1, setLoadingSwapLevel1] = useState(false);
+  const [loadinglevel1Stake, setLoadingSwapLevel1Stake] = useState(false);
+  const [level1, setLevel1] = useState(0);
+  const [level1Stake, setLevel1Stake] = useState(0);
 
   const claimIsOpenValue = claimIsOpen();
   const isPausedValue = isPaused();
@@ -91,6 +98,34 @@ function Owner() {
       toast.error(e.message);
     } finally {
       setLoadingSwap(false);
+    }
+  };
+
+  const handleChangeLevel1 = async () => {
+    setLoadingSwapLevel1(true);
+    try {
+      const tx = await changeLevel1(level1);
+      await waitForTransactionReceipt(config, { hash: tx });
+      toast.success(`Change minimum request sent!`);
+    } catch (e) {
+      console.error(e.message);
+      toast.error(e.message);
+    } finally {
+      setLoadingSwapLevel1(false);
+    }
+  };
+
+  const handleChangeLevel1Stake = async () => {
+    setLoadingSwapLevel1Stake(true);
+    try {
+      const tx = await changeLevel1Stake(level1Stake);
+      await waitForTransactionReceipt(config, { hash: tx });
+      toast.success(`Change minimum request sent!`);
+    } catch (e) {
+      console.error(e.message);
+      toast.error(e.message);
+    } finally {
+      setLoadingSwapLevel1Stake(false);
     }
   };
 
@@ -190,6 +225,71 @@ function Owner() {
             onClick={handleOpenSwap}
           >
             {loadingSwap ? "Openning..." : "Open"}
+          </VuiButton>
+        </VuiBox>
+      </VuiBox>
+
+      <VuiBox
+        p="24px"
+        sx={{
+          background: "rgba(255,255,255,0.05)",
+          borderRadius: "16px",
+          width: "280px",
+          textAlign: "center",
+          boxShadow: "0 8px 16px rgba(0,0,0,0.25)",
+        }}
+      >
+        <VuiTypography variant="h6" color="white" fontWeight="bold" mb="12px">
+          Change Minimum Token & Point
+        </VuiTypography>
+
+        <VuiBox>
+          <VuiInput
+            fullWidth
+            onChange={(e) => () => setLevel1(e.target.value)}
+            type="number"
+            placeholder="0.0"
+          />
+          <VuiButton
+            variant="contained"
+            color="info"
+            fullWidth
+            disabled={loadinglevel1}
+            onClick={handleChangeLevel1}
+          >
+            {loadinglevel1 ? "Changing..." : "Change"}
+          </VuiButton>
+        </VuiBox>
+      </VuiBox>
+
+      <VuiBox
+        p="24px"
+        sx={{
+          background: "rgba(255,255,255,0.05)",
+          borderRadius: "16px",
+          width: "280px",
+          textAlign: "center",
+          boxShadow: "0 8px 16px rgba(0,0,0,0.25)",
+        }}
+      >
+        <VuiTypography variant="h6" color="white" fontWeight="bold" mb="12px">
+          Change Minimum Stakee
+        </VuiTypography>
+        <VuiInput
+          fullWidth
+          onChange={(e) => () => setLevel1Stake(e.target.value)}
+          type="number"
+          placeholder="0.0"
+        />
+        <VuiBox>
+          <VuiButton
+            variant="contained"
+            color="info"
+            fullWidth
+            disabled={loadinglevel1Stake}
+            onClick={handleChangeLevel1Stake}
+          >
+            {loadinglevel1Stake ? "Changing..." : "Change"}
           </VuiButton>
         </VuiBox>
       </VuiBox>

@@ -296,7 +296,7 @@ function PlanDashboard() {
                 <VuiTypography variant="caption" color="white" fontWeight="medium" mr="auto">
                   Entry Amount
                 </VuiTypography>
-                <FaEllipsisH color="white" size="18px" sx={{ cursor: "pointer" }} />
+                {/* <FaEllipsisH color="white" size="18px" sx={{ cursor: "pointer" }} /> */}
               </VuiBox>
               <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
                 <VuiTypography variant="h2" color="white" fontWeight="bold" mr="auto">
