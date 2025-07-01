@@ -46,7 +46,7 @@ function Overview() {
   const contractStage = getContractStage();
   const userInfo = getUser(address);
 
-  console.log(address);
+  console.log(userInfo);
   // If not connected, show a prompt and the Connect button
   if (!isConnected && !address) {
     return (
@@ -121,21 +121,31 @@ function Overview() {
         </VuiBox>
         <VuiBox mb={3}>
           <Grid container spacing="10px" justifyContent="space-around">
-            <Grid item xs={12} lg={12} xl={4}>
+            <Grid item xs={12} lg={6} xl={6}>
               <WelcomeMark name={userInfo?.data?.username} />
             </Grid>
-            <Grid item xs={12} lg={6} xl={4}>
+            <Grid item xs={12} lg={6} xl={6}>
               <ReferralTracking
-                title={"Plan Tracking"}
-                levels={userInfo?.data?.unlockedLevelsToken}
-                reward={userInfo?.data?.totalRewardToken}
+                title={"Token Tracking"}
+                levels={userInfo?.data?.tokenPlan?.unlockedLevels}
+                reward={userInfo?.data?.tokenPlan?.totalReward}
+                isActive={userInfo?.data?.tokenPlan?.isActive}
               />
             </Grid>
-            <Grid item xs={12} lg={6} xl={4}>
+            <Grid item xs={12} lg={6} xl={6}>
+              <ReferralTracking
+                title={"Point Tracking"}
+                levels={userInfo?.data?.pointPlan?.unlockedLevels}
+                reward={userInfo?.data?.pointPlan?.totalReward}
+                isActive={userInfo?.data?.pointPlan?.isActive}
+              />
+            </Grid>
+            <Grid item xs={12} lg={6} xl={6}>
               <ReferralTracking
                 title={"Stake Tracking"}
-                levels={userInfo?.data?.unlockedLevelsStake}
-                reward={userInfo?.data?.totalRewardStake}
+                levels={userInfo?.data?.stakePlan?.unlockedLevels}
+                reward={userInfo?.data?.stakePlan?.totalReward}
+                isActive={userInfo?.data?.stakePlan?.isActive}
               />
             </Grid>
           </Grid>

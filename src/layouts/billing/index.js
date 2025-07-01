@@ -145,12 +145,13 @@ function StackDashboard() {
       ),
       value: (
         <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
-          {userInfo?.data?.totalreward
-            ? (Number(userInfo.totalrewardStake) / 1e18).toLocaleString(undefined, {
+          {userInfo?.stakePlan?.totalreward
+            ? (Number(userInfo.stakePlan.totalreward) / 1e18).toLocaleString(undefined, {
                 style: "currency",
                 currency: "USD",
               })
-            : "$ 0"}
+            : "0"}
+          $
         </VuiTypography>
       ),
     },
@@ -508,7 +509,8 @@ function StackDashboard() {
                     >
                       <SatisfactionRate
                         amount={Number(stake.amount) / 1e18}
-                        percentage={Number(stake.rewardClaimed) / Number(stake.amount) / 2}
+                        claimed={Number(stake.rewardClaimed) / 1e18}
+                        percentage={(Number(stake.rewardClaimed) / Number(stake.amount) / 2) * 100}
                       />
                     </Grid>
                   ))}

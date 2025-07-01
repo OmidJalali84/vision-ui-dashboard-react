@@ -403,7 +403,7 @@ function PlanDashboard() {
                     },
                   })}
                 >
-                  {Number(userInfo?.data?.totalRewardToken) / 1e18}
+                  {Number(userInfo?.data?.tokenPlan?.totalReward) / 1e18}$
                 </VuiTypography>
               </VuiBox>
               <VuiBox
