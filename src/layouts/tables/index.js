@@ -302,7 +302,7 @@ function PlanDashboard() {
                 <VuiTypography variant="h2" color="white" fontWeight="bold" mr="auto">
                   ${Number(userInfo?.data?.tokenPlan?.entryAmount) / 1e18}
                 </VuiTypography>
-                <VuiBox component="img" src={Graph} sx={{ width: "58px", height: "20px" }} />
+                {/* <VuiBox component="img" src={Graph} sx={{ width: "58px", height: "20px" }} /> */}
               </VuiBox>
             </VuiBox>
 
