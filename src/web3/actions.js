@@ -275,3 +275,12 @@ export function changeLevel1Stake(amount) {
     args: [ethers.utils.parseUnits(amount.toString(), 18)],
   });
 }
+
+export function getUserTeam(address) {
+  return useReadContract({
+    abi: contractABI,
+    address: contractAddress,
+    functionName: "sumDownlineByPlan",
+    args: [address],
+  });
+}

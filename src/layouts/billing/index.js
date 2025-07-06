@@ -53,6 +53,7 @@ import { toast } from "react-toastify";
 import { waitForTransactionReceipt } from "@wagmi/core";
 import { config } from "web3/Web3Provider";
 import Stake from "./components/Stake";
+import { getUserTeam } from "web3/actions";
 
 function StackDashboard() {
   const { columns: prCols } = projectsTableData;
@@ -60,6 +61,8 @@ function StackDashboard() {
   const { isConnected, address } = useAccount();
   const userInfo = getUser(address);
   const stakes = getStakes(address);
+  const userTeam = getUserTeam(address);
+
   const availableRewards = getAvailableRewards(address);
 
   const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 });
@@ -147,6 +150,51 @@ function StackDashboard() {
         <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
           {userInfo?.stakePlan?.totalreward
             ? (Number(userInfo.stakePlan.totalreward) / 1e18).toLocaleString(undefined, {
+                style: "currency",
+                currency: "USD",
+              })
+            : "0"}
+          $
+        </VuiTypography>
+      ),
+    },
+    {
+      data: (
+        <VuiBox display="flex" alignItems="center">
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            5.
+          </VuiTypography>
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            Team Members
+          </VuiTypography>
+        </VuiBox>
+      ),
+      value: (
+        <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
+          {userTeam?.data?.[5]
+            ? Number(userTeam.data[5]).toLocaleString(undefined, {
+                style: "currency",
+                currency: "USD",
+              })
+            : "0"}
+        </VuiTypography>
+      ),
+    },
+    {
+      data: (
+        <VuiBox display="flex" alignItems="center">
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            6.
+          </VuiTypography>
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            Team Valume
+          </VuiTypography>
+        </VuiBox>
+      ),
+      value: (
+        <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
+          {userTeam?.data?.[2]
+            ? (Number(userTeam.data[2]) / 1e18).toLocaleString(undefined, {
                 style: "currency",
                 currency: "USD",
               })
@@ -311,6 +359,33 @@ function StackDashboard() {
                   ${Number(userInfo?.data?.stakePlan?.entryAmount) / 1e18}
                 </VuiTypography>
                 {/* <VuiBox component="img" src={Graph} sx={{ width: "58px", height: "20px" }} /> */}
+              </VuiBox>
+              <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
+                <VuiTypography
+                  color="white"
+                  fontWeight="bold"
+                  textAlign="left"
+                  mt="15px"
+                  variant="button"
+                  width="75px"
+                  paddingLeft="10px"
+                  paddingRight="10px"
+                  paddingTop="5px"
+                  paddingBottom="5px"
+                  borderRadius="10px"
+                  sx={({ breakpoints }) => ({
+                    background: linearGradient(
+                      cardContent.main,
+                      cardContent.state,
+                      cardContent.deg
+                    ),
+                    [breakpoints.only("xl")]: {
+                      fontSize: "10px",
+                    },
+                  })}
+                >
+                  Credit: {userInfo?.data?.stakePlan?.credit}
+                </VuiTypography>
               </VuiBox>
             </VuiBox>
 

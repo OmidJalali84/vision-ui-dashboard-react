@@ -45,7 +45,13 @@ import { IoWallet } from "react-icons/io5";
 
 import { useAccount } from "wagmi";
 import { ConnectKitButton } from "connectkit";
-import { getUser, getTokenBalance, getPointBalance, getLockedBalance } from "web3/actions";
+import {
+  getUser,
+  getTokenBalance,
+  getPointBalance,
+  getLockedBalance,
+  getUserTeam,
+} from "web3/actions";
 import Register from "./components/Register";
 import UpgradePlan from "./components/UpgradePlan";
 import { useState } from "react";
@@ -56,6 +62,8 @@ function PlanDashboard() {
   const { cardContent } = gradients;
   const { isConnected, address } = useAccount();
   const userInfo = getUser(address);
+  const userTeam = getUserTeam(address);
+
   const tokenBalance = getTokenBalance(address);
   const lockedBalance = getLockedBalance(address);
   const pointsBalance = getPointBalance(address);
@@ -173,6 +181,51 @@ function PlanDashboard() {
         </VuiTypography>
       ),
     },
+    {
+      data: (
+        <VuiBox display="flex" alignItems="center">
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            6.
+          </VuiTypography>
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            Team Members
+          </VuiTypography>
+        </VuiBox>
+      ),
+      value: (
+        <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
+          {userTeam?.data?.[4]
+            ? Number(userTeam.data[4]).toLocaleString(undefined, {
+                style: "currency",
+                currency: "USD",
+              })
+            : "0"}
+        </VuiTypography>
+      ),
+    },
+    {
+      data: (
+        <VuiBox display="flex" alignItems="center">
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            7.
+          </VuiTypography>
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+            Team Valume
+          </VuiTypography>
+        </VuiBox>
+      ),
+      value: (
+        <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
+          {userTeam?.data?.[1]
+            ? (Number(userTeam.data[1]) / 1e18).toLocaleString(undefined, {
+                style: "currency",
+                currency: "USD",
+              })
+            : "0"}
+          $
+        </VuiTypography>
+      ),
+    },
   ];
 
   if (!isConnected && !address) {
@@ -283,6 +336,33 @@ function PlanDashboard() {
                   ${Number(userInfo?.data?.pointPlan?.entryAmount) / 1e18}
                 </VuiTypography>
                 {/* <VuiBox component="img" src={Graph} sx={{ width: "58px", height: "20px" }} /> */}
+              </VuiBox>
+              <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
+                <VuiTypography
+                  color="white"
+                  fontWeight="bold"
+                  textAlign="left"
+                  mt="15px"
+                  variant="button"
+                  width="75px"
+                  paddingLeft="10px"
+                  paddingRight="10px"
+                  paddingTop="5px"
+                  paddingBottom="5px"
+                  borderRadius="10px"
+                  sx={({ breakpoints }) => ({
+                    background: linearGradient(
+                      cardContent.main,
+                      cardContent.state,
+                      cardContent.deg
+                    ),
+                    [breakpoints.only("xl")]: {
+                      fontSize: "10px",
+                    },
+                  })}
+                >
+                  Credit: {userInfo?.data?.pointPlan?.credit}
+                </VuiTypography>
               </VuiBox>
             </VuiBox>
 

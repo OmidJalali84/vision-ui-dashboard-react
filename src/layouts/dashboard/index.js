@@ -37,7 +37,7 @@ import { FaMoneyCheck } from "react-icons/fa";
 // Wagmi & ConnectKit
 import { useAccount } from "wagmi";
 import { ConnectKitButton } from "connectkit";
-import { getContractStage, getUser } from "web3/actions";
+import { getContractStage, getUser, getUserTeam } from "web3/actions";
 import Owner from "./components/Owner";
 import { contractOwner } from "web3/helper";
 
@@ -45,8 +45,7 @@ function Overview() {
   const { address, isConnected } = useAccount();
   const contractStage = getContractStage();
   const userInfo = getUser(address);
-
-  console.log(userInfo);
+  const userTeam = getUserTeam(address);
   // If not connected, show a prompt and the Connect button
   if (!isConnected && !address) {
     return (
@@ -89,6 +88,16 @@ function Overview() {
             </Grid>
             <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
+                title={{ text: "total members" }}
+                count={Number(userTeam?.data?.[6]).toString()}
+                icon={{
+                  color: "info",
+                  component: <IoGlobe size="22px" color="white" />,
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} md={6} xl={3}>
+              <MiniStatisticsCard
                 title={{ text: "Price", fontWeight: "regular" }}
                 count={"$" + (Number(contractStage?.data?.[3]) / 1e18).toFixed(8).toString()}
                 icon={{
@@ -107,16 +116,6 @@ function Overview() {
                 }}
               />
             </Grid>
-            <Grid item xs={12} md={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "total supply" }}
-                count={(Number(contractStage?.data?.[2]) / 1e18).toString()}
-                icon={{
-                  color: "info",
-                  component: <FaMoneyCheck size="20px" color="white" />,
-                }}
-              />
-            </Grid>
           </Grid>
         </VuiBox>
         <VuiBox mb={3}>
@@ -128,7 +127,8 @@ function Overview() {
               <ReferralTracking
                 title={"Token Tracking"}
                 levels={userInfo?.data?.tokenPlan?.unlockedLevels}
-                reward={userInfo?.data?.tokenPlan?.totalReward}
+                account={userTeam?.data?.[0]}
+                members={userTeam?.data?.[3]}
                 isActive={userInfo?.data?.tokenPlan?.isActive}
               />
             </Grid>
@@ -136,7 +136,8 @@ function Overview() {
               <ReferralTracking
                 title={"Point Tracking"}
                 levels={userInfo?.data?.pointPlan?.unlockedLevels}
-                reward={userInfo?.data?.pointPlan?.totalReward}
+                account={userTeam?.data?.[1]}
+                members={userTeam?.data?.[4]}
                 isActive={userInfo?.data?.pointPlan?.isActive}
               />
             </Grid>
@@ -144,7 +145,8 @@ function Overview() {
               <ReferralTracking
                 title={"Stake Tracking"}
                 levels={userInfo?.data?.stakePlan?.unlockedLevels}
-                reward={userInfo?.data?.stakePlan?.totalReward}
+                account={userTeam?.data?.[2]}
+                members={userTeam?.data?.[5]}
                 isActive={userInfo?.data?.stakePlan?.isActive}
               />
             </Grid>

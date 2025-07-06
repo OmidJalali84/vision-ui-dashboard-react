@@ -1,1769 +1,1237 @@
-export const contractAddress = "0x519af4b2049B2c0f5b44597A0684B66945897062";
+export const contractAddress = "0xB9b73Ba2DcEfF1AfCEa976429D565C6Fcc313394";
 export const usdtAddress = "0x320f0Ed6Fc42b0857e2b598B5DA85103203cf5d3";
-export const pointAddress = "0x446FA1F7b1f100C1D030715F780517f798e8dC8a";
+export const pointAddress = "0x655509fCf9BB793ABFE7bC3C283E07e26C6cC88a";
 export const contractOwner = "0x6Ac97c57138BD707680A10A798bAf24aCe62Ae9D";
 
 export const contractABI = [
   {
+    type: "constructor",
     inputs: [
       {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-    ],
-    name: "addLiquidity",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "spender",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "value",
-        type: "uint256",
-      },
-    ],
-    name: "approve",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "newEntrance",
-        type: "uint256",
-      },
-    ],
-    name: "changeLevel1Entrance",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "newEntrance",
-        type: "uint256",
-      },
-    ],
-    name: "changeLevel1EntranceStake",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "claimRewards",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "closeClaim",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "openClaim",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "openSwap",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "pauseStake",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_user",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "_referrer",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "registrationAmount",
-        type: "uint256",
-      },
-      {
-        internalType: "string",
-        name: "username",
-        type: "string",
-      },
-      {
-        internalType: "enum Pyramid.PlanType",
-        name: "plan",
-        type: "uint8",
-      },
-    ],
-    name: "register",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "renounceOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "daiAmount",
-        type: "uint256",
-      },
-    ],
-    name: "stakeMore",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "receiver",
-        type: "address",
-      },
-      {
-        internalType: "bool",
-        name: "isFRVtoDAI",
-        type: "bool",
-      },
-      {
-        internalType: "uint256",
-        name: "inputAmount",
-        type: "uint256",
-      },
-    ],
-    name: "swap",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "to",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "value",
-        type: "uint256",
-      },
-    ],
-    name: "transfer",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "from",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "to",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "value",
-        type: "uint256",
-      },
-    ],
-    name: "transferFrom",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "newOwner",
-        type: "address",
-      },
-    ],
-    name: "transferOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
         name: "_initialOwner",
         type: "address",
-      },
-      {
         internalType: "address",
-        name: "_daiAddress",
-        type: "address",
       },
+      { name: "_daiAddress", type: "address", internalType: "address" },
       {
-        internalType: "address",
         name: "_supportiveWallet",
         type: "address",
+        internalType: "address",
       },
     ],
     stateMutability: "nonpayable",
-    type: "constructor",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "spender",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "allowance",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "needed",
-        type: "uint256",
-      },
-    ],
-    name: "ERC20InsufficientAllowance",
-    type: "error",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "sender",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "balance",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "needed",
-        type: "uint256",
-      },
-    ],
-    name: "ERC20InsufficientBalance",
-    type: "error",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "approver",
-        type: "address",
-      },
-    ],
-    name: "ERC20InvalidApprover",
-    type: "error",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "receiver",
-        type: "address",
-      },
-    ],
-    name: "ERC20InvalidReceiver",
-    type: "error",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "sender",
-        type: "address",
-      },
-    ],
-    name: "ERC20InvalidSender",
-    type: "error",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "spender",
-        type: "address",
-      },
-    ],
-    name: "ERC20InvalidSpender",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "EnforcedPause",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "ExpectedPause",
-    type: "error",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "owner",
-        type: "address",
-      },
-    ],
-    name: "OwnableInvalidOwner",
-    type: "error",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-    ],
-    name: "OwnableUnauthorizedAccount",
-    type: "error",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "token",
-        type: "address",
-      },
-    ],
-    name: "SafeERC20FailedOperation",
-    type: "error",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "address",
-        name: "provider",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-    ],
-    name: "AddLiquidity",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "owner",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "spender",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "value",
-        type: "uint256",
-      },
-    ],
-    name: "Approval",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "previousOwner",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "newOwner",
-        type: "address",
-      },
-    ],
-    name: "OwnershipTransferred",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-    ],
-    name: "Paused",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "user",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "referrer",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "string",
-        name: "username",
-        type: "string",
-      },
-      {
-        indexed: false,
-        internalType: "enum Pyramid.PlanType",
-        name: "plan",
-        type: "uint8",
-      },
-    ],
-    name: "Register",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "user",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-    ],
-    name: "RewardClaimed",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "bool",
-        name: "isFRVToDAI",
-        type: "bool",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "caller",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "receiver",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "inputAmount",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "outputAmount",
-        type: "uint256",
-      },
-    ],
-    name: "Swap",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "time",
-        type: "uint256",
-      },
-    ],
-    name: "SwapOpened",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "from",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "to",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "value",
-        type: "uint256",
-      },
-    ],
-    name: "Transfer",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-    ],
-    name: "Unpaused",
-    type: "event",
-  },
-  {
-    inputs: [],
-    name: "unpauseStake",
-    outputs: [],
-    stateMutability: "nonpayable",
     type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "upgradeAmount",
-        type: "uint256",
-      },
-      {
-        internalType: "enum Pyramid.PlanType",
-        name: "planToUpgrade",
-        type: "uint8",
-      },
-    ],
-    name: "upgradePlan",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "user",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "enum Pyramid.PlanType",
-        name: "plan",
-        type: "uint8",
-      },
-    ],
-    name: "UpgradePlan",
-    type: "event",
-  },
-  {
-    inputs: [],
-    name: "withdrawTokens",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "user",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-    ],
-    name: "WithdrawTokens",
-    type: "event",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-      {
-        internalType: "uint8",
-        name: "",
-        type: "uint8",
-      },
-    ],
-    name: "_pending",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "owner",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "spender",
-        type: "address",
-      },
-    ],
-    name: "allowance",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "user",
-        type: "address",
-      },
-    ],
-    name: "availableRewards",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-    ],
-    name: "balanceOf",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
     name: "BUY_FEE",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
-    type: "function",
   },
   {
-    inputs: [],
-    name: "claimOpen",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
     type: "function",
-  },
-  {
-    inputs: [],
-    name: "dai",
-    outputs: [
-      {
-        internalType: "contract IERC20",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "daiLiquidity",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "decimals",
-    outputs: [
-      {
-        internalType: "uint8",
-        name: "",
-        type: "uint8",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
     name: "DIVIDE",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
     inputs: [],
-    name: "getContractStage",
-    outputs: [
-      {
-        internalType: "uint256[]",
-        name: "",
-        type: "uint256[]",
-      },
-    ],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
-    type: "function",
   },
   {
+    type: "function",
+    name: "LOCK_DURATION",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "MAX_REWARD_BP",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "MONTH_SECONDS",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "PRICE_DECIMALS",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "REGISTRATION_FEE",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "SELL_FEE",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "TRANSFER_FEE",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "_pending",
     inputs: [
-      {
-        internalType: "address",
-        name: "userAddr",
-        type: "address",
-      },
+      { name: "", type: "address", internalType: "address" },
+      { name: "", type: "uint8", internalType: "uint8" },
     ],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "addLiquidity",
+    inputs: [{ name: "amount", type: "uint256", internalType: "uint256" }],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "allowance",
+    inputs: [
+      { name: "owner", type: "address", internalType: "address" },
+      { name: "spender", type: "address", internalType: "address" },
+    ],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "approve",
+    inputs: [
+      { name: "spender", type: "address", internalType: "address" },
+      { name: "value", type: "uint256", internalType: "uint256" },
+    ],
+    outputs: [{ name: "", type: "bool", internalType: "bool" }],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "availableRewards",
+    inputs: [{ name: "user", type: "address", internalType: "address" }],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "balanceOf",
+    inputs: [{ name: "account", type: "address", internalType: "address" }],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "changeLevel1Entrance",
+    inputs: [{ name: "newEntrance", type: "uint256", internalType: "uint256" }],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "changeLevel1EntranceStake",
+    inputs: [{ name: "newEntrance", type: "uint256", internalType: "uint256" }],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "claimOpen",
+    inputs: [],
+    outputs: [{ name: "", type: "bool", internalType: "bool" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "claimRewards",
+    inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "closeClaim",
+    inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "dai",
+    inputs: [],
+    outputs: [{ name: "", type: "address", internalType: "contract IERC20" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "daiLiquidity",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "decimals",
+    inputs: [],
+    outputs: [{ name: "", type: "uint8", internalType: "uint8" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "getContractStage",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256[]", internalType: "uint256[]" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
     name: "getLocks",
+    inputs: [{ name: "userAddr", type: "address", internalType: "address" }],
     outputs: [
       {
+        name: "",
+        type: "tuple[]",
+        internalType: "struct Pyramid.Lock[]",
         components: [
+          { name: "amount", type: "uint256", internalType: "uint256" },
           {
-            internalType: "uint256",
-            name: "amount",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
             name: "releaseTime",
             type: "uint256",
+            internalType: "uint256",
           },
         ],
-        internalType: "struct Pyramid.Lock[]",
+      },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "getUser",
+    inputs: [{ name: "userAddr", type: "address", internalType: "address" }],
+    outputs: [
+      {
+        name: "",
+        type: "tuple",
+        internalType: "struct Pyramid.User",
+        components: [
+          {
+            name: "userAddress",
+            type: "address",
+            internalType: "address",
+          },
+          { name: "username", type: "string", internalType: "string" },
+          {
+            name: "referrer",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "referrerUsername",
+            type: "string",
+            internalType: "string",
+          },
+          {
+            name: "firstDirect",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "registrationTime",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "firstDirectLockAmount",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          { name: "directs", type: "uint256", internalType: "uint256" },
+          {
+            name: "directsAddresses",
+            type: "address[]",
+            internalType: "address[]",
+          },
+          {
+            name: "tokenPlan",
+            type: "tuple",
+            internalType: "struct Pyramid.PlanInfo",
+            components: [
+              { name: "isActive", type: "bool", internalType: "bool" },
+              {
+                name: "entryAmount",
+                type: "uint256",
+                internalType: "uint256",
+              },
+              {
+                name: "unlockedLevels",
+                type: "uint256",
+                internalType: "uint256",
+              },
+              {
+                name: "totalReward",
+                type: "uint256",
+                internalType: "uint256",
+              },
+              {
+                name: "credit",
+                type: "uint256",
+                internalType: "uint256",
+              },
+            ],
+          },
+          {
+            name: "pointPlan",
+            type: "tuple",
+            internalType: "struct Pyramid.PlanInfo",
+            components: [
+              { name: "isActive", type: "bool", internalType: "bool" },
+              {
+                name: "entryAmount",
+                type: "uint256",
+                internalType: "uint256",
+              },
+              {
+                name: "unlockedLevels",
+                type: "uint256",
+                internalType: "uint256",
+              },
+              {
+                name: "totalReward",
+                type: "uint256",
+                internalType: "uint256",
+              },
+              {
+                name: "credit",
+                type: "uint256",
+                internalType: "uint256",
+              },
+            ],
+          },
+          {
+            name: "stakePlan",
+            type: "tuple",
+            internalType: "struct Pyramid.PlanInfo",
+            components: [
+              { name: "isActive", type: "bool", internalType: "bool" },
+              {
+                name: "entryAmount",
+                type: "uint256",
+                internalType: "uint256",
+              },
+              {
+                name: "unlockedLevels",
+                type: "uint256",
+                internalType: "uint256",
+              },
+              {
+                name: "totalReward",
+                type: "uint256",
+                internalType: "uint256",
+              },
+              {
+                name: "credit",
+                type: "uint256",
+                internalType: "uint256",
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "getUserByUsername",
+    inputs: [{ name: "username", type: "string", internalType: "string" }],
+    outputs: [
+      {
+        name: "",
+        type: "tuple",
+        internalType: "struct Pyramid.User",
+        components: [
+          {
+            name: "userAddress",
+            type: "address",
+            internalType: "address",
+          },
+          { name: "username", type: "string", internalType: "string" },
+          {
+            name: "referrer",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "referrerUsername",
+            type: "string",
+            internalType: "string",
+          },
+          {
+            name: "firstDirect",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "registrationTime",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "firstDirectLockAmount",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          { name: "directs", type: "uint256", internalType: "uint256" },
+          {
+            name: "directsAddresses",
+            type: "address[]",
+            internalType: "address[]",
+          },
+          {
+            name: "tokenPlan",
+            type: "tuple",
+            internalType: "struct Pyramid.PlanInfo",
+            components: [
+              { name: "isActive", type: "bool", internalType: "bool" },
+              {
+                name: "entryAmount",
+                type: "uint256",
+                internalType: "uint256",
+              },
+              {
+                name: "unlockedLevels",
+                type: "uint256",
+                internalType: "uint256",
+              },
+              {
+                name: "totalReward",
+                type: "uint256",
+                internalType: "uint256",
+              },
+              {
+                name: "credit",
+                type: "uint256",
+                internalType: "uint256",
+              },
+            ],
+          },
+          {
+            name: "pointPlan",
+            type: "tuple",
+            internalType: "struct Pyramid.PlanInfo",
+            components: [
+              { name: "isActive", type: "bool", internalType: "bool" },
+              {
+                name: "entryAmount",
+                type: "uint256",
+                internalType: "uint256",
+              },
+              {
+                name: "unlockedLevels",
+                type: "uint256",
+                internalType: "uint256",
+              },
+              {
+                name: "totalReward",
+                type: "uint256",
+                internalType: "uint256",
+              },
+              {
+                name: "credit",
+                type: "uint256",
+                internalType: "uint256",
+              },
+            ],
+          },
+          {
+            name: "stakePlan",
+            type: "tuple",
+            internalType: "struct Pyramid.PlanInfo",
+            components: [
+              { name: "isActive", type: "bool", internalType: "bool" },
+              {
+                name: "entryAmount",
+                type: "uint256",
+                internalType: "uint256",
+              },
+              {
+                name: "unlockedLevels",
+                type: "uint256",
+                internalType: "uint256",
+              },
+              {
+                name: "totalReward",
+                type: "uint256",
+                internalType: "uint256",
+              },
+              {
+                name: "credit",
+                type: "uint256",
+                internalType: "uint256",
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "getUserStakes",
+    inputs: [{ name: "user", type: "address", internalType: "address" }],
+    outputs: [
+      {
         name: "",
         type: "tuple[]",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "userAddr",
-        type: "address",
-      },
-    ],
-    name: "getUser",
-    outputs: [
-      {
+        internalType: "struct Pyramid.Stake[]",
         components: [
+          { name: "amount", type: "uint256", internalType: "uint256" },
           {
-            internalType: "address",
-            name: "userAddress",
-            type: "address",
-          },
-          {
-            internalType: "string",
-            name: "username",
-            type: "string",
-          },
-          {
-            internalType: "address",
-            name: "referrer",
-            type: "address",
-          },
-          {
-            internalType: "string",
-            name: "referrerUsername",
-            type: "string",
-          },
-          {
-            internalType: "address",
-            name: "firstDirect",
-            type: "address",
-          },
-          {
-            internalType: "uint256",
-            name: "registrationTime",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "registerAmount",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "firstDirectLockAmount",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "directs",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "credit",
-            type: "uint256",
-          },
-          {
-            components: [
-              {
-                internalType: "bool",
-                name: "isActive",
-                type: "bool",
-              },
-              {
-                internalType: "uint256",
-                name: "entryAmount",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "unlockedLevels",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "totalReward",
-                type: "uint256",
-              },
-            ],
-            internalType: "struct Pyramid.PlanInfo",
-            name: "tokenPlan",
-            type: "tuple",
-          },
-          {
-            components: [
-              {
-                internalType: "bool",
-                name: "isActive",
-                type: "bool",
-              },
-              {
-                internalType: "uint256",
-                name: "entryAmount",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "unlockedLevels",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "totalReward",
-                type: "uint256",
-              },
-            ],
-            internalType: "struct Pyramid.PlanInfo",
-            name: "pointPlan",
-            type: "tuple",
-          },
-          {
-            components: [
-              {
-                internalType: "bool",
-                name: "isActive",
-                type: "bool",
-              },
-              {
-                internalType: "uint256",
-                name: "entryAmount",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "unlockedLevels",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "totalReward",
-                type: "uint256",
-              },
-            ],
-            internalType: "struct Pyramid.PlanInfo",
-            name: "stakePlan",
-            type: "tuple",
-          },
-        ],
-        internalType: "struct Pyramid.User",
-        name: "",
-        type: "tuple",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "string",
-        name: "username",
-        type: "string",
-      },
-    ],
-    name: "getUserByUsername",
-    outputs: [
-      {
-        components: [
-          {
-            internalType: "address",
-            name: "userAddress",
-            type: "address",
-          },
-          {
-            internalType: "string",
-            name: "username",
-            type: "string",
-          },
-          {
-            internalType: "address",
-            name: "referrer",
-            type: "address",
-          },
-          {
-            internalType: "string",
-            name: "referrerUsername",
-            type: "string",
-          },
-          {
-            internalType: "address",
-            name: "firstDirect",
-            type: "address",
-          },
-          {
-            internalType: "uint256",
-            name: "registrationTime",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "registerAmount",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "firstDirectLockAmount",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "directs",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "credit",
-            type: "uint256",
-          },
-          {
-            components: [
-              {
-                internalType: "bool",
-                name: "isActive",
-                type: "bool",
-              },
-              {
-                internalType: "uint256",
-                name: "entryAmount",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "unlockedLevels",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "totalReward",
-                type: "uint256",
-              },
-            ],
-            internalType: "struct Pyramid.PlanInfo",
-            name: "tokenPlan",
-            type: "tuple",
-          },
-          {
-            components: [
-              {
-                internalType: "bool",
-                name: "isActive",
-                type: "bool",
-              },
-              {
-                internalType: "uint256",
-                name: "entryAmount",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "unlockedLevels",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "totalReward",
-                type: "uint256",
-              },
-            ],
-            internalType: "struct Pyramid.PlanInfo",
-            name: "pointPlan",
-            type: "tuple",
-          },
-          {
-            components: [
-              {
-                internalType: "bool",
-                name: "isActive",
-                type: "bool",
-              },
-              {
-                internalType: "uint256",
-                name: "entryAmount",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "unlockedLevels",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "totalReward",
-                type: "uint256",
-              },
-            ],
-            internalType: "struct Pyramid.PlanInfo",
-            name: "stakePlan",
-            type: "tuple",
-          },
-        ],
-        internalType: "struct Pyramid.User",
-        name: "",
-        type: "tuple",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "getUsers",
-    outputs: [
-      {
-        internalType: "address[]",
-        name: "",
-        type: "address[]",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "user",
-        type: "address",
-      },
-    ],
-    name: "getUserStakes",
-    outputs: [
-      {
-        components: [
-          {
-            internalType: "uint256",
-            name: "amount",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
             name: "startTimestamp",
             type: "uint256",
+            internalType: "uint256",
           },
           {
-            internalType: "uint256",
             name: "lastClaim",
             type: "uint256",
+            internalType: "uint256",
           },
           {
-            internalType: "uint256",
             name: "rewardClaimed",
             type: "uint256",
+            internalType: "uint256",
           },
         ],
-        internalType: "struct Pyramid.Stake[]",
-        name: "",
-        type: "tuple[]",
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
   {
+    type: "function",
+    name: "getUsers",
     inputs: [],
-    name: "LOCK_DURATION",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    outputs: [{ name: "", type: "address[]", internalType: "address[]" }],
     stateMutability: "view",
-    type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-    ],
+    type: "function",
     name: "lockedAmount",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "locked",
-        type: "uint256",
-      },
-    ],
+    inputs: [{ name: "account", type: "address", internalType: "address" }],
+    outputs: [{ name: "locked", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
-    type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    type: "function",
     name: "locks",
+    inputs: [
+      { name: "", type: "address", internalType: "address" },
+      { name: "", type: "uint256", internalType: "uint256" },
+    ],
     outputs: [
-      {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "releaseTime",
-        type: "uint256",
-      },
+      { name: "amount", type: "uint256", internalType: "uint256" },
+      { name: "releaseTime", type: "uint256", internalType: "uint256" },
     ],
     stateMutability: "view",
-    type: "function",
   },
   {
-    inputs: [],
-    name: "MAX_REWARD_BP",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
     type: "function",
-  },
-  {
-    inputs: [],
-    name: "MONTH_SECONDS",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
     name: "name",
-    outputs: [
-      {
-        internalType: "string",
-        name: "",
-        type: "string",
-      },
-    ],
+    inputs: [],
+    outputs: [{ name: "", type: "string", internalType: "string" }],
     stateMutability: "view",
-    type: "function",
   },
   {
+    type: "function",
+    name: "openClaim",
     inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "openSwap",
+    inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
     name: "owner",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
+    inputs: [],
+    outputs: [{ name: "", type: "address", internalType: "address" }],
     stateMutability: "view",
-    type: "function",
   },
   {
+    type: "function",
+    name: "pauseStake",
     inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
     name: "paused",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
+    inputs: [],
+    outputs: [{ name: "", type: "bool", internalType: "bool" }],
     stateMutability: "view",
-    type: "function",
   },
   {
-    inputs: [],
+    type: "function",
     name: "pointToken",
-    outputs: [
-      {
-        internalType: "contract PointToken",
-        name: "",
-        type: "address",
-      },
-    ],
+    inputs: [],
+    outputs: [{ name: "", type: "address", internalType: "contract PointToken" }],
     stateMutability: "view",
-    type: "function",
   },
   {
-    inputs: [],
+    type: "function",
     name: "price",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
-    type: "function",
   },
   {
-    inputs: [],
-    name: "PRICE_DECIMALS",
-    outputs: [
+    type: "function",
+    name: "register",
+    inputs: [
+      { name: "_user", type: "address", internalType: "address" },
+      { name: "_referrer", type: "address", internalType: "address" },
       {
-        internalType: "uint256",
-        name: "",
+        name: "registrationAmount",
         type: "uint256",
+        internalType: "uint256",
+      },
+      { name: "username", type: "string", internalType: "string" },
+      {
+        name: "plan",
+        type: "uint8",
+        internalType: "enum Pyramid.PlanType",
       },
     ],
-    stateMutability: "view",
-    type: "function",
+    outputs: [],
+    stateMutability: "nonpayable",
   },
   {
-    inputs: [],
-    name: "REGISTRATION_FEE",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
     type: "function",
+    name: "renounceOwnership",
+    inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
   },
   {
-    inputs: [],
+    type: "function",
     name: "rewardRateBP",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
     inputs: [],
-    name: "SELL_FEE",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
-    type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
+    type: "function",
+    name: "stakeMore",
+    inputs: [{ name: "daiAmount", type: "uint256", internalType: "uint256" }],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
     name: "stakerEarnings",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    inputs: [{ name: "", type: "address", internalType: "address" }],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
-    type: "function",
   },
   {
-    inputs: [],
+    type: "function",
     name: "startingDate",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
-    type: "function",
   },
   {
-    inputs: [],
+    type: "function",
+    name: "sumDownlineByPlan",
+    inputs: [{ name: "_user", type: "address", internalType: "address" }],
+    outputs: [
+      { name: "tokenValume", type: "uint256", internalType: "uint256" },
+      { name: "pointValume", type: "uint256", internalType: "uint256" },
+      { name: "stakeValume", type: "uint256", internalType: "uint256" },
+      {
+        name: "tokenMembers",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      {
+        name: "pointMembers",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      {
+        name: "stakeMembers",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      { name: "members", type: "uint256", internalType: "uint256" },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
     name: "supportiveWallet",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
+    inputs: [],
+    outputs: [{ name: "", type: "address", internalType: "address" }],
     stateMutability: "view",
-    type: "function",
   },
   {
-    inputs: [],
+    type: "function",
+    name: "swap",
+    inputs: [
+      { name: "receiver", type: "address", internalType: "address" },
+      { name: "isFRVtoDAI", type: "bool", internalType: "bool" },
+      { name: "inputAmount", type: "uint256", internalType: "uint256" },
+    ],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
     name: "swapOpenForAll",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
+    inputs: [],
+    outputs: [{ name: "", type: "bool", internalType: "bool" }],
     stateMutability: "view",
-    type: "function",
   },
   {
-    inputs: [],
+    type: "function",
     name: "symbol",
-    outputs: [
-      {
-        internalType: "string",
-        name: "",
-        type: "string",
-      },
-    ],
+    inputs: [],
+    outputs: [{ name: "", type: "string", internalType: "string" }],
     stateMutability: "view",
-    type: "function",
   },
   {
-    inputs: [],
+    type: "function",
     name: "totalAvailableRewards",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
-    type: "function",
   },
   {
-    inputs: [],
+    type: "function",
     name: "totalSupply",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
-    type: "function",
   },
   {
-    inputs: [],
+    type: "function",
     name: "totalUsers",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
     inputs: [],
-    name: "TRANSFER_FEE",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
-    type: "function",
   },
   {
+    type: "function",
+    name: "transfer",
     inputs: [
-      {
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
+      { name: "to", type: "address", internalType: "address" },
+      { name: "value", type: "uint256", internalType: "uint256" },
     ],
+    outputs: [{ name: "", type: "bool", internalType: "bool" }],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "transferFrom",
+    inputs: [
+      { name: "from", type: "address", internalType: "address" },
+      { name: "to", type: "address", internalType: "address" },
+      { name: "value", type: "uint256", internalType: "uint256" },
+    ],
+    outputs: [{ name: "", type: "bool", internalType: "bool" }],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "transferOwnership",
+    inputs: [{ name: "newOwner", type: "address", internalType: "address" }],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
     name: "unlockedAmount",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "unlocked",
-        type: "uint256",
-      },
-    ],
+    inputs: [{ name: "account", type: "address", internalType: "address" }],
+    outputs: [{ name: "unlocked", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
-    type: "function",
   },
   {
+    type: "function",
+    name: "unpauseStake",
+    inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "upgradePlan",
     inputs: [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
+        name: "upgradeAmount",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      {
+        name: "planToUpgrade",
+        type: "uint8",
+        internalType: "enum Pyramid.PlanType",
       },
     ],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
     name: "userInfo",
+    inputs: [{ name: "", type: "address", internalType: "address" }],
     outputs: [
+      { name: "userAddress", type: "address", internalType: "address" },
+      { name: "username", type: "string", internalType: "string" },
+      { name: "referrer", type: "address", internalType: "address" },
       {
-        internalType: "address",
-        name: "userAddress",
-        type: "address",
-      },
-      {
-        internalType: "string",
-        name: "username",
-        type: "string",
-      },
-      {
-        internalType: "address",
-        name: "referrer",
-        type: "address",
-      },
-      {
-        internalType: "string",
         name: "referrerUsername",
         type: "string",
+        internalType: "string",
       },
+      { name: "firstDirect", type: "address", internalType: "address" },
       {
-        internalType: "address",
-        name: "firstDirect",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
         name: "registrationTime",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "uint256",
-        name: "registerAmount",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
         name: "firstDirectLockAmount",
         type: "uint256",
-      },
-      {
         internalType: "uint256",
-        name: "directs",
-        type: "uint256",
       },
+      { name: "directs", type: "uint256", internalType: "uint256" },
       {
-        internalType: "uint256",
-        name: "credit",
-        type: "uint256",
-      },
-      {
-        components: [
-          {
-            internalType: "bool",
-            name: "isActive",
-            type: "bool",
-          },
-          {
-            internalType: "uint256",
-            name: "entryAmount",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "unlockedLevels",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "totalReward",
-            type: "uint256",
-          },
-        ],
-        internalType: "struct Pyramid.PlanInfo",
         name: "tokenPlan",
         type: "tuple",
-      },
-      {
+        internalType: "struct Pyramid.PlanInfo",
         components: [
+          { name: "isActive", type: "bool", internalType: "bool" },
           {
-            internalType: "bool",
-            name: "isActive",
-            type: "bool",
-          },
-          {
-            internalType: "uint256",
             name: "entryAmount",
             type: "uint256",
+            internalType: "uint256",
           },
           {
-            internalType: "uint256",
             name: "unlockedLevels",
             type: "uint256",
+            internalType: "uint256",
           },
           {
-            internalType: "uint256",
             name: "totalReward",
             type: "uint256",
+            internalType: "uint256",
           },
+          { name: "credit", type: "uint256", internalType: "uint256" },
         ],
-        internalType: "struct Pyramid.PlanInfo",
+      },
+      {
         name: "pointPlan",
         type: "tuple",
-      },
-      {
+        internalType: "struct Pyramid.PlanInfo",
         components: [
+          { name: "isActive", type: "bool", internalType: "bool" },
           {
-            internalType: "bool",
-            name: "isActive",
-            type: "bool",
-          },
-          {
-            internalType: "uint256",
             name: "entryAmount",
             type: "uint256",
+            internalType: "uint256",
           },
           {
-            internalType: "uint256",
             name: "unlockedLevels",
             type: "uint256",
+            internalType: "uint256",
           },
           {
-            internalType: "uint256",
             name: "totalReward",
             type: "uint256",
+            internalType: "uint256",
           },
+          { name: "credit", type: "uint256", internalType: "uint256" },
         ],
-        internalType: "struct Pyramid.PlanInfo",
+      },
+      {
         name: "stakePlan",
         type: "tuple",
+        internalType: "struct Pyramid.PlanInfo",
+        components: [
+          { name: "isActive", type: "bool", internalType: "bool" },
+          {
+            name: "entryAmount",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "unlockedLevels",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "totalReward",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          { name: "credit", type: "uint256", internalType: "uint256" },
+        ],
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
   {
+    type: "function",
+    name: "usernameToAddressMapping",
+    inputs: [{ name: "", type: "string", internalType: "string" }],
+    outputs: [{ name: "", type: "address", internalType: "address" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "withdrawTokens",
+    inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "event",
+    name: "AddLiquidity",
     inputs: [
       {
-        internalType: "string",
-        name: "",
-        type: "string",
-      },
-    ],
-    name: "usernameToAddressMapping",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
+        name: "provider",
         type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+      {
+        name: "amount",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
       },
     ],
-    stateMutability: "view",
-    type: "function",
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "Approval",
+    inputs: [
+      {
+        name: "owner",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "spender",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "value",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "OwnershipTransferred",
+    inputs: [
+      {
+        name: "previousOwner",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "newOwner",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "Paused",
+    inputs: [
+      {
+        name: "account",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "Register",
+    inputs: [
+      {
+        name: "user",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "referrer",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "amount",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+      {
+        name: "username",
+        type: "string",
+        indexed: false,
+        internalType: "string",
+      },
+      {
+        name: "plan",
+        type: "uint8",
+        indexed: false,
+        internalType: "enum Pyramid.PlanType",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "RewardClaimed",
+    inputs: [
+      {
+        name: "user",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "amount",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "Swap",
+    inputs: [
+      {
+        name: "isFRVToDAI",
+        type: "bool",
+        indexed: false,
+        internalType: "bool",
+      },
+      {
+        name: "caller",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+      {
+        name: "receiver",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+      {
+        name: "inputAmount",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+      {
+        name: "outputAmount",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "SwapOpened",
+    inputs: [
+      {
+        name: "time",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "Transfer",
+    inputs: [
+      {
+        name: "from",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "to",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "value",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "Unpaused",
+    inputs: [
+      {
+        name: "account",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "UpgradePlan",
+    inputs: [
+      {
+        name: "user",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "amount",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+      {
+        name: "plan",
+        type: "uint8",
+        indexed: false,
+        internalType: "enum Pyramid.PlanType",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "WithdrawTokens",
+    inputs: [
+      {
+        name: "user",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "amount",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "error",
+    name: "ERC20InsufficientAllowance",
+    inputs: [
+      { name: "spender", type: "address", internalType: "address" },
+      { name: "allowance", type: "uint256", internalType: "uint256" },
+      { name: "needed", type: "uint256", internalType: "uint256" },
+    ],
+  },
+  {
+    type: "error",
+    name: "ERC20InsufficientBalance",
+    inputs: [
+      { name: "sender", type: "address", internalType: "address" },
+      { name: "balance", type: "uint256", internalType: "uint256" },
+      { name: "needed", type: "uint256", internalType: "uint256" },
+    ],
+  },
+  {
+    type: "error",
+    name: "ERC20InvalidApprover",
+    inputs: [{ name: "approver", type: "address", internalType: "address" }],
+  },
+  {
+    type: "error",
+    name: "ERC20InvalidReceiver",
+    inputs: [{ name: "receiver", type: "address", internalType: "address" }],
+  },
+  {
+    type: "error",
+    name: "ERC20InvalidSender",
+    inputs: [{ name: "sender", type: "address", internalType: "address" }],
+  },
+  {
+    type: "error",
+    name: "ERC20InvalidSpender",
+    inputs: [{ name: "spender", type: "address", internalType: "address" }],
+  },
+  { type: "error", name: "EnforcedPause", inputs: [] },
+  { type: "error", name: "ExpectedPause", inputs: [] },
+  {
+    type: "error",
+    name: "OwnableInvalidOwner",
+    inputs: [{ name: "owner", type: "address", internalType: "address" }],
+  },
+  {
+    type: "error",
+    name: "OwnableUnauthorizedAccount",
+    inputs: [{ name: "account", type: "address", internalType: "address" }],
+  },
+  {
+    type: "error",
+    name: "SafeERC20FailedOperation",
+    inputs: [{ name: "token", type: "address", internalType: "address" }],
   },
 ];
