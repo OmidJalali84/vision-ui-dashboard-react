@@ -116,7 +116,7 @@ function Swap() {
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
-          minHeight="70vh"
+          minHeight="90vh"
           textAlign="center"
         >
           <VuiTypography variant="lg" fontWeight="bold" mb={2}>
@@ -150,7 +150,7 @@ function Swap() {
               }}
             >
               <VuiTypography variant="h4" fontWeight="bold" mb={3} color="white">
-                Token Swap
+                Unity Swap
               </VuiTypography>
 
               {/* ----- FROM ----- */}

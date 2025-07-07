@@ -261,7 +261,7 @@ function StackDashboard() {
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
-          minHeight="75vh"
+          minHeight="90vh"
           textAlign="center"
           py={6}
         >
@@ -281,7 +281,7 @@ function StackDashboard() {
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
-          minHeight="75vh"
+          minHeight="90vh"
           textAlign="center"
           py={6}
         >
@@ -366,7 +366,7 @@ function StackDashboard() {
                   textAlign="left"
                   mt="15px"
                   variant="button"
-                  width="75px"
+                  // width="75px"
                   paddingLeft="10px"
                   paddingRight="10px"
                   paddingTop="5px"

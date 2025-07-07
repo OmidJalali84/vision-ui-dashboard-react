@@ -224,7 +224,7 @@ function PlanDashboard() {
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
-          minHeight="60vh"
+          minHeight="90vh"
           textAlign="center"
           py={6}
         >
@@ -246,7 +246,7 @@ function PlanDashboard() {
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
-          minHeight="75vh"
+          minHeight="90vh"
           textAlign="center"
           py={6}
         >
@@ -280,7 +280,7 @@ function PlanDashboard() {
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
-          minHeight="75vh"
+          minHeight="90vh"
           textAlign="center"
           py={6}
         >
@@ -502,7 +502,7 @@ function PlanDashboard() {
             >
               <VuiBox display="flex" flexDirection="column" mr="auto">
                 <VuiTypography color="text" variant="caption" fontWeight="medium" mb="2px">
-                  Token Balance
+                  Unity Balance
                 </VuiTypography>
                 <VuiTypography
                   color="white"
@@ -546,7 +546,7 @@ function PlanDashboard() {
             >
               <VuiBox display="flex" flexDirection="column" mr="auto">
                 <VuiTypography color="text" variant="caption" fontWeight="medium" mb="2px">
-                  Locked Token
+                  Locked Unity
                 </VuiTypography>
                 <VuiTypography
                   color="white"

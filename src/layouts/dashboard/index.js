@@ -56,7 +56,7 @@ function Overview() {
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
-          minHeight="75vh"
+          minHeight="90vh"
           textAlign="center"
           py={6}
         >
@@ -116,7 +116,7 @@ function Overview() {
             </Grid>
             <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
-                title={{ text: "Token Price", fontWeight: "regular" }}
+                title={{ text: "Unity Price", fontWeight: "regular" }}
                 count={"$" + (Number(contractStage?.data?.[3]) / 1e18).toFixed(8).toString()}
                 icon={{
                   color: "info",
@@ -133,7 +133,7 @@ function Overview() {
             </Grid>
             <Grid item xs={12} lg={6} xl={6}>
               <ReferralTracking
-                title={"Token Tracking"}
+                title={"Unity Plan Tracking"}
                 levels={userInfo?.data?.tokenPlan?.unlockedLevels}
                 account={userTeam?.data?.[0]}
                 members={userTeam?.data?.[3]}
@@ -142,7 +142,7 @@ function Overview() {
             </Grid>
             <Grid item xs={12} lg={6} xl={6}>
               <ReferralTracking
-                title={"Point Tracking"}
+                title={"Unirx Tracking"}
                 levels={userInfo?.data?.pointPlan?.unlockedLevels}
                 account={userTeam?.data?.[1]}
                 members={userTeam?.data?.[4]}

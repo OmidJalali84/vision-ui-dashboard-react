@@ -140,7 +140,18 @@ function Sidenav({ color, brandName, routes, ...rest }) {
   });
 
   return (
-    <SidenavRoot {...rest} variant="permanent" ownerState={{ transparentSidenav, miniSidenav }}>
+    <SidenavRoot
+      {...rest}
+      variant="permanent"
+      ownerState={{ transparentSidenav, miniSidenav }}
+      sx={{
+        // target the internal paper element
+        "& .MuiDrawer-paper": {
+          backgroundColor: "rgba(6, 11, 40, 0.94)", // your solid color
+          // boxShadow: "0 2px 10px rgba(0,0,0,0.1)", // optional
+        },
+      }}
+    >
       <VuiBox
         pt={3.5}
         pb={0.5}

@@ -240,7 +240,7 @@ function Owner() {
         }}
       >
         <VuiTypography variant="h6" color="white" fontWeight="bold" mb="12px">
-          Change Minimum Token & Point
+          Change Minimum Unity & Unirx
         </VuiTypography>
 
         <VuiBox>
