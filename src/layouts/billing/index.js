@@ -54,6 +54,7 @@ import { waitForTransactionReceipt } from "@wagmi/core";
 import { config } from "web3/Web3Provider";
 import Stake from "./components/Stake";
 import { getUserTeam } from "web3/actions";
+import linearGradient from "assets/theme/functions/linearGradient";
 
 function StackDashboard() {
   const { columns: prCols } = projectsTableData;
@@ -71,6 +72,9 @@ function StackDashboard() {
   const [modalOpenStake, setModalOpenStake] = useState(false);
   const [modalOpenStakeMore, setModalOpenStakeMore] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const { gradients, info } = colors;
+  const { cardContent } = gradients;
 
   const style = {
     position: "absolute",
@@ -171,12 +175,7 @@ function StackDashboard() {
       ),
       value: (
         <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
-          {userTeam?.data?.[5]
-            ? Number(userTeam.data[5]).toLocaleString(undefined, {
-                style: "currency",
-                currency: "USD",
-              })
-            : "0"}
+          {userTeam?.data?.[5] ? Number(userTeam.data[5]).toString() : "0"}
         </VuiTypography>
       ),
     },
@@ -384,7 +383,7 @@ function StackDashboard() {
                     },
                   })}
                 >
-                  Credit: {userInfo?.data?.stakePlan?.credit}
+                  Credit: &nbsp;{(Number(userInfo?.data?.stakePlan?.credit) / 1e18).toString()}$
                 </VuiTypography>
               </VuiBox>
             </VuiBox>
@@ -411,7 +410,7 @@ function StackDashboard() {
           }}
         >
           <VuiBox display="flex" justifyContent="center" mt={6} alignItems="center">
-            {true ? (
+            {isFirstDay ? (
               <VuiBox
                 p="24px"
                 sx={{

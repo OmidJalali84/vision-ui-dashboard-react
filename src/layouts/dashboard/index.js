@@ -98,21 +98,29 @@ function Overview() {
             </Grid>
             <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
-                title={{ text: "Price", fontWeight: "regular" }}
-                count={"$" + (Number(contractStage?.data?.[3]) / 1e18).toFixed(8).toString()}
+                title={{ text: "Total Reward" }}
+                count={
+                  "$" +
+                  (
+                    (Number(userInfo?.data?.tokenPlan?.totalReward) +
+                      Number(userInfo?.data?.pointPlan?.totalReward) +
+                      Number(userInfo?.data?.stakePlan?.totalReward)) /
+                    1e18
+                  ).toString()
+                }
                 icon={{
                   color: "info",
-                  component: <IoPricetagOutline size="22px" color="white" />,
+                  component: <FaMoneyCheck size="22px" color="white" />,
                 }}
               />
             </Grid>
             <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
-                title={{ text: "usdt liquidity" }}
-                count={"$" + (Number(contractStage?.data?.[1]) / 1e18).toString()}
+                title={{ text: "Token Price", fontWeight: "regular" }}
+                count={"$" + (Number(contractStage?.data?.[3]) / 1e18).toFixed(8).toString()}
                 icon={{
                   color: "info",
-                  component: <FaMoneyCheck size="22px" color="white" />,
+                  component: <IoPricetagOutline size="22px" color="white" />,
                 }}
               />
             </Grid>

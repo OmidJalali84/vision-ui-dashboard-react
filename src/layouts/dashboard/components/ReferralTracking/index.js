@@ -120,7 +120,7 @@ function ReferralTracking({ levels, title, members, account, isActive }) {
                     Valume
                   </VuiTypography>
                   <VuiTypography color="white" variant="lg" fontWeight="bold">
-                    {Number(account)}
+                    {Number(account) / 1e18}
                   </VuiTypography>
                 </VuiBox>
               </Stack>

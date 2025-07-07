@@ -194,12 +194,7 @@ function PlanDashboard() {
       ),
       value: (
         <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
-          {userTeam?.data?.[4]
-            ? Number(userTeam.data[4]).toLocaleString(undefined, {
-                style: "currency",
-                currency: "USD",
-              })
-            : "0"}
+          {userTeam?.data?.[4] ? Number(userTeam.data[4]).toString() : "0"}
         </VuiTypography>
       ),
     },
@@ -361,7 +356,7 @@ function PlanDashboard() {
                     },
                   })}
                 >
-                  Credit: {userInfo?.data?.pointPlan?.credit}
+                  Credit: &nbsp;{(Number(userInfo?.data?.pointPlan?.credit) / 1e18).toString()}$
                 </VuiTypography>
               </VuiBox>
             </VuiBox>
