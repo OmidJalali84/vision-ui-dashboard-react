@@ -98,6 +98,21 @@ function Overview() {
             </Grid>
             <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
+                title={{ text: "Total Balance", fontWeight: "regular" }}
+                count={(
+                  (Number(userTeam?.data?.[0]) +
+                    Number(userTeam?.data?.[1]) +
+                    Number(userTeam?.data?.[2])) /
+                  1e18
+                ).toString()}
+                icon={{
+                  color: "info",
+                  component: <IoPricetagOutline size="22px" color="white" />,
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} md={6} xl={3}>
+              <MiniStatisticsCard
                 title={{ text: "Total Reward" }}
                 count={
                   "$" +
@@ -114,16 +129,6 @@ function Overview() {
                 }}
               />
             </Grid>
-            <Grid item xs={12} md={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "Unity Price", fontWeight: "regular" }}
-                count={"$" + (Number(contractStage?.data?.[3]) / 1e18).toFixed(8).toString()}
-                icon={{
-                  color: "info",
-                  component: <IoPricetagOutline size="22px" color="white" />,
-                }}
-              />
-            </Grid>
           </Grid>
         </VuiBox>
         <VuiBox mb={3}>
@@ -133,7 +138,7 @@ function Overview() {
             </Grid>
             <Grid item xs={12} lg={6} xl={6}>
               <ReferralTracking
-                title={"Unity Plan Tracking"}
+                title={"Unity Tracking"}
                 levels={userInfo?.data?.tokenPlan?.unlockedLevels}
                 account={userTeam?.data?.[0]}
                 members={userTeam?.data?.[3]}

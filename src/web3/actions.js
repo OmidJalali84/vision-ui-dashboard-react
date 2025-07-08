@@ -69,6 +69,15 @@ export function getLockedBalance(address) {
   });
 }
 
+export function getUnlockedBalance(address) {
+  return useReadContract({
+    abi: contractABI,
+    address: contractAddress,
+    functionName: "unlockedAmount",
+    args: [address],
+  });
+}
+
 export function getPointBalance(address) {
   return useReadContract({
     abi: contractABI,
@@ -142,6 +151,7 @@ export function register(userAddress, amount, plan) {
 }
 
 export function upgrade(amount, plan) {
+  console.log(amount);
   return writeContract(config, {
     abi: contractABI,
     address: contractAddress,
@@ -282,5 +292,14 @@ export function getUserTeam(address) {
     address: contractAddress,
     functionName: "sumDownlineByPlan",
     args: [address],
+  });
+}
+
+export function withdrawToken(amount) {
+  return writeContract(config, {
+    abi: contractABI,
+    address: contractAddress,
+    functionName: "withdrawTokens",
+    args: [],
   });
 }

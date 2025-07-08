@@ -20,7 +20,6 @@ export default function UpgradePlan() {
     setLoading(true);
     try {
       const amt = ((Number(amountRef.current.value) * 105) / 100).toString();
-      console.log(amt);
       const tx = await approveUsdt(amt);
       await waitForTransactionReceipt(config, { hash: tx });
       toast.success("Approval successful!");

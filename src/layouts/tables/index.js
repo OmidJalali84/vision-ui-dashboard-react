@@ -45,10 +45,17 @@ import { IoWallet } from "react-icons/io5";
 
 import { useAccount } from "wagmi";
 import { ConnectKitButton } from "connectkit";
-import { getUser, getTokenBalance, getUserTeam, getLockedBalance } from "web3/actions";
+import {
+  getUser,
+  getTokenBalance,
+  getUserTeam,
+  getLockedBalance,
+  getUnlockedBalance,
+} from "web3/actions";
 import UpgradePlan from "./components/UpgradePlan";
 import Register from "./components/Register";
 import { useState } from "react";
+import { withdrawToken } from "web3/actions";
 
 function PlanDashboard() {
   const { columns: prCols } = projectsTableData;
@@ -59,6 +66,9 @@ function PlanDashboard() {
   const userTeam = getUserTeam(address);
   const tokenBalance = getTokenBalance(address);
   const lockedBalance = getLockedBalance(address);
+  const unlockedBalance = getUnlockedBalance(address);
+  const [loading, setLoading] = useState(false);
+
   const [modalOpenRegister, setModalOpenRegister] = useState(false);
   const [modalOpenUpgrade, setModalOpenUpgrade] = useState(false);
 
@@ -67,6 +77,18 @@ function PlanDashboard() {
   };
   const handleModalClickUpgrade = () => {
     setModalOpenUpgrade(true);
+  };
+
+  const handleTokenWithdrawal = async () => {
+    setLoading(true);
+    try {
+      const tx = await withdrawToken();
+      await waitForTransactionReceipt(config, { hash: tx });
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const style = {
@@ -502,7 +524,7 @@ function PlanDashboard() {
             >
               <VuiBox display="flex" flexDirection="column" mr="auto">
                 <VuiTypography color="text" variant="caption" fontWeight="medium" mb="2px">
-                  Unity Balance
+                  Available Unity
                 </VuiTypography>
                 <VuiTypography
                   color="white"
@@ -514,9 +536,18 @@ function PlanDashboard() {
                     },
                   })}
                 >
-                  {Number(tokenBalance?.data) / 1e18}
+                  {Number(unlockedBalance?.data) / 1e18}
                 </VuiTypography>
               </VuiBox>
+              <VuiButton
+                variant="contained"
+                color="info"
+                onClick={handleTokenWithdrawal}
+                disabled={Number(unlockedBalance?.data) / 1e18 == 0}
+                sx={{ marginRight: "5px", width: "20px" }}
+              >
+                {loading ? "..." : "Withdraw"}
+              </VuiButton>
               <VuiBox
                 display="flex"
                 justifyContent="center"

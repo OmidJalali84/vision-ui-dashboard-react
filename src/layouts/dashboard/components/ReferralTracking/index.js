@@ -117,7 +117,7 @@ function ReferralTracking({ levels, title, members, account, isActive }) {
                   })}
                 >
                   <VuiTypography color="text" variant="button" fontWeight="regular" mb="5px">
-                    Valume
+                    Total Balance
                   </VuiTypography>
                   <VuiTypography color="white" variant="lg" fontWeight="bold">
                     {Number(account) / 1e18}
