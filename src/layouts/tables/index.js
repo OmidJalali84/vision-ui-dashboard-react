@@ -219,7 +219,7 @@ function PlanDashboard() {
             7.
           </VuiTypography>
           <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-            Team Valume
+            Team Balance
           </VuiTypography>
         </VuiBox>
       ),

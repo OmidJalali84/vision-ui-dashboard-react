@@ -269,6 +269,7 @@ export function swap(adress, unityToDai, amount) {
 }
 
 export function changeLevel1(amount) {
+  console.log(amount);
   return writeContract(config, {
     abi: contractABI,
     address: contractAddress,

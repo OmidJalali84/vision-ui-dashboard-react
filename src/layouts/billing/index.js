@@ -186,7 +186,7 @@ function StackDashboard() {
             6.
           </VuiTypography>
           <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-            Team Valume
+            Team Balance
           </VuiTypography>
         </VuiBox>
       ),

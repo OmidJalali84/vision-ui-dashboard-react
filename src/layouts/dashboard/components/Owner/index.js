@@ -51,8 +51,8 @@ function Owner() {
   const [loadingSwap, setLoadingSwap] = useState(false);
   const [loadinglevel1, setLoadingSwapLevel1] = useState(false);
   const [loadinglevel1Stake, setLoadingSwapLevel1Stake] = useState(false);
-  const [level1, setLevel1] = useState(0);
-  const [level1Stake, setLevel1Stake] = useState(0);
+  const [level1, setLevel1] = useState("");
+  const [level1Stake, setLevel1Stake] = useState("");
 
   const claimIsOpenValue = claimIsOpen();
   const isPausedValue = isPaused();
@@ -92,7 +92,7 @@ function Owner() {
     try {
       const tx = await openSwap();
       await waitForTransactionReceipt(config, { hash: tx });
-      toast.success(`Open Swap request sent!`);
+      toast.success("Open Swap request sent!");
     } catch (e) {
       console.error(e.message);
       toast.error(e.message);
@@ -102,11 +102,16 @@ function Owner() {
   };
 
   const handleChangeLevel1 = async () => {
+    if (!level1 || isNaN(level1)) {
+      toast.error("Please enter a valid number");
+      return;
+    }
+
     setLoadingSwapLevel1(true);
     try {
       const tx = await changeLevel1(level1);
       await waitForTransactionReceipt(config, { hash: tx });
-      toast.success(`Change minimum request sent!`);
+      toast.success("Change minimum request sent!");
     } catch (e) {
       console.error(e.message);
       toast.error(e.message);
@@ -116,11 +121,16 @@ function Owner() {
   };
 
   const handleChangeLevel1Stake = async () => {
+    if (!level1Stake || isNaN(level1Stake)) {
+      toast.error("Please enter a valid number");
+      return;
+    }
+
     setLoadingSwapLevel1Stake(true);
     try {
       const tx = await changeLevel1Stake(level1Stake);
       await waitForTransactionReceipt(config, { hash: tx });
-      toast.success(`Change minimum request sent!`);
+      toast.success("Change minimum request sent!");
     } catch (e) {
       console.error(e.message);
       toast.error(e.message);
@@ -224,7 +234,7 @@ function Owner() {
             disabled={loadingSwap}
             onClick={handleOpenSwap}
           >
-            {loadingSwap ? "Openning..." : "Open"}
+            {loadingSwap ? "Opening..." : "Open"}
           </VuiButton>
         </VuiBox>
       </VuiBox>
@@ -246,7 +256,8 @@ function Owner() {
         <VuiBox>
           <VuiInput
             fullWidth
-            onChange={(e) => () => setLevel1(e.target.value)}
+            value={level1}
+            onChange={(e) => setLevel1(e.target.value)}
             type="number"
             placeholder="0.0"
           />
@@ -273,11 +284,12 @@ function Owner() {
         }}
       >
         <VuiTypography variant="h6" color="white" fontWeight="bold" mb="12px">
-          Change Minimum Stakee
+          Change Minimum Stake
         </VuiTypography>
         <VuiInput
           fullWidth
-          onChange={(e) => () => setLevel1Stake(e.target.value)}
+          value={level1Stake}
+          onChange={(e) => setLevel1Stake(e.target.value)}
           type="number"
           placeholder="0.0"
         />

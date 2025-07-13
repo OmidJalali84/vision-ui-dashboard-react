@@ -41,11 +41,44 @@ import { getContractStage, getUser, getUserTeam } from "web3/actions";
 import Owner from "./components/Owner";
 import { contractOwner } from "web3/helper";
 
+// Helper function to format numbers properly
+const formatNumber = (value, decimals = 2) => {
+  if (!value || isNaN(value)) return "0";
+
+  const num = Number(value);
+
+  // Handle very large numbers
+  if (num >= 1e9) {
+    return (num / 1e9).toFixed(decimals) + "B";
+  } else if (num >= 1e6) {
+    return (num / 1e6).toFixed(decimals) + "M";
+  } else if (num >= 1e3) {
+    return (num / 1e3).toFixed(decimals) + "K";
+  } else {
+    return num.toFixed(decimals);
+  }
+};
+
+// Helper function to safely convert and format blockchain values
+const formatTokenValue = (value, decimals = 18, displayDecimals = 2) => {
+  if (!value || value === "0" || value === 0) return "0";
+
+  try {
+    const num = Number(value) / Math.pow(10, decimals);
+    return formatNumber(num, displayDecimals);
+  } catch (error) {
+    console.error("Error formatting token value:", error);
+    return "0";
+  }
+};
+
 function Overview() {
   const { address, isConnected } = useAccount();
   const contractStage = getContractStage();
   const userInfo = getUser(address);
+  console.log(userInfo);
   const userTeam = getUserTeam(address);
+
   // If not connected, show a prompt and the Connect button
   if (!isConnected && !address) {
     return (
@@ -69,6 +102,32 @@ function Overview() {
     );
   }
 
+  // Calculate total balance safely
+  const totalBalance = () => {
+    try {
+      const balance0 = Number(userTeam?.data?.[0]) || 0;
+      const balance1 = Number(userTeam?.data?.[1]) || 0;
+      const balance2 = Number(userTeam?.data?.[2]) || 0;
+      return formatTokenValue(balance0 + balance1 + balance2);
+    } catch (error) {
+      console.error("Error calculating total balance:", error);
+      return "0";
+    }
+  };
+
+  // Calculate total reward safely
+  const totalReward = () => {
+    try {
+      const unityReward = Number(userInfo?.data?.unityPlan?.totalReward) || 0;
+      const unirxReward = Number(userInfo?.data?.unirxPlan?.totalReward) || 0;
+      const stakeReward = Number(userInfo?.data?.stakePlan?.totalReward) || 0;
+      return formatTokenValue(unityReward + unirxReward + stakeReward);
+    } catch (error) {
+      console.error("Error calculating total reward:", error);
+      return "0";
+    }
+  };
+
   // If connected, show the original dashboard content
   return (
     <DashboardLayout>
@@ -79,7 +138,7 @@ function Overview() {
             <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
                 title={{ text: "total directs" }}
-                count={userInfo?.data?.directs.toString()}
+                count={userInfo?.data?.directs?.toString() || "0"}
                 icon={{
                   color: "info",
                   component: <IoGlobe size="22px" color="white" />,
@@ -89,7 +148,7 @@ function Overview() {
             <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
                 title={{ text: "total members" }}
-                count={Number(userTeam?.data?.[6]).toString()}
+                count={Number(userTeam?.data?.[6])?.toString() || "0"}
                 icon={{
                   color: "info",
                   component: <IoGlobe size="22px" color="white" />,
@@ -99,12 +158,7 @@ function Overview() {
             <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
                 title={{ text: "Total Balance", fontWeight: "regular" }}
-                count={(
-                  (Number(userTeam?.data?.[0]) +
-                    Number(userTeam?.data?.[1]) +
-                    Number(userTeam?.data?.[2])) /
-                  1e18
-                ).toString()}
+                count={totalBalance()}
                 icon={{
                   color: "info",
                   component: <IoPricetagOutline size="22px" color="white" />,
@@ -114,15 +168,7 @@ function Overview() {
             <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
                 title={{ text: "Total Reward" }}
-                count={
-                  "$" +
-                  (
-                    (Number(userInfo?.data?.unityPlan?.totalReward) +
-                      Number(userInfo?.data?.unirxPlan?.totalReward) +
-                      Number(userInfo?.data?.stakePlan?.totalReward)) /
-                    1e18
-                  ).toString()
-                }
+                count={"$" + totalReward()}
                 icon={{
                   color: "info",
                   component: <FaMoneyCheck size="22px" color="white" />,
