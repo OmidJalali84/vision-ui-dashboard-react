@@ -410,7 +410,7 @@ function StackDashboard() {
           }}
         >
           <VuiBox display="flex" justifyContent="center" mt={6} alignItems="center">
-            {isFirstDay ? (
+            {true ? (
               <VuiBox
                 p="24px"
                 sx={{
