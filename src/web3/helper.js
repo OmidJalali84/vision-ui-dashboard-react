@@ -1,6 +1,6 @@
-export const contractAddress = "0x35F7223614210edd51D5A9B5b7dfc8AACdc70569";
+export const contractAddress = "0x9dA615064e8578Ab7A07fBE95d366AB1912d5fE0";
 export const usdtAddress = "0x320f0Ed6Fc42b0857e2b598B5DA85103203cf5d3";
-export const pointAddress = "0x139c0231ec20Be8543a4909e05C6e5BF931Beb9B";
+export const pointAddress = "0xEe6Acb8105F33B4eA034A2bc841c645349992A88";
 export const contractOwner = "0x6Ac97c57138BD707680A10A798bAf24aCe62Ae9D";
 
 export const contractABI = [
@@ -206,7 +206,7 @@ export const contractABI = [
       {
         name: "",
         type: "tuple[]",
-        internalType: "struct Pyramid.Lock[]",
+        internalType: "struct Unity.Lock[]",
         components: [
           { name: "amount", type: "uint256", internalType: "uint256" },
           {
@@ -227,7 +227,7 @@ export const contractABI = [
       {
         name: "",
         type: "tuple",
-        internalType: "struct Pyramid.User",
+        internalType: "struct Unity.User",
         components: [
           {
             name: "userAddress",
@@ -267,9 +267,9 @@ export const contractABI = [
             internalType: "address[]",
           },
           {
-            name: "tokenPlan",
+            name: "unityPlan",
             type: "tuple",
-            internalType: "struct Pyramid.PlanInfo",
+            internalType: "struct Unity.PlanInfo",
             components: [
               { name: "isActive", type: "bool", internalType: "bool" },
               {
@@ -295,9 +295,9 @@ export const contractABI = [
             ],
           },
           {
-            name: "pointPlan",
+            name: "unirxPlan",
             type: "tuple",
-            internalType: "struct Pyramid.PlanInfo",
+            internalType: "struct Unity.PlanInfo",
             components: [
               { name: "isActive", type: "bool", internalType: "bool" },
               {
@@ -325,7 +325,7 @@ export const contractABI = [
           {
             name: "stakePlan",
             type: "tuple",
-            internalType: "struct Pyramid.PlanInfo",
+            internalType: "struct Unity.PlanInfo",
             components: [
               { name: "isActive", type: "bool", internalType: "bool" },
               {
@@ -363,7 +363,7 @@ export const contractABI = [
       {
         name: "",
         type: "tuple",
-        internalType: "struct Pyramid.User",
+        internalType: "struct Unity.User",
         components: [
           {
             name: "userAddress",
@@ -403,9 +403,9 @@ export const contractABI = [
             internalType: "address[]",
           },
           {
-            name: "tokenPlan",
+            name: "unityPlan",
             type: "tuple",
-            internalType: "struct Pyramid.PlanInfo",
+            internalType: "struct Unity.PlanInfo",
             components: [
               { name: "isActive", type: "bool", internalType: "bool" },
               {
@@ -431,9 +431,9 @@ export const contractABI = [
             ],
           },
           {
-            name: "pointPlan",
+            name: "unirxPlan",
             type: "tuple",
-            internalType: "struct Pyramid.PlanInfo",
+            internalType: "struct Unity.PlanInfo",
             components: [
               { name: "isActive", type: "bool", internalType: "bool" },
               {
@@ -461,7 +461,7 @@ export const contractABI = [
           {
             name: "stakePlan",
             type: "tuple",
-            internalType: "struct Pyramid.PlanInfo",
+            internalType: "struct Unity.PlanInfo",
             components: [
               { name: "isActive", type: "bool", internalType: "bool" },
               {
@@ -499,7 +499,7 @@ export const contractABI = [
       {
         name: "",
         type: "tuple[]",
-        internalType: "struct Pyramid.Stake[]",
+        internalType: "struct Unity.Stake[]",
         components: [
           { name: "amount", type: "uint256", internalType: "uint256" },
           {
@@ -593,13 +593,6 @@ export const contractABI = [
   },
   {
     type: "function",
-    name: "pointToken",
-    inputs: [],
-    outputs: [{ name: "", type: "address", internalType: "contract PointToken" }],
-    stateMutability: "view",
-  },
-  {
-    type: "function",
     name: "price",
     inputs: [],
     outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
@@ -620,7 +613,7 @@ export const contractABI = [
       {
         name: "plan",
         type: "uint8",
-        internalType: "enum Pyramid.PlanType",
+        internalType: "enum Unity.PlanType",
       },
     ],
     outputs: [],
@@ -666,16 +659,16 @@ export const contractABI = [
     name: "sumDownlineByPlan",
     inputs: [{ name: "_user", type: "address", internalType: "address" }],
     outputs: [
-      { name: "tokenValume", type: "uint256", internalType: "uint256" },
-      { name: "pointValume", type: "uint256", internalType: "uint256" },
+      { name: "unityValume", type: "uint256", internalType: "uint256" },
+      { name: "unirxValume", type: "uint256", internalType: "uint256" },
       { name: "stakeValume", type: "uint256", internalType: "uint256" },
       {
-        name: "tokenMembers",
+        name: "unityMembers",
         type: "uint256",
         internalType: "uint256",
       },
       {
-        name: "pointMembers",
+        name: "unirxMembers",
         type: "uint256",
         internalType: "uint256",
       },
@@ -700,7 +693,7 @@ export const contractABI = [
     name: "swap",
     inputs: [
       { name: "receiver", type: "address", internalType: "address" },
-      { name: "isFRVtoDAI", type: "bool", internalType: "bool" },
+      { name: "isUnitytoDAI", type: "bool", internalType: "bool" },
       { name: "inputAmount", type: "uint256", internalType: "uint256" },
     ],
     outputs: [],
@@ -771,6 +764,13 @@ export const contractABI = [
   },
   {
     type: "function",
+    name: "unirxToken",
+    inputs: [],
+    outputs: [{ name: "", type: "address", internalType: "contract UnirxToken" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
     name: "unlockedAmount",
     inputs: [{ name: "account", type: "address", internalType: "address" }],
     outputs: [{ name: "unlocked", type: "uint256", internalType: "uint256" }],
@@ -795,7 +795,7 @@ export const contractABI = [
       {
         name: "planToUpgrade",
         type: "uint8",
-        internalType: "enum Pyramid.PlanType",
+        internalType: "enum Unity.PlanType",
       },
     ],
     outputs: [],
@@ -827,9 +827,9 @@ export const contractABI = [
       },
       { name: "directs", type: "uint256", internalType: "uint256" },
       {
-        name: "tokenPlan",
+        name: "unityPlan",
         type: "tuple",
-        internalType: "struct Pyramid.PlanInfo",
+        internalType: "struct Unity.PlanInfo",
         components: [
           { name: "isActive", type: "bool", internalType: "bool" },
           {
@@ -851,9 +851,9 @@ export const contractABI = [
         ],
       },
       {
-        name: "pointPlan",
+        name: "unirxPlan",
         type: "tuple",
-        internalType: "struct Pyramid.PlanInfo",
+        internalType: "struct Unity.PlanInfo",
         components: [
           { name: "isActive", type: "bool", internalType: "bool" },
           {
@@ -877,7 +877,7 @@ export const contractABI = [
       {
         name: "stakePlan",
         type: "tuple",
-        internalType: "struct Pyramid.PlanInfo",
+        internalType: "struct Unity.PlanInfo",
         components: [
           { name: "isActive", type: "bool", internalType: "bool" },
           {
@@ -910,7 +910,7 @@ export const contractABI = [
   },
   {
     type: "function",
-    name: "withdrawTokens",
+    name: "withdrawUnity",
     inputs: [],
     outputs: [],
     stateMutability: "nonpayable",
@@ -1023,7 +1023,7 @@ export const contractABI = [
         name: "plan",
         type: "uint8",
         indexed: false,
-        internalType: "enum Pyramid.PlanType",
+        internalType: "enum Unity.PlanType",
       },
     ],
     anonymous: false,
@@ -1052,7 +1052,7 @@ export const contractABI = [
     name: "Swap",
     inputs: [
       {
-        name: "isFRVToDAI",
+        name: "isUnityToDAI",
         type: "bool",
         indexed: false,
         internalType: "bool",
@@ -1155,14 +1155,14 @@ export const contractABI = [
         name: "plan",
         type: "uint8",
         indexed: false,
-        internalType: "enum Pyramid.PlanType",
+        internalType: "enum Unity.PlanType",
       },
     ],
     anonymous: false,
   },
   {
     type: "event",
-    name: "WithdrawTokens",
+    name: "WithdrawUnity",
     inputs: [
       {
         name: "user",

@@ -259,7 +259,7 @@ function PlanDashboard() {
     );
   }
 
-  if (!userInfo || !userInfo?.data?.tokenPlan?.isActive) {
+  if (!userInfo || !userInfo?.data?.unityPlan?.isActive) {
     return (
       <DashboardLayout>
         <DashboardNavbar />
@@ -293,7 +293,7 @@ function PlanDashboard() {
         </VuiBox>
       </DashboardLayout>
     );
-  } else if (!userInfo || !userInfo?.data?.tokenPlan?.isActive) {
+  } else if (!userInfo || !userInfo?.data?.unityPlan?.isActive) {
     return (
       <DashboardLayout>
         <DashboardNavbar />
@@ -363,7 +363,7 @@ function PlanDashboard() {
               </VuiBox>
               <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
                 <VuiTypography variant="h2" color="white" fontWeight="bold" mr="auto">
-                  ${Number(userInfo?.data?.tokenPlan?.entryAmount) / 1e18}
+                  ${Number(userInfo?.data?.unityPlan?.entryAmount) / 1e18}
                 </VuiTypography>
                 {/* <VuiBox component="img" src={Graph} sx={{ width: "58px", height: "20px" }} /> */}
               </VuiBox>
@@ -391,7 +391,7 @@ function PlanDashboard() {
                     },
                   })}
                 >
-                  Credit: &nbsp;{(Number(userInfo?.data?.tokenPlan?.credit) / 1e18).toString()}$
+                  Credit: &nbsp;{(Number(userInfo?.data?.unityPlan?.credit) / 1e18).toString()}$
                 </VuiTypography>
               </VuiBox>
             </VuiBox>
@@ -493,7 +493,7 @@ function PlanDashboard() {
                     },
                   })}
                 >
-                  {Number(userInfo?.data?.tokenPlan?.totalReward) / 1e18}$
+                  {Number(userInfo?.data?.unityPlan?.totalReward) / 1e18}$
                 </VuiTypography>
               </VuiBox>
               <VuiBox

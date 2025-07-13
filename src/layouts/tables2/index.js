@@ -243,7 +243,7 @@ function PlanDashboard() {
         </VuiBox>
       </DashboardLayout>
     );
-  } else if (!userInfo || !userInfo?.data?.pointPlan?.isActive) {
+  } else if (!userInfo || !userInfo?.data?.unirxPlan?.isActive) {
     return (
       <DashboardLayout>
         <DashboardNavbar />
@@ -328,7 +328,7 @@ function PlanDashboard() {
               </VuiBox>
               <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
                 <VuiTypography variant="h2" color="white" fontWeight="bold" mr="auto">
-                  ${Number(userInfo?.data?.pointPlan?.entryAmount) / 1e18}
+                  ${Number(userInfo?.data?.unirxPlan?.entryAmount) / 1e18}
                 </VuiTypography>
                 {/* <VuiBox component="img" src={Graph} sx={{ width: "58px", height: "20px" }} /> */}
               </VuiBox>
@@ -356,7 +356,7 @@ function PlanDashboard() {
                     },
                   })}
                 >
-                  Credit: &nbsp;{(Number(userInfo?.data?.pointPlan?.credit) / 1e18).toString()}$
+                  Credit: &nbsp;{(Number(userInfo?.data?.unirxPlan?.credit) / 1e18).toString()}$
                 </VuiTypography>
               </VuiBox>
             </VuiBox>
@@ -458,7 +458,7 @@ function PlanDashboard() {
                     },
                   })}
                 >
-                  {Number(userInfo?.data?.pointPlan?.totalReward) / 1e18}$
+                  {Number(userInfo?.data?.unirxPlan?.totalReward) / 1e18}$
                 </VuiTypography>
               </VuiBox>
               <VuiBox

@@ -117,8 +117,8 @@ function Overview() {
                 count={
                   "$" +
                   (
-                    (Number(userInfo?.data?.tokenPlan?.totalReward) +
-                      Number(userInfo?.data?.pointPlan?.totalReward) +
+                    (Number(userInfo?.data?.unityPlan?.totalReward) +
+                      Number(userInfo?.data?.unirxPlan?.totalReward) +
                       Number(userInfo?.data?.stakePlan?.totalReward)) /
                     1e18
                   ).toString()
@@ -139,19 +139,19 @@ function Overview() {
             <Grid item xs={12} lg={6} xl={6}>
               <ReferralTracking
                 title={"Unity Tracking"}
-                levels={userInfo?.data?.tokenPlan?.unlockedLevels}
+                levels={userInfo?.data?.unityPlan?.unlockedLevels}
                 account={userTeam?.data?.[0]}
                 members={userTeam?.data?.[3]}
-                isActive={userInfo?.data?.tokenPlan?.isActive}
+                isActive={userInfo?.data?.unityPlan?.isActive}
               />
             </Grid>
             <Grid item xs={12} lg={6} xl={6}>
               <ReferralTracking
                 title={"Unirx Tracking"}
-                levels={userInfo?.data?.pointPlan?.unlockedLevels}
+                levels={userInfo?.data?.unirxPlan?.unlockedLevels}
                 account={userTeam?.data?.[1]}
                 members={userTeam?.data?.[4]}
-                isActive={userInfo?.data?.pointPlan?.isActive}
+                isActive={userInfo?.data?.unirxPlan?.isActive}
               />
             </Grid>
             <Grid item xs={12} lg={6} xl={6}>

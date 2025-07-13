@@ -295,11 +295,11 @@ export function getUserTeam(address) {
   });
 }
 
-export function withdrawToken(amount) {
+export function withdrawToken() {
   return writeContract(config, {
     abi: contractABI,
     address: contractAddress,
-    functionName: "withdrawTokens",
+    functionName: "withdrawUnity",
     args: [],
   });
 }
