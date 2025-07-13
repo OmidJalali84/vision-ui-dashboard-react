@@ -152,8 +152,8 @@ function StackDashboard() {
       ),
       value: (
         <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
-          {userInfo?.stakePlan?.totalreward
-            ? (Number(userInfo.stakePlan.totalreward) / 1e18).toLocaleString(undefined, {
+          {userInfo?.data?.stakePlan?.totalReward
+            ? (Number(userInfo.data.stakePlan.totalReward) / 1e18).toLocaleString(undefined, {
                 style: "currency",
                 currency: "USD",
               })
