@@ -168,7 +168,7 @@ function PlanDashboard() {
       value: (
         <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
           {userInfo?.data?.firstDirectLockAmount
-            ? (Number(userInfo.data.firstDirectLockAmount) / 1e18).toLocaleString(undefined, {
+            ? (Number(userInfo.data.firstDirectLockAmount) / 1e6).toLocaleString(undefined, {
                 style: "currency",
                 currency: "USD",
               })
@@ -226,7 +226,7 @@ function PlanDashboard() {
       value: (
         <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
           {userTeam?.data?.[0]
-            ? (Number(userTeam.data[0]) / 1e18).toLocaleString(undefined, {
+            ? (Number(userTeam.data[0]) / 1e6).toLocaleString(undefined, {
                 style: "currency",
                 currency: "USD",
               })
@@ -363,7 +363,7 @@ function PlanDashboard() {
               </VuiBox>
               <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
                 <VuiTypography variant="h2" color="white" fontWeight="bold" mr="auto">
-                  ${Number(userInfo?.data?.unityPlan?.entryAmount) / 1e18}
+                  ${Number(userInfo?.data?.unityPlan?.entryAmount) / 1e6}
                 </VuiTypography>
                 {/* <VuiBox component="img" src={Graph} sx={{ width: "58px", height: "20px" }} /> */}
               </VuiBox>
@@ -391,7 +391,7 @@ function PlanDashboard() {
                     },
                   })}
                 >
-                  Credit: &nbsp;{(Number(userInfo?.data?.unityPlan?.credit) / 1e18).toString()}$
+                  Credit: &nbsp;{(Number(userInfo?.data?.unityPlan?.credit) / 1e6).toString()}$
                 </VuiTypography>
               </VuiBox>
             </VuiBox>
@@ -493,7 +493,7 @@ function PlanDashboard() {
                     },
                   })}
                 >
-                  {Number(userInfo?.data?.unityPlan?.totalReward) / 1e18}$
+                  {Number(userInfo?.data?.unityPlan?.totalReward) / 1e6}$
                 </VuiTypography>
               </VuiBox>
               <VuiBox
@@ -536,14 +536,14 @@ function PlanDashboard() {
                     },
                   })}
                 >
-                  {Number(unlockedBalance?.data) / 1e18}
+                  {Number(unlockedBalance?.data) / 1e8}
                 </VuiTypography>
               </VuiBox>
               <VuiButton
                 variant="contained"
                 color="info"
                 onClick={handleTokenWithdrawal}
-                disabled={Number(unlockedBalance?.data) / 1e18 == 0}
+                disabled={Number(unlockedBalance?.data) / 1e8 == 0}
                 sx={{ marginRight: "5px", width: "20px" }}
               >
                 {loading ? "..." : "Withdraw"}

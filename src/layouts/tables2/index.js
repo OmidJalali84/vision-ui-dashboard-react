@@ -154,7 +154,7 @@ function PlanDashboard() {
       value: (
         <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
           {userInfo?.data?.firstDirectLockAmount
-            ? (Number(userInfo.data.firstDirectLockAmount) / 1e18).toLocaleString(undefined, {
+            ? (Number(userInfo.data.firstDirectLockAmount) / 1e6).toLocaleString(undefined, {
                 style: "currency",
                 currency: "USD",
               })
@@ -212,7 +212,7 @@ function PlanDashboard() {
       value: (
         <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
           {userTeam?.data?.[1]
-            ? (Number(userTeam.data[1]) / 1e18).toLocaleString(undefined, {
+            ? (Number(userTeam.data[1]) / 1e6).toLocaleString(undefined, {
                 style: "currency",
                 currency: "USD",
               })
@@ -328,7 +328,7 @@ function PlanDashboard() {
               </VuiBox>
               <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
                 <VuiTypography variant="h2" color="white" fontWeight="bold" mr="auto">
-                  ${Number(userInfo?.data?.unirxPlan?.entryAmount) / 1e18}
+                  ${Number(userInfo?.data?.unirxPlan?.entryAmount) / 1e6}
                 </VuiTypography>
                 {/* <VuiBox component="img" src={Graph} sx={{ width: "58px", height: "20px" }} /> */}
               </VuiBox>
@@ -356,7 +356,7 @@ function PlanDashboard() {
                     },
                   })}
                 >
-                  Credit: &nbsp;{(Number(userInfo?.data?.unirxPlan?.credit) / 1e18).toString()}$
+                  Credit: &nbsp;{(Number(userInfo?.data?.unirxPlan?.credit) / 1e6).toString()}$
                 </VuiTypography>
               </VuiBox>
             </VuiBox>
@@ -458,7 +458,7 @@ function PlanDashboard() {
                     },
                   })}
                 >
-                  {Number(userInfo?.data?.unirxPlan?.totalReward) / 1e18}$
+                  {Number(userInfo?.data?.unirxPlan?.totalReward) / 1e6}$
                 </VuiTypography>
               </VuiBox>
               <VuiBox
@@ -545,7 +545,7 @@ function PlanDashboard() {
                     },
                   })}
                 >
-                  {Number(pointsBalance?.data) / 1e18}
+                  {Number(pointsBalance?.data) / 1e6}
                 </VuiTypography>
               </VuiBox>
               <VuiBox

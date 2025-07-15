@@ -153,7 +153,7 @@ function StackDashboard() {
       value: (
         <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
           {userInfo?.data?.stakePlan?.totalReward
-            ? (Number(userInfo.data.stakePlan.totalReward) / 1e18).toLocaleString(undefined, {
+            ? (Number(userInfo.data.stakePlan.totalReward) / 1e6).toLocaleString(undefined, {
                 style: "currency",
                 currency: "USD",
               })
@@ -193,7 +193,7 @@ function StackDashboard() {
       value: (
         <VuiTypography variant="button" color="white" fontWeight="medium" ml={2}>
           {userTeam?.data?.[2]
-            ? (Number(userTeam.data[2]) / 1e18).toLocaleString(undefined, {
+            ? (Number(userTeam.data[2]) / 1e6).toLocaleString(undefined, {
                 style: "currency",
                 currency: "USD",
               })
@@ -355,7 +355,7 @@ function StackDashboard() {
               </VuiBox>
               <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
                 <VuiTypography variant="h2" color="white" fontWeight="bold" mr="auto">
-                  ${Number(userInfo?.data?.stakePlan?.entryAmount) / 1e18}
+                  ${Number(userInfo?.data?.stakePlan?.entryAmount) / 1e6}
                 </VuiTypography>
                 {/* <VuiBox component="img" src={Graph} sx={{ width: "58px", height: "20px" }} /> */}
               </VuiBox>
@@ -383,7 +383,7 @@ function StackDashboard() {
                     },
                   })}
                 >
-                  Credit: &nbsp;{(Number(userInfo?.data?.stakePlan?.credit) / 1e18).toString()}$
+                  Credit: &nbsp;{(Number(userInfo?.data?.stakePlan?.credit) / 1e6).toString()}$
                 </VuiTypography>
               </VuiBox>
             </VuiBox>
@@ -426,7 +426,7 @@ function StackDashboard() {
                 </VuiTypography>
 
                 <VuiTypography variant="h3" color="white" fontWeight="bold" mb="16px">
-                  {Number(availableRewards?.data) / 1e18} DAI
+                  {Number(availableRewards?.data) / 1e6} USDT
                 </VuiTypography>
 
                 <VuiBox>
@@ -582,8 +582,8 @@ function StackDashboard() {
                       justifyContent={"center"}
                     >
                       <SatisfactionRate
-                        amount={Number(stake.amount) / 1e18}
-                        claimed={Number(stake.rewardClaimed) / 1e18}
+                        amount={Number(stake.amount) / 1e6}
+                        claimed={Number(stake.rewardClaimed) / 1e6}
                         percentage={(Number(stake.rewardClaimed) / Number(stake.amount) / 2) * 100}
                       />
                     </Grid>

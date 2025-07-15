@@ -110,7 +110,7 @@ export function approveUsdt(amount) {
     abi: contractABI,
     address: usdtAddress,
     functionName: "approve",
-    args: [contractAddress, ethers.utils.parseUnits(amount.toString(), 18)],
+    args: [contractAddress, ethers.utils.parseUnits(amount.toString(), 6)],
   });
 }
 
@@ -119,7 +119,7 @@ export function approveUnity(amount) {
     abi: contractABI,
     address: contractAddress,
     functionName: "approve",
-    args: [contractAddress, ethers.utils.parseUnits(amount.toString(), 18)],
+    args: [contractAddress, ethers.utils.parseUnits(amount.toString(), 6)],
   });
 }
 
@@ -128,7 +128,7 @@ export function stakeMore(amount) {
     abi: contractABI,
     address: contractAddress,
     functionName: "stakeMore",
-    args: [ethers.utils.parseUnits(amount.toString(), 18)],
+    args: [ethers.utils.parseUnits(amount.toString(), 6)],
   });
 }
 
@@ -137,7 +137,7 @@ export function stake(userAddress, amount) {
     abi: contractABI,
     address: contractAddress,
     functionName: "register",
-    args: [userAddress, zeroAddress, ethers.utils.parseEther(amount.toString()), "", 2],
+    args: [userAddress, zeroAddress, ethers.utils.parseUnits(amount.toString(), 6), "", 2],
   });
 }
 
@@ -146,7 +146,7 @@ export function register(userAddress, amount, plan) {
     abi: contractABI,
     address: contractAddress,
     functionName: "register",
-    args: [userAddress, zeroAddress, ethers.utils.parseEther(amount.toString()), "", plan],
+    args: [userAddress, zeroAddress, ethers.utils.parseUnits(amount.toString(), 6), "", plan],
   });
 }
 
@@ -156,7 +156,7 @@ export function upgrade(amount, plan) {
     abi: contractABI,
     address: contractAddress,
     functionName: "upgradePlan",
-    args: [ethers.utils.parseUnits(amount.toString(), 18), plan],
+    args: [ethers.utils.parseUnits(amount.toString(), 6), plan],
   });
 }
 
@@ -264,7 +264,7 @@ export function swap(adress, unityToDai, amount) {
     abi: contractABI,
     address: contractAddress,
     functionName: "swap",
-    args: [adress, unityToDai, ethers.utils.parseUnits(amount.toString(), 18)],
+    args: [adress, unityToDai, ethers.utils.parseUnits(amount.toString(), 6)],
   });
 }
 
@@ -274,7 +274,7 @@ export function changeLevel1(amount) {
     abi: contractABI,
     address: contractAddress,
     functionName: "changeLevel1Entrance",
-    args: [ethers.utils.parseUnits(amount.toString(), 18)],
+    args: [ethers.utils.parseUnits(amount.toString(), 6)],
   });
 }
 
@@ -283,7 +283,7 @@ export function changeLevel1Stake(amount) {
     abi: contractABI,
     address: contractAddress,
     functionName: "changeLevel1EntranceStake",
-    args: [ethers.utils.parseUnits(amount.toString(), 18)],
+    args: [ethers.utils.parseUnits(amount.toString(), 6)],
   });
 }
 

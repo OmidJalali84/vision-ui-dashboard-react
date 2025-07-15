@@ -52,7 +52,7 @@ const CreditBalance = ({ width, title, buttonTitle, entryAmount }) => {
           </VuiBox>
           <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
             <VuiTypography variant="h2" color="white" fontWeight="bold" mr="auto">
-              ${Number(entryAmount) / 1e18}
+              ${Number(entryAmount) / 1e6}
             </VuiTypography>
             <VuiBox component="img" src={Graph} sx={{ width: "58px", height: "20px" }} />
           </VuiBox>

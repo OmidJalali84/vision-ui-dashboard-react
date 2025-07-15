@@ -157,7 +157,7 @@ function Owner() {
         </VuiTypography>
 
         <VuiTypography variant="h3" color="white" fontWeight="bold" mb="16px">
-          {Number(totalRewards?.data) / 1e18} DAI
+          {Number(totalRewards?.data) / 1e6} USDT
         </VuiTypography>
 
         <VuiBox>

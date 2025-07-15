@@ -68,7 +68,7 @@ function Swap() {
         return;
       }
       setUnityBalance((Number(unityBalanceWithDecimals) / 1e18)?.toFixed(2));
-      setDaiBalance((Number(daiBalanceWithDecimals) / 1e18)?.toFixed(2));
+      setDaiBalance((Number(daiBalanceWithDecimals) / 1e6)?.toFixed(2));
     };
 
     handleFetchBalances();
@@ -84,7 +84,7 @@ function Swap() {
   const handleGetQuote = async (value) => {
     setTokenIn(value);
 
-    if (fromToken.symbol === "DAI") {
+    if (fromToken.symbol === "USDT") {
       setTokenOut(value * rate);
     } else {
       setTokenOut(value / rate);
@@ -128,8 +128,8 @@ function Swap() {
     );
 
   /* -------------------------------- UI ------------------------------------ */
-  const tokenA = { symbol: "DAI", address: "0x320f0Ed6Fc42b0857e2b598B5DA85103203cf5d3" }; // hard-coded pair
-  const tokenB = { symbol: "UNITY", address: "0x3Fc28ff6BB78acB702DF816D88525a85e6c7a7E0" };
+  const tokenA = { symbol: "USDT", address: "0xc2132D05D31c914a87C6611C10748AEb04B58e8F" }; // hard-coded pair
+  const tokenB = { symbol: "UNITY", address: "0xFf67d2D91A2a4c206679BE587cfEdBf7168BBeaf" };
 
   const fromToken = direction === "A-to-B" ? tokenA : tokenB;
   const toToken = direction === "A-to-B" ? tokenB : tokenA;
@@ -166,8 +166,8 @@ function Swap() {
               />
               {/* TODO – web3: Use balance from the wallet */}
               <VuiTypography variant="caption" color="textSecondary" mt={1}>
-                {fromToken.symbol === "DAI"
-                  ? `Balance: ${daiBalance} DAI`
+                {fromToken.symbol === "USDT"
+                  ? `Balance: ${daiBalance} UADT`
                   : `Balance: ${unityBalance} UNITY`}
               </VuiTypography>
 
@@ -207,7 +207,7 @@ function Swap() {
                   <span>Rate</span>
                   {/* TODO – web3: real rate */}
                   <span>
-                    {rate ?? fromToken.symbol === "DAI"
+                    {rate ?? fromToken.symbol === "USDT"
                       ? `1 ${fromToken.symbol} ≈ ${rate?.toFixed(2).toString() + toToken.symbol}`
                       : `1 ${fromToken.symbol} ≈ ${
                           (1 / rate)?.toFixed(8).toString() + toToken.symbol
@@ -241,7 +241,7 @@ function Swap() {
         disableEscapeKeyDown={true}
       >
         <Box sx={style}>
-          <SwapModal daiForUnity={fromToken.symbol === "DAI"} amount={tokenIn} />
+          <SwapModal daiForUnity={fromToken.symbol === "USDT"} amount={tokenIn} />
         </Box>
       </Modal>
     </DashboardLayout>

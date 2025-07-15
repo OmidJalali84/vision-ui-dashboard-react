@@ -1,7 +1,7 @@
-export const contractAddress = "0x3eCC0ab60e3C7d32CACE39b032AaE3A790cCFca4";
-export const usdtAddress = "0x320f0Ed6Fc42b0857e2b598B5DA85103203cf5d3";
-export const pointAddress = "0xfBB47d9B94cE563Cb62949A877f1DdD58856Ff11";
-export const contractOwner = "0x6Ac97c57138BD707680A10A798bAf24aCe62Ae9D";
+export const contractAddress = "0xFf67d2D91A2a4c206679BE587cfEdBf7168BBeaf";
+export const usdtAddress = "0xc2132D05D31c914a87C6611C10748AEb04B58e8F";
+export const pointAddress = "0xEf0E4Bc93AA3Cb770D20D7a8A09547448245c3e0";
+export const contractOwner = "0x72C88D0c0aBF2488F4755Ba8188b8CcC226C8B0d";
 
 export const contractABI = [
   {
@@ -12,12 +12,17 @@ export const contractABI = [
         type: "address",
         internalType: "address",
       },
-      { name: "_daiAddress", type: "address", internalType: "address" },
+      {
+        name: "_usdtAddress",
+        type: "address",
+        internalType: "address",
+      },
       {
         name: "_supportiveWallet",
         type: "address",
         internalType: "address",
       },
+      { name: "_feeWallet", type: "address", internalType: "address" },
     ],
     stateMutability: "nonpayable",
   },
@@ -31,6 +36,20 @@ export const contractABI = [
   {
     type: "function",
     name: "DIVIDE",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "LEVEL1_ENTRANCE",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "LEVEL1_ENTRANCE_STAKE",
     inputs: [],
     outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
@@ -172,23 +191,16 @@ export const contractABI = [
   },
   {
     type: "function",
-    name: "dai",
-    inputs: [],
-    outputs: [{ name: "", type: "address", internalType: "contract IERC20" }],
-    stateMutability: "view",
-  },
-  {
-    type: "function",
-    name: "daiLiquidity",
-    inputs: [],
-    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
-    stateMutability: "view",
-  },
-  {
-    type: "function",
     name: "decimals",
     inputs: [],
     outputs: [{ name: "", type: "uint8", internalType: "uint8" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "feeWallet",
+    inputs: [],
+    outputs: [{ name: "", type: "address", internalType: "address" }],
     stateMutability: "view",
   },
   {
@@ -636,7 +648,7 @@ export const contractABI = [
   {
     type: "function",
     name: "stakeMore",
-    inputs: [{ name: "daiAmount", type: "uint256", internalType: "uint256" }],
+    inputs: [{ name: "usdtAmount", type: "uint256", internalType: "uint256" }],
     outputs: [],
     stateMutability: "nonpayable",
   },
@@ -693,7 +705,7 @@ export const contractABI = [
     name: "swap",
     inputs: [
       { name: "receiver", type: "address", internalType: "address" },
-      { name: "isUnitytoDAI", type: "bool", internalType: "bool" },
+      { name: "isUnitytoUSDT", type: "bool", internalType: "bool" },
       { name: "inputAmount", type: "uint256", internalType: "uint256" },
     ],
     outputs: [],
@@ -766,7 +778,7 @@ export const contractABI = [
     type: "function",
     name: "unirxToken",
     inputs: [],
-    outputs: [{ name: "", type: "address", internalType: "contract UnirxToken" }],
+    outputs: [{ name: "", type: "address", internalType: "contract Unirx" }],
     stateMutability: "view",
   },
   {
@@ -800,6 +812,20 @@ export const contractABI = [
     ],
     outputs: [],
     stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "usdt",
+    inputs: [],
+    outputs: [{ name: "", type: "address", internalType: "contract IERC20" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "usdtLiquidity",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
   },
   {
     type: "function",
@@ -914,6 +940,13 @@ export const contractABI = [
     inputs: [],
     outputs: [],
     stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "yieldSoFar",
+    inputs: [{ name: "", type: "address", internalType: "address" }],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
   },
   {
     type: "event",
@@ -1052,7 +1085,7 @@ export const contractABI = [
     name: "Swap",
     inputs: [
       {
-        name: "isUnityToDAI",
+        name: "isUnityToUSDT",
         type: "bool",
         indexed: false,
         internalType: "bool",

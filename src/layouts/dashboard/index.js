@@ -60,7 +60,7 @@ const formatNumber = (value, decimals = 2) => {
 };
 
 // Helper function to safely convert and format blockchain values
-const formatTokenValue = (value, decimals = 18, displayDecimals = 2) => {
+const formatTokenValue = (value, decimals = 6, displayDecimals = 2) => {
   if (!value || value === "0" || value === 0) return "0";
 
   try {
