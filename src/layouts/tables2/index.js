@@ -545,7 +545,7 @@ function PlanDashboard() {
                     },
                   })}
                 >
-                  {Number(pointsBalance?.data) / 1e6}
+                  {Number(pointsBalance?.data) / 1e18}
                 </VuiTypography>
               </VuiBox>
               <VuiBox
