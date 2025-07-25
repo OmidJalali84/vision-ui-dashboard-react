@@ -11,6 +11,7 @@ import { waitForTransactionReceipt } from "@wagmi/core";
 import { config } from "web3/Web3Provider";
 import { toast } from "react-toastify";
 import { useAccount } from "wagmi";
+import { parseUnits } from "ethers/lib/utils";
 
 export default function SwapModal({ daiForUnity, amount }) {
   const amountRef = useRef();
@@ -37,7 +38,9 @@ export default function SwapModal({ daiForUnity, amount }) {
   const handleSwap = async () => {
     setLoading(true);
     try {
-      const tx = await swap(address, !daiForUnity, amount);
+      const tx = daiForUnity
+        ? await swap(address, !daiForUnity, parseUnits(amount.toString(), 6))
+        : await swap(address, !daiForUnity, parseUnits(amount.toString(), 18));
       await waitForTransactionReceipt(config, { hash: tx });
       toast.success("Swap request sent!");
     } catch (e) {

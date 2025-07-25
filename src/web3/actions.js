@@ -264,7 +264,7 @@ export function swap(adress, unityToDai, amount) {
     abi: contractABI,
     address: contractAddress,
     functionName: "swap",
-    args: [adress, unityToDai, ethers.utils.parseUnits(amount.toString(), 6)],
+    args: [adress, unityToDai, amount],
   });
 }
 

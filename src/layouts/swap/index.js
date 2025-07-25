@@ -167,7 +167,7 @@ function Swap() {
               {/* TODO – web3: Use balance from the wallet */}
               <VuiTypography variant="caption" color="textSecondary" mt={1}>
                 {fromToken.symbol === "USDT"
-                  ? `Balance: ${daiBalance} UADT`
+                  ? `Balance: ${daiBalance} USDT`
                   : `Balance: ${unityBalance} UNITY`}
               </VuiTypography>
 
